@@ -19,7 +19,7 @@ namespace _3D_Space_Invaders
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-            
+
         // Temp var to hold the model
         Model myModel;
 
@@ -53,29 +53,11 @@ namespace _3D_Space_Invaders
 
             // TODO: use this.Content to load your game content here
             myModel = Content.Load<Model>("Cube");
+            this.myModel = Load_Model(myModel, "Cube"); 
 
+            
 
-            float aspectRatio = (float)graphics.GraphicsDevice.Viewport.Width /
-                                       graphics.GraphicsDevice.Viewport.Height;
-
-            foreach (ModelMesh mesh in myModel.Meshes)
-            {
-                foreach (BasicEffect effect in mesh.Effects)
-                {
-                    effect.Projection =
-                    Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(45f), aspectRatio,
-                    1.0f, 100.0f);
-
-                    // Set initial position - replace model, seems to not be correct
-                    //Vector3 modelPosition = new Vector3(-30.0f, -5.0f, -40.0f);
-                    
-
-                    effect.View = Matrix.CreateLookAt(new Vector3(0f, 0f, 10f), Vector3.Zero,
-                                    Vector3.Up);
-
-                    effect.EnableDefaultLighting();
-                }
-            }
+            
         }
 
         /// <summary>
@@ -120,5 +102,31 @@ namespace _3D_Space_Invaders
 
             base.Draw(gameTime);
         }
+
+        private Model Load_Model(Model myModel, string asset_Name = "")
+        {
+
+            float aspectRatio = (float)graphics.GraphicsDevice.Viewport.Width /
+                                       graphics.GraphicsDevice.Viewport.Height;
+
+            foreach (ModelMesh mesh in myModel.Meshes)
+            {
+                foreach (BasicEffect effect in mesh.Effects)
+                {
+                    effect.Projection =
+                    Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(45f), aspectRatio,
+                    1.0f, 100.0f);
+
+                    effect.View = Matrix.CreateLookAt(new Vector3(0f, 0f, 10f), Vector3.Zero,
+                                    Vector3.Up);
+
+                    effect.EnableDefaultLighting();
+                }
+            }
+
+            return myModel; 
+        }
     }
+
+
 }
