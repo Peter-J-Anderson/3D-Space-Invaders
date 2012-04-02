@@ -1,133 +1,65 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<XnaContent xmlns:Pipeline="Microsoft.Xna.Framework.Content.Pipeline" xmlns:Framework="Microsoft.Xna.Framework" xmlns:Processors="Microsoft.Xna.Framework.Content.Pipeline.Processors">
+<XnaContent xmlns:Pipeline="Microsoft.Xna.Framework.Content.Pipeline">
   <Asset Type="Pipeline:BuildItemCollection">
     <Item>
-      <Source>Cube.X</Source>
-      <Name>Cube</Name>
+      <Source>Laser_Cannon\Laser_Cannon.x</Source>
+      <Name>Laser_Cannon\Laser_Cannon</Name>
       <Importer>XImporter</Importer>
       <Processor>ModelProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\bin\x86\Debug\Content\Cube.xnb</Output>
-      <Time>2012-04-02T13:48:46.0462396+01:00</Time>
+      <Output>C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\bin\x86\Debug\Content\Laser_Cannon\Laser_Cannon.xnb</Output>
+      <Time>2012-04-02T16:37:47.8635443+01:00</Time>
       <Dependency>
-        <Key>obj\x86\Debug\Cube_0.xml</Key>
-        <Value>2012-04-02T13:49:24.838506+01:00</Value>
+        <Key>obj\x86\Debug\Laser_Cannon\Laser_Cannon_0.xml</Key>
+        <Value>2012-04-02T17:27:55.6817833+01:00</Value>
       </Dependency>
     </Item>
     <Item>
-      <Source>Cube.X</Source>
+      <Source>Laser_Cannon\Laser_Cannon.x</Source>
       <Importer>XImporter</Importer>
       <Options>IntermediateFile, DontCacheImportedData</Options>
-      <Output>obj\x86\Debug\Cube_0.xml</Output>
-      <Time>2012-04-02T13:48:46.0462396+01:00</Time>
+      <Output>obj\x86\Debug\Laser_Cannon\Laser_Cannon_0.xml</Output>
+      <Time>2012-04-02T16:37:47.8635443+01:00</Time>
     </Item>
     <Item>
-      <Source>car.x</Source>
-      <Name>car</Name>
+      <Source>Space_Invaders\Invader_20.x</Source>
+      <Name>Space_Invaders\Invader_20</Name>
       <Importer>XImporter</Importer>
       <Processor>ModelProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\bin\x86\Debug\Content\car.xnb</Output>
-      <Time>2011-03-15T01:00:06+00:00</Time>
+      <Output>C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\bin\x86\Debug\Content\Space_Invaders\Invader_20.xnb</Output>
+      <Time>2012-04-02T18:19:29.0651275+01:00</Time>
       <Dependency>
-        <Key>obj\x86\Debug\car_0.xml</Key>
-        <Value>2012-04-02T13:54:09.2905843+01:00</Value>
+        <Key>obj\x86\Debug\Space_Invaders\Invader_20_0.xml</Key>
+        <Value>2012-04-02T18:19:35.8671744+01:00</Value>
       </Dependency>
-      <Request>C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\bin\x86\Debug\Content\CHASIS_0.xnb</Request>
-      <Request>C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\bin\x86\Debug\Content\VENTANAS_0.xnb</Request>
-      <Request>C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\bin\x86\Debug\Content\CHASIS_A_0.xnb</Request>
-      <Request>C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\bin\x86\Debug\Content\RUEDAS_0.xnb</Request>
     </Item>
     <Item>
-      <Source>car.x</Source>
+      <Source>Space_Invaders\Invader_20.x</Source>
       <Importer>XImporter</Importer>
       <Options>IntermediateFile, DontCacheImportedData</Options>
-      <Output>obj\x86\Debug\car_0.xml</Output>
-      <Time>2011-03-15T01:00:06+00:00</Time>
+      <Output>obj\x86\Debug\Space_Invaders\Invader_20_0.xml</Output>
+      <Time>2012-04-02T18:19:29.0651275+01:00</Time>
     </Item>
     <Item>
-      <Source>CHASIS.JPG</Source>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Parameters>
-        <Data Key="ColorKeyColor" Type="Framework:Color">FFFF00FF</Data>
-        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
-        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
-        <Data Key="GenerateMipmaps" Type="bool">true</Data>
-        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
-        <Data Key="PremultiplyAlpha" Type="bool">true</Data>
-      </Parameters>
-      <Options>None</Options>
-      <Output>C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\bin\x86\Debug\Content\CHASIS_0.xnb</Output>
-      <Time>2011-03-15T01:00:06+00:00</Time>
-    </Item>
-    <Item>
-      <Source>VENTANAS.JPG</Source>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Parameters>
-        <Data Key="ColorKeyColor" Type="Framework:Color">FFFF00FF</Data>
-        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
-        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
-        <Data Key="GenerateMipmaps" Type="bool">true</Data>
-        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
-        <Data Key="PremultiplyAlpha" Type="bool">true</Data>
-      </Parameters>
-      <Options>None</Options>
-      <Output>C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\bin\x86\Debug\Content\VENTANAS_0.xnb</Output>
-      <Time>2011-03-15T01:00:06+00:00</Time>
-    </Item>
-    <Item>
-      <Source>CHASIS_A.JPG</Source>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Parameters>
-        <Data Key="ColorKeyColor" Type="Framework:Color">FFFF00FF</Data>
-        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
-        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
-        <Data Key="GenerateMipmaps" Type="bool">true</Data>
-        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
-        <Data Key="PremultiplyAlpha" Type="bool">true</Data>
-      </Parameters>
-      <Options>None</Options>
-      <Output>C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\bin\x86\Debug\Content\CHASIS_A_0.xnb</Output>
-      <Time>2011-03-15T01:00:06+00:00</Time>
-    </Item>
-    <Item>
-      <Source>RUEDAS.JPG</Source>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Parameters>
-        <Data Key="ColorKeyColor" Type="Framework:Color">FFFF00FF</Data>
-        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
-        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
-        <Data Key="GenerateMipmaps" Type="bool">true</Data>
-        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
-        <Data Key="PremultiplyAlpha" Type="bool">true</Data>
-      </Parameters>
-      <Options>None</Options>
-      <Output>C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\bin\x86\Debug\Content\RUEDAS_0.xnb</Output>
-      <Time>2011-03-15T01:00:06+00:00</Time>
-    </Item>
-    <Item>
-      <Source>DropShip.x</Source>
-      <Name>DropShip</Name>
+      <Source>Space_Invaders\Invader_30.x</Source>
+      <Name>Space_Invaders\Invader_30</Name>
       <Importer>XImporter</Importer>
       <Processor>ModelProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\bin\x86\Debug\Content\DropShip.xnb</Output>
-      <Time>2012-03-28T18:03:42+01:00</Time>
+      <Output>C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\bin\x86\Debug\Content\Space_Invaders\Invader_30.xnb</Output>
+      <Time>2012-04-02T18:16:19.0468164+01:00</Time>
       <Dependency>
-        <Key>obj\x86\Debug\DropShip_0.xml</Key>
-        <Value>2012-04-02T14:01:59.9556204+01:00</Value>
+        <Key>obj\x86\Debug\Space_Invaders\Invader_30_0.xml</Key>
+        <Value>2012-04-02T18:16:36.2959354+01:00</Value>
       </Dependency>
     </Item>
     <Item>
-      <Source>DropShip.x</Source>
+      <Source>Space_Invaders\Invader_30.x</Source>
       <Importer>XImporter</Importer>
       <Options>IntermediateFile, DontCacheImportedData</Options>
-      <Output>obj\x86\Debug\DropShip_0.xml</Output>
-      <Time>2012-03-28T18:03:42+01:00</Time>
+      <Output>obj\x86\Debug\Space_Invaders\Invader_30_0.xml</Output>
+      <Time>2012-04-02T18:16:19.0468164+01:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

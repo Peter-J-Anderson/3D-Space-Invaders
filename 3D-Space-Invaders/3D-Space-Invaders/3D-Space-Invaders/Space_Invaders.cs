@@ -18,7 +18,7 @@ namespace _3D_Space_Invaders
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-
+        
 
         // Temp var to hold the model
         Model myModel;
@@ -59,7 +59,7 @@ namespace _3D_Space_Invaders
 
 
 
-            this.myModel = Load_Model(myModel, "Cube"); 
+            this.myModel = Load_Model(myModel, @"Space_Invaders\Invader_20");
 
             
 
@@ -122,12 +122,12 @@ namespace _3D_Space_Invaders
                 {
                     effect.Projection =
                     Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(45f), aspectRatio,
-                    1.0f, 100.0f);
+                    1.0f, 1000.0f);
 
                     effect.View = Matrix.CreateLookAt(new Vector3(0f, 0f, 10f), Vector3.Zero,
                                     Vector3.Up);
-
-                    
+                    effect.World = Matrix.CreateTranslation(0, 0, 0) *
+                                    Matrix.CreateRotationX(MathHelper.ToRadians(0f));                    
 
                     effect.EnableDefaultLighting();
                 }
