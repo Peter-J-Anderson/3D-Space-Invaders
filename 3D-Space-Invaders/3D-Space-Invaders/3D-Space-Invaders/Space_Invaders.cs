@@ -23,6 +23,9 @@ namespace _3D_Space_Invaders
         // Temp var to hold the model
         Model myModel;
 
+        // These are the ships that will be attacking the laser cannon
+        Model Ship_Myster, Ship_30, Ship_20, Ship_10; 
+
         public Space_Invaders()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -52,7 +55,10 @@ namespace _3D_Space_Invaders
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
-            myModel = Content.Load<Model>("Cube");
+            
+
+
+
             this.myModel = Load_Model(myModel, "Cube"); 
 
             
@@ -105,6 +111,7 @@ namespace _3D_Space_Invaders
 
         private Model Load_Model(Model myModel, string asset_Name = "")
         {
+            myModel = Content.Load<Model>(asset_Name);
 
             float aspectRatio = (float)graphics.GraphicsDevice.Viewport.Width /
                                        graphics.GraphicsDevice.Viewport.Height;
@@ -119,6 +126,8 @@ namespace _3D_Space_Invaders
 
                     effect.View = Matrix.CreateLookAt(new Vector3(0f, 0f, 10f), Vector3.Zero,
                                     Vector3.Up);
+
+                    
 
                     effect.EnableDefaultLighting();
                 }
