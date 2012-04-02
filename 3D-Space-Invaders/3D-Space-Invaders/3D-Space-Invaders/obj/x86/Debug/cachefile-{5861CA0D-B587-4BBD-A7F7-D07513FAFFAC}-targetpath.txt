@@ -1,3 +1,5 @@
 Content\Laser_Cannon\Laser_Cannon.xnb
 Content\Space_Invaders\Invader_20.xnb
 Content\Space_Invaders\Invader_30.xnb
+Content\Space_Invaders\Mystery.xnb
+Content\Space_Invaders\Invader_10.xnb

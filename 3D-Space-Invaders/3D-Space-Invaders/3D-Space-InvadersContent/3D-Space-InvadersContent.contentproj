@@ -47,6 +47,11 @@
       <Importer>XImporter</Importer>
       <Processor>ModelProcessor</Processor>
     </Compile>
+    <Compile Include="Space_Invaders\Invader_10.x">
+      <Name>Invader_10</Name>
+      <Importer>XImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
     <Compile Include="Space_Invaders\Invader_20.x">
       <Name>Invader_20</Name>
       <Importer>XImporter</Importer>
@@ -56,6 +61,13 @@
   <ItemGroup>
     <Compile Include="Space_Invaders\Invader_30.x">
       <Name>Invader_30</Name>
+      <Importer>XImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Space_Invaders\Mystery.x">
+      <Name>Mystery</Name>
       <Importer>XImporter</Importer>
       <Processor>ModelProcessor</Processor>
     </Compile>

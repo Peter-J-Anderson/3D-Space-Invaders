@@ -7,3 +7,5 @@ C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Inv
 C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\bin\x86\Debug\Content\Laser_Cannon\Laser_Cannon.xnb
 C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\bin\x86\Debug\Content\Space_Invaders\Invader_20.xnb
 C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\bin\x86\Debug\Content\Space_Invaders\Invader_30.xnb
+C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\bin\x86\Debug\Content\Space_Invaders\Mystery.xnb
+C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\bin\x86\Debug\Content\Space_Invaders\Invader_10.xnb

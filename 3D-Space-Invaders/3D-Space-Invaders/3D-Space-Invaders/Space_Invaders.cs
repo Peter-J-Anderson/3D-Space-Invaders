@@ -22,7 +22,7 @@ namespace _3D_Space_Invaders
 
         // Temp var to hold the model
         Model myModel;
-
+        List<Model> myModelList;
         // These are the ships that will be attacking the laser cannon
         Model Ship_Myster, Ship_30, Ship_20, Ship_10; 
 
@@ -41,7 +41,7 @@ namespace _3D_Space_Invaders
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
+            myModelList = new List<Model>();
             base.Initialize();
         }
 
@@ -59,10 +59,10 @@ namespace _3D_Space_Invaders
 
 
 
-            this.myModel = Load_Model(myModel, @"Space_Invaders\Invader_20");
-
-            
-
+            myModelList.Add(this.myModel = Load_Model(myModel, @"Space_Invaders\Invader_10"));
+            myModelList.Add(this.myModel = Load_Model(myModel, @"Space_Invaders\Invader_20"));
+            myModelList.Add(this.myModel = Load_Model(myModel, @"Space_Invaders\Invader_30"));
+            myModelList.Add(this.myModel = Load_Model(myModel, @"Space_Invaders\Mystery"));
             
         }
 
@@ -100,11 +100,16 @@ namespace _3D_Space_Invaders
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
+            // Use a list for drawing multiply objects
 
-            foreach (ModelMesh mesh in myModel.Meshes)
+            for (int i = 0; i < myModelList.Capacity; i++)
             {
-                mesh.Draw();
+                foreach (ModelMesh mesh in myModelList[i].Meshes)
+                {
+                    mesh.Draw();
+                }
             }
+
 
             base.Draw(gameTime);
         }
