@@ -11,75 +11,8 @@
       <Time>2012-04-02T16:37:47.8635443+01:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Laser_Cannon\Laser_Cannon_0.xml</Key>
-        <Value>2012-04-02T17:27:55.6817833+01:00</Value>
+        <Value>2012-04-04T20:04:47.976988+01:00</Value>
       </Dependency>
-    </Item>
-    <Item>
-      <Source>Laser_Cannon\Laser_Cannon.x</Source>
-      <Importer>XImporter</Importer>
-      <Options>IntermediateFile, DontCacheImportedData</Options>
-      <Output>obj\x86\Debug\Laser_Cannon\Laser_Cannon_0.xml</Output>
-      <Time>2012-04-02T16:37:47.8635443+01:00</Time>
-    </Item>
-    <Item>
-      <Source>Space_Invaders\Invader_20.x</Source>
-      <Name>Space_Invaders\Invader_20</Name>
-      <Importer>XImporter</Importer>
-      <Processor>ModelProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\bin\x86\Debug\Content\Space_Invaders\Invader_20.xnb</Output>
-      <Time>2012-04-02T18:19:29.0651275+01:00</Time>
-      <Dependency>
-        <Key>obj\x86\Debug\Space_Invaders\Invader_20_0.xml</Key>
-        <Value>2012-04-02T18:19:35.8671744+01:00</Value>
-      </Dependency>
-    </Item>
-    <Item>
-      <Source>Space_Invaders\Invader_20.x</Source>
-      <Importer>XImporter</Importer>
-      <Options>IntermediateFile, DontCacheImportedData</Options>
-      <Output>obj\x86\Debug\Space_Invaders\Invader_20_0.xml</Output>
-      <Time>2012-04-02T18:19:29.0651275+01:00</Time>
-    </Item>
-    <Item>
-      <Source>Space_Invaders\Invader_30.x</Source>
-      <Name>Space_Invaders\Invader_30</Name>
-      <Importer>XImporter</Importer>
-      <Processor>ModelProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\bin\x86\Debug\Content\Space_Invaders\Invader_30.xnb</Output>
-      <Time>2012-04-02T20:04:02.084411+01:00</Time>
-      <Dependency>
-        <Key>obj\x86\Debug\Space_Invaders\Invader_30_0.xml</Key>
-        <Value>2012-04-02T20:04:10.7954711+01:00</Value>
-      </Dependency>
-    </Item>
-    <Item>
-      <Source>Space_Invaders\Invader_30.x</Source>
-      <Importer>XImporter</Importer>
-      <Options>IntermediateFile, DontCacheImportedData</Options>
-      <Output>obj\x86\Debug\Space_Invaders\Invader_30_0.xml</Output>
-      <Time>2012-04-02T20:04:02.084411+01:00</Time>
-    </Item>
-    <Item>
-      <Source>Space_Invaders\Mystery.x</Source>
-      <Name>Space_Invaders\Mystery</Name>
-      <Importer>XImporter</Importer>
-      <Processor>ModelProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\bin\x86\Debug\Content\Space_Invaders\Mystery.xnb</Output>
-      <Time>2012-04-02T19:46:27.7421361+01:00</Time>
-      <Dependency>
-        <Key>obj\x86\Debug\Space_Invaders\Mystery_0.xml</Key>
-        <Value>2012-04-02T19:46:34.979186+01:00</Value>
-      </Dependency>
-    </Item>
-    <Item>
-      <Source>Space_Invaders\Mystery.x</Source>
-      <Importer>XImporter</Importer>
-      <Options>IntermediateFile, DontCacheImportedData</Options>
-      <Output>obj\x86\Debug\Space_Invaders\Mystery_0.xml</Output>
-      <Time>2012-04-02T19:46:27.7421361+01:00</Time>
     </Item>
     <Item>
       <Source>Space_Invaders\Invader_10.x</Source>
@@ -91,8 +24,54 @@
       <Time>2012-04-02T19:54:13.6943511+01:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Space_Invaders\Invader_10_0.xml</Key>
-        <Value>2012-04-02T19:54:18.4283838+01:00</Value>
+        <Value>2012-04-04T20:04:48.4399912+01:00</Value>
       </Dependency>
+    </Item>
+    <Item>
+      <Source>Space_Invaders\Invader_20.x</Source>
+      <Name>Space_Invaders\Invader_20</Name>
+      <Importer>XImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\bin\x86\Debug\Content\Space_Invaders\Invader_20.xnb</Output>
+      <Time>2012-04-02T18:19:29.0651275+01:00</Time>
+      <Dependency>
+        <Key>obj\x86\Debug\Space_Invaders\Invader_20_0.xml</Key>
+        <Value>2012-04-04T20:04:48.5679921+01:00</Value>
+      </Dependency>
+    </Item>
+    <Item>
+      <Source>Space_Invaders\Invader_30.x</Source>
+      <Name>Space_Invaders\Invader_30</Name>
+      <Importer>XImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\bin\x86\Debug\Content\Space_Invaders\Invader_30.xnb</Output>
+      <Time>2012-04-02T20:04:02.084411+01:00</Time>
+      <Dependency>
+        <Key>obj\x86\Debug\Space_Invaders\Invader_30_0.xml</Key>
+        <Value>2012-04-04T20:04:48.6669928+01:00</Value>
+      </Dependency>
+    </Item>
+    <Item>
+      <Source>Space_Invaders\Mystery.x</Source>
+      <Name>Space_Invaders\Mystery</Name>
+      <Importer>XImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\bin\x86\Debug\Content\Space_Invaders\Mystery.xnb</Output>
+      <Time>2012-04-02T19:46:27.7421361+01:00</Time>
+      <Dependency>
+        <Key>obj\x86\Debug\Space_Invaders\Mystery_0.xml</Key>
+        <Value>2012-04-04T20:04:48.846994+01:00</Value>
+      </Dependency>
+    </Item>
+    <Item>
+      <Source>Laser_Cannon\Laser_Cannon.x</Source>
+      <Importer>XImporter</Importer>
+      <Options>IntermediateFile, DontCacheImportedData</Options>
+      <Output>obj\x86\Debug\Laser_Cannon\Laser_Cannon_0.xml</Output>
+      <Time>2012-04-02T16:37:47.8635443+01:00</Time>
     </Item>
     <Item>
       <Source>Space_Invaders\Invader_10.x</Source>
@@ -100,6 +79,27 @@
       <Options>IntermediateFile, DontCacheImportedData</Options>
       <Output>obj\x86\Debug\Space_Invaders\Invader_10_0.xml</Output>
       <Time>2012-04-02T19:54:13.6943511+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Space_Invaders\Invader_20.x</Source>
+      <Importer>XImporter</Importer>
+      <Options>IntermediateFile, DontCacheImportedData</Options>
+      <Output>obj\x86\Debug\Space_Invaders\Invader_20_0.xml</Output>
+      <Time>2012-04-02T18:19:29.0651275+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Space_Invaders\Invader_30.x</Source>
+      <Importer>XImporter</Importer>
+      <Options>IntermediateFile, DontCacheImportedData</Options>
+      <Output>obj\x86\Debug\Space_Invaders\Invader_30_0.xml</Output>
+      <Time>2012-04-02T20:04:02.084411+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Space_Invaders\Mystery.x</Source>
+      <Importer>XImporter</Importer>
+      <Options>IntermediateFile, DontCacheImportedData</Options>
+      <Output>obj\x86\Debug\Space_Invaders\Mystery_0.xml</Output>
+      <Time>2012-04-02T19:46:27.7421361+01:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

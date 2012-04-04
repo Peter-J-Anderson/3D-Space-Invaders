@@ -9,24 +9,14 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 
-namespace _3D_Space_Invaders
+namespace Space_Invader
 {
-    /// <summary>
-    /// This is the main type for your game
-    /// </summary>
-    public class Space_Invaders : Microsoft.Xna.Framework.Game
+  public class SpaceInvader : Microsoft.Xna.Framework.Game
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        
 
-        // Temp var to hold the model
-        Model myModel;
-        List<Model> myModelList;
-        // These are the ships that will be attacking the laser cannon
-        Model Ship_Myster, Ship_30, Ship_20, Ship_10; 
-
-        public Space_Invaders()
+        public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -41,7 +31,7 @@ namespace _3D_Space_Invaders
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            myModelList = new List<Model>();
+
             base.Initialize();
         }
 
@@ -55,15 +45,6 @@ namespace _3D_Space_Invaders
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
-            
-
-
-
-            myModelList.Add(this.myModel = Load_Model(myModel, @"Space_Invaders\Invader_10"));
-            myModelList.Add(this.myModel = Load_Model(myModel, @"Space_Invaders\Invader_20"));
-            myModelList.Add(this.myModel = Load_Model(myModel, @"Space_Invaders\Invader_30"));
-            myModelList.Add(this.myModel = Load_Model(myModel, @"Space_Invaders\Mystery"));
-            
         }
 
         /// <summary>
@@ -100,47 +81,8 @@ namespace _3D_Space_Invaders
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
-            // Use a list for drawing multiply objects
-
-            for (int i = 0; i < myModelList.Capacity; i++)
-            {
-                foreach (ModelMesh mesh in myModelList[i].Meshes)
-                {
-                    mesh.Draw();
-                }
-            }
-
 
             base.Draw(gameTime);
         }
-
-        private Model Load_Model(Model myModel, string asset_Name = "")
-        {
-            myModel = Content.Load<Model>(asset_Name);
-
-            float aspectRatio = (float)graphics.GraphicsDevice.Viewport.Width /
-                                       graphics.GraphicsDevice.Viewport.Height;
-
-            foreach (ModelMesh mesh in myModel.Meshes)
-            {
-                foreach (BasicEffect effect in mesh.Effects)
-                {
-                    effect.Projection =
-                    Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(45f), aspectRatio,
-                    1.0f, 1000.0f);
-
-                    effect.View = Matrix.CreateLookAt(new Vector3(0f, 0f, 10f), Vector3.Zero,
-                                    Vector3.Up);
-                    effect.World = Matrix.CreateTranslation(0, 0, 0) *
-                                    Matrix.CreateRotationX(MathHelper.ToRadians(0f));                    
-
-                    effect.EnableDefaultLighting();
-                }
-            }
-
-            return myModel; 
-        }
     }
-
-
 }
