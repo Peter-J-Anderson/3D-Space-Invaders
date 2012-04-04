@@ -24,7 +24,13 @@ namespace _3D_Space_Invaders
 
 
         // These are the ships that will be attacking the laser cannon
-        Model Mystery_Invader, Invader_30, Invader_20, Invader_10; 
+        Model Mystery_Invader, Invader_30, Invader_20, Invader_10;
+
+        // The laser cannon the user will be controlling
+        Model Laser_Cannon; 
+
+        // The laser fired from bother the aliens and the laser cannon
+        Model Laser; 
 
         public Space_Invaders_3D()
         {
@@ -55,7 +61,9 @@ namespace _3D_Space_Invaders
             spriteBatch = new SpriteBatch(GraphicsDevice);
             // Load models into game ready for use
             Invader_10 = Load_Model("Invader_10");
-            
+            Invader_20 = Load_Model("Invader_20");
+            Invader_30 = Load_Model("Invader_30");
+            Mystery_Invader = Load_Model("Mystery.x"); 
         
         }
 

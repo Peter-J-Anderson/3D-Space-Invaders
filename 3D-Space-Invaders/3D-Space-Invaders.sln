@@ -5,7 +5,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "3D-Space-Invaders", "3D-Spa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "3D-Space-InvadersContent", "3D-Space-Invaders\3D-Space-InvadersContent\3D-Space-InvadersContent.contentproj", "{5861CA0D-B587-4BBD-A7F7-D07513FAFFAC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Space_Invader", "Space_Invaders\Space_Invader.csproj", "{482F191E-8403-4C07-BB58-8DC84FCF99F6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Character", "Space_Invaders\Character.csproj", "{482F191E-8403-4C07-BB58-8DC84FCF99F6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
