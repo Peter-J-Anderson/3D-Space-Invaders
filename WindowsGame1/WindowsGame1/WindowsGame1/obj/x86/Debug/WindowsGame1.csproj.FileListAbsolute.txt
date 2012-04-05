@@ -1,0 +1,2 @@
+C:\Users\Pete\3D-Space-Invaders\WindowsGame1\WindowsGame1\WindowsGame1\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Pete\3D-Space-Invaders\WindowsGame1\WindowsGame1\WindowsGame1\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt

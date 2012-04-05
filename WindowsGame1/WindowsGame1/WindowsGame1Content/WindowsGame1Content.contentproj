@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <ProjectGuid>{5861CA0D-B587-4BBD-A7F7-D07513FAFFAC}</ProjectGuid>
+    <ProjectGuid>{8D201415-6E40-409E-9AF4-6058932E4610}</ProjectGuid>
     <ProjectTypeGuids>{96E2B04D-8817-42c6-938A-82C39BA4D311};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
@@ -19,7 +19,7 @@
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup>
-    <RootNamespace>_3D_Space_InvadersContent</RootNamespace>
+    <RootNamespace>WindowsGame1Content</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Xna.Framework.Content.Pipeline.EffectImporter, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=MSIL">
@@ -40,43 +40,6 @@
     <Reference Include="Microsoft.Xna.Framework.Content.Pipeline.VideoImporters, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=MSIL">
       <Private>False</Private>
     </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Laser_Cannon\Laser_Cannon.x">
-      <Name>Laser_Cannon</Name>
-      <Importer>XImporter</Importer>
-      <Processor>ModelProcessor</Processor>
-    </Compile>
-    <Compile Include="Space_Invaders\Invader_10.x">
-      <Name>Invader_10</Name>
-      <Importer>XImporter</Importer>
-      <Processor>ModelProcessor</Processor>
-    </Compile>
-    <Compile Include="Space_Invaders\Invader_20.x">
-      <Name>Invader_20</Name>
-      <Importer>XImporter</Importer>
-      <Processor>ModelProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Space_Invaders\Invader_30.x">
-      <Name>Invader_30</Name>
-      <Importer>XImporter</Importer>
-      <Processor>ModelProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Space_Invaders\Mystery.x">
-      <Name>Mystery</Name>
-      <Importer>XImporter</Importer>
-      <Processor>ModelProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Game_Level\Game_Level.csproj">
-      <Project>{79836D56-EE1E-45CF-B790-F1385EA36C71}</Project>
-      <Name>Game_Level</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
   <!--  To modify your build process, add your task inside one of the targets below and uncomment it. 

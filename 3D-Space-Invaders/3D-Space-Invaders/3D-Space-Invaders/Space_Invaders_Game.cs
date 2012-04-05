@@ -9,7 +9,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using _3D_Space_Invaders;
-using Space_Invaders_Framework;
+using Space_Invaders_Characters;
+using Game_Level;
 
 namespace _3D_Space_Invaders
 {
@@ -21,16 +22,15 @@ namespace _3D_Space_Invaders
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         
-
-
         // These are the ships that will be attacking the laser cannon
         Model Mystery_Invader, Invader_30, Invader_20, Invader_10;
-
         // The laser cannon the user will be controlling
         Model Laser_Cannon; 
-
         // The laser fired from bother the aliens and the laser cannon
         Model Laser; 
+
+        // This will be the object for the game level
+        Level Game_Level;
 
         public Space_Invaders_3D()
         {
@@ -47,7 +47,9 @@ namespace _3D_Space_Invaders
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            
+            // Create level here :)
+            Game_Level = new Level(1); 
+
             base.Initialize();
         }
 
@@ -60,10 +62,10 @@ namespace _3D_Space_Invaders
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             // Load models into game ready for use
-            Invader_10 = Load_Model("Invader_10");
-            Invader_20 = Load_Model("Invader_20");
-            Invader_30 = Load_Model("Invader_30");
-            Mystery_Invader = Load_Model("Mystery.x"); 
+            Invader_10 = Load_Model(@"Space_Invaders\Invader_10");
+            Invader_20 = Load_Model(@"Space_Invaders\Invader_20");
+            Invader_30 = Load_Model(@"Space_Invaders\Invader_30");
+            Mystery_Invader = Load_Model(@"Space_Invaders\Mystery");
         
         }
 
@@ -88,7 +90,7 @@ namespace _3D_Space_Invaders
                 this.Exit();
 
             // TODO: Add your update logic here
-
+            
             base.Update(gameTime);
         }
 
@@ -102,7 +104,7 @@ namespace _3D_Space_Invaders
 
             // TODO: Add your drawing code here
             // Use a list for drawing multiply objects
-
+            
             
             base.Draw(gameTime);
         }
@@ -111,17 +113,19 @@ namespace _3D_Space_Invaders
         {
             Model myModel = Content.Load<Model>(asset_Name);
 
+            
             float aspectRatio = (float)graphics.GraphicsDevice.Viewport.Width /
                                        graphics.GraphicsDevice.Viewport.Height;
 
             foreach (ModelMesh mesh in myModel.Meshes)
             {
+                
                 foreach (BasicEffect effect in mesh.Effects)
                 {
                     effect.Projection =
                     Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(45f), aspectRatio,
                     1.0f, 1000.0f);
-
+                    
                     effect.View = Matrix.CreateLookAt(new Vector3(0f, 10f, 50f), Vector3.Zero,
                                     Vector3.Up);
                     effect.World = Matrix.CreateTranslation(0, 0, 0) *

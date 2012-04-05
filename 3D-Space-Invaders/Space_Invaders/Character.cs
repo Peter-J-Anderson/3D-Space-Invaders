@@ -9,12 +9,16 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 
-namespace Space_Invaders_Framework
+namespace Space_Invaders_Characters
 {
     public class Space_Invader_Char
     {
+        // Types of characters in the game 
+        public enum Character_Types { Invader_10, Invader_20, Invader_30, Invader_Mystery };
+
+
         // The model that will be used for this Invader 
-        private Model myModel { get; set; } 
+        private Character_Types character_Type { get; set; } 
 
 
         List<Model> test; 
@@ -22,8 +26,8 @@ namespace Space_Invaders_Framework
         
         // Attributes for the alien (e.g. velocity)
         Vector2 velocity { get; set; }
-        Vector2 position { get; protected set; }
-        int points { get; protected set; }    // amount of point gained for destroying this object
+        Vector2 position { get; set; }
+        int points { get; set; }    // amount of point gained for destroying this object
  
         /// <summary>
         /// Class Constructor
@@ -31,13 +35,13 @@ namespace Space_Invaders_Framework
         /// <param name="_myModel"></param>
         /// <param name="_velocity"></param>
         /// <param name="_position"></param>
-        public Space_Invader_Char(Model _myModel, Vector2 _velocity, Vector2 _position, int _points)
+        public Space_Invader_Char(Character_Types _character_Type, Vector2 _velocity, Vector2 _position)
         {
             // Set attributes that are required for creation
-            myModel = _myModel;
+            character_Type = _character_Type;
             velocity = _velocity;
             position = _position;
-            points = _points;
+            points = (int)_character_Type+1 * 10;
 
         }
         /// <summary>

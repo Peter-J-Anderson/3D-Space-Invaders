@@ -11,7 +11,7 @@
       <Time>2012-04-02T16:37:47.8635443+01:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Laser_Cannon\Laser_Cannon_0.xml</Key>
-        <Value>2012-04-04T20:04:47.976988+01:00</Value>
+        <Value>2012-04-05T02:26:20.9357857+01:00</Value>
       </Dependency>
     </Item>
     <Item>
@@ -24,7 +24,7 @@
       <Time>2012-04-02T19:54:13.6943511+01:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Space_Invaders\Invader_10_0.xml</Key>
-        <Value>2012-04-04T20:04:48.4399912+01:00</Value>
+        <Value>2012-04-05T02:26:21.1737874+01:00</Value>
       </Dependency>
     </Item>
     <Item>
@@ -37,7 +37,7 @@
       <Time>2012-04-02T18:19:29.0651275+01:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Space_Invaders\Invader_20_0.xml</Key>
-        <Value>2012-04-04T20:04:48.5679921+01:00</Value>
+        <Value>2012-04-05T02:26:21.2817881+01:00</Value>
       </Dependency>
     </Item>
     <Item>
@@ -50,7 +50,7 @@
       <Time>2012-04-02T20:04:02.084411+01:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Space_Invaders\Invader_30_0.xml</Key>
-        <Value>2012-04-04T20:04:48.6669928+01:00</Value>
+        <Value>2012-04-05T02:26:21.3997889+01:00</Value>
       </Dependency>
     </Item>
     <Item>
@@ -63,7 +63,7 @@
       <Time>2012-04-02T19:46:27.7421361+01:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Space_Invaders\Mystery_0.xml</Key>
-        <Value>2012-04-04T20:04:48.846994+01:00</Value>
+        <Value>2012-04-05T02:26:21.6647907+01:00</Value>
       </Dependency>
     </Item>
     <Item>
@@ -136,6 +136,10 @@
       <Assembly>
         <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.AudioImporters.dll</Key>
         <Value>2010-08-23T13:41:18+01:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\Game_Level\bin\x86\Debug\Game_Level.dll</Key>
+        <Value>2012-04-05T02:18:24.9215012+01:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Windows\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
