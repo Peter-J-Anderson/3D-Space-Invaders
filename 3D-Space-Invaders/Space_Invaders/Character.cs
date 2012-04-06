@@ -29,11 +29,11 @@ namespace Space_Invaders_Characters
         /// <param name="_myModel"></param>
         /// <param name="_velocity"></param>
         /// <param name="_position"></param>
-        public Space_Invader_Char(Character_Types _character_Type, Vector3 _velocity, Vector3 _position)
+        public Space_Invader_Char(Character_Types _character_Type, Vector3  _velocity, Vector3 _position)
         {
             // Set attributes that are required for creation
             character_Type = _character_Type;
-            velocity = _velocity;
+            //velocity = _velocity;
             position = _position;
             points = (int)_character_Type+1 * 10;
 
@@ -41,7 +41,7 @@ namespace Space_Invaders_Characters
         /// <summary>
         /// Will apply the current velocity to the current position
         /// </summary>
-        public void update_Positon(){position += velocity;}
+        public void update_Positon(Vector3 _velocity) { position += _velocity; }
 
      
     }

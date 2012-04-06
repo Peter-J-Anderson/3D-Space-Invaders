@@ -53,11 +53,6 @@ namespace Game_Level
 
         private void Create_Aliens()
         { 
-            // Create 11 columns of aliens 
-            // Create 5 rows of aliens 
-                // 1 row of 30 points 
-                // 2 rows of 20 points 
-                // 2 rows of 10 points
             for (int i = 0; i < 11; i++) // loop through each column
             {// loop through columns
                 temp_Alien_List = new List<Space_Invader_Char>();
@@ -80,6 +75,10 @@ namespace Game_Level
             }
         }
 
+        public void Move_Aliens()
+        { 
+        
+        }
         
 
     }

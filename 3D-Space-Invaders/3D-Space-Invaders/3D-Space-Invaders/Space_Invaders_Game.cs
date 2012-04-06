@@ -35,6 +35,12 @@ namespace _3D_Space_Invaders
         // This will be the object for the game level
         Level Game_Level;
 
+        // Movement timer
+        float moveTimer = 0f;
+        float interval = 100f;
+        float value = 0.1f; // used for movement for now 
+
+
         public Space_Invaders_3D()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -86,6 +92,8 @@ namespace _3D_Space_Invaders
         /// </summary>
         protected override void UnloadContent()
         {
+
+            spriteBatch.Dispose();
             // TODO: Unload any non ContentManager content here
         }
 
@@ -99,6 +107,37 @@ namespace _3D_Space_Invaders
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
+
+            
+            for (int i = 0; i < 11; i++)
+            {
+                for (int j = 0; j < 5; j++)
+                {
+                    if (Game_Level.alien_List[i][j].position.X > 68)
+                    {
+                        value = -value; 
+                    }
+                    if (Game_Level.alien_List[i][j].position.X < -8)
+                    {
+                        value = Math.Abs(value);
+                    }
+
+
+                }
+            }
+
+
+            moveTimer += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+            if (moveTimer > interval*3)
+            {
+                    for (int i = 0; i < 11; i++)
+                    {
+                        for (int j = 0; j < 5; j++)
+                        {
+                            Game_Level.alien_List[i][j].update_Positon(new Vector3(value, 0, 0));
+                        }
+                    }
+            }
 
             // TODO: Add your update logic here
 
@@ -115,7 +154,7 @@ namespace _3D_Space_Invaders
             float xj, yj, zj;
             // Draw the model. A model can have multiple meshes, so loop.
             for (int i = 0; i < 5; i++)
-                for (int j = 0; j < 11; j ++ )
+                for (int j = 0; j < 11; j++)
                     foreach (ModelMesh mesh in Alien_Model_List[(int)Game_Level.alien_List[j][i].character_Type].Meshes)
                     {
                         // This is where the mesh orientation is set, as well 
