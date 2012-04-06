@@ -19,8 +19,8 @@ namespace Space_Invaders_Characters
         public Character_Types character_Type { get; set; }
         
         // Attributes for the alien (e.g. velocity)
-        Vector2 velocity { get; set; }
-        Vector2 position { get; set; }
+        Vector3 velocity { get; set; }
+        public Vector3 position { get; set; }
         int points { get; set; }    // amount of point gained for destroying this object
  
         /// <summary>
@@ -29,7 +29,7 @@ namespace Space_Invaders_Characters
         /// <param name="_myModel"></param>
         /// <param name="_velocity"></param>
         /// <param name="_position"></param>
-        public Space_Invader_Char(Character_Types _character_Type, Vector2 _velocity, Vector2 _position)
+        public Space_Invader_Char(Character_Types _character_Type, Vector3 _velocity, Vector3 _position)
         {
             // Set attributes that are required for creation
             character_Type = _character_Type;

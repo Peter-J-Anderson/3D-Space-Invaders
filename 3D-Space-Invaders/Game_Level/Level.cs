@@ -23,9 +23,8 @@ namespace Game_Level
         float alien_Fire_Rate { get; set; }
 
         // Holds the aliens for this level 
-        public List<List<Space_Invader_Char>> alien_List_Column = new List<List<Space_Invader_Char>>();
-        public List<Space_Invader_Char> alien_List_Row = new List<Space_Invader_Char>();
-
+        public List<List<Space_Invader_Char>> alien_List = new List<List<Space_Invader_Char>>();
+        List<Space_Invader_Char> temp_Alien_List;
         public Level(int _level)
         {
             level = _level;
@@ -33,9 +32,7 @@ namespace Game_Level
         }
 
         private void Initialise() 
-        {
-            alien_List_Column = new List<List<Space_Invader_Char>>();
-            alien_List_Row = new List<Space_Invader_Char>();
+        {            
             Level_Setup();
         }
 
@@ -63,23 +60,23 @@ namespace Game_Level
                 // 2 rows of 10 points
             for (int i = 0; i < 11; i++) // loop through each column
             {// loop through columns
-
+                temp_Alien_List = new List<Space_Invader_Char>();
                 for (int j = 0; j < 1; j++) // for each row in the column put an alien
                 {
-                    alien_List_Row.Add( new Space_Invader_Char(Space_Invader_Char.Character_Types.Invader_30, new Vector2(alien_Speed, 0), new Vector2((30 * i), 10 * j)));
+                    temp_Alien_List.Add(new Space_Invader_Char(Space_Invader_Char.Character_Types.Invader_30, new Vector3(alien_Speed, 0,0), new Vector3((6 * i), -3 * j, -10)));
                 }
 
                 for (int j = 1; j < 3; j++)
                 {
-                    alien_List_Row.Add(new Space_Invader_Char(Space_Invader_Char.Character_Types.Invader_20, new Vector2(alien_Speed, 0), new Vector2((30 * i), 10 * j)));
+                    temp_Alien_List.Add(new Space_Invader_Char(Space_Invader_Char.Character_Types.Invader_20, new Vector3(alien_Speed, 0,0), new Vector3((6 * i), -3 * j, -10)));
                 }
 
                 for (int j = 3; j < 5; j++)
                 {
-                    alien_List_Row.Add(new Space_Invader_Char(Space_Invader_Char.Character_Types.Invader_10, new Vector2(alien_Speed, 0), new Vector2((30 * i), 10 * j)));
+                    temp_Alien_List.Add(new Space_Invader_Char(Space_Invader_Char.Character_Types.Invader_10, new Vector3(alien_Speed, 0,0), new Vector3((6 * i), -3 * j, -10)));
                 }
+                alien_List.Add(temp_Alien_List);
 
-                alien_List_Column.Add(alien_List_Row);
             }
         }
 
