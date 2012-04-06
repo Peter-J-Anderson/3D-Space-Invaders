@@ -21,13 +21,16 @@ namespace _3D_Space_Invaders
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        
+
+        float aspectRatio;
+
+
         // These are the ships that will be attacking the laser cannon
-        Model Mystery_Invader, Invader_30, Invader_20, Invader_10;
+        List<Model> Alien_Model_List = new List<Model>();
         // The laser cannon the user will be controlling
-        Model Laser_Cannon; 
+        Model Laser_Cannon;
         // The laser fired from bother the aliens and the laser cannon
-        Model Laser; 
+        Model Laser;
 
         // This will be the object for the game level
         Level Game_Level;
@@ -48,7 +51,7 @@ namespace _3D_Space_Invaders
         {
             // TODO: Add your initialization logic here
             // Create level here :)
-            Game_Level = new Level(1); 
+            Game_Level = new Level(1);
 
             base.Initialize();
         }
@@ -59,14 +62,22 @@ namespace _3D_Space_Invaders
         /// </summary>
         protected override void LoadContent()
         {
+            Model temp, temp1, temp2, temp3;
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             // Load models into game ready for use
-            Invader_10 = Load_Model(@"Space_Invaders\Invader_10");
-            Invader_20 = Load_Model(@"Space_Invaders\Invader_20");
-            Invader_30 = Load_Model(@"Space_Invaders\Invader_30");
-            Mystery_Invader = Load_Model(@"Space_Invaders\Mystery");
-        
+
+            temp = Load_Model(@"Space_Invaders\Invader_10");
+            Alien_Model_List.Add(temp);
+            temp1 = Load_Model(@"Space_Invaders\Invader_20");
+            Alien_Model_List.Add(temp1);
+            temp2 = Load_Model(@"Space_Invaders\Invader_30");
+            Alien_Model_List.Add(temp2);
+            temp3 = Load_Model(@"Space_Invaders\Mystery");
+            Alien_Model_List.Add(temp3);
+
+
+            aspectRatio = graphics.GraphicsDevice.Viewport.AspectRatio;
         }
 
         /// <summary>
@@ -90,7 +101,7 @@ namespace _3D_Space_Invaders
                 this.Exit();
 
             // TODO: Add your update logic here
-            
+
             base.Update(gameTime);
         }
 
@@ -100,44 +111,58 @@ namespace _3D_Space_Invaders
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            graphics.GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
-            // Use a list for drawing multiply objects
-            
-            
+            // Draw the model. A model can have multiple meshes, so loop.
+            for (int i = 0; i < Game_Level.alien_List_Row.Count; i++)
+                foreach (ModelMesh mesh in Alien_Model_List[(int)Game_Level.alien_List_Row[i].character_Type].Meshes)
+                {
+                    // This is where the mesh orientation is set, as well 
+                    // as our camera and projection.
+                    foreach (BasicEffect effect in mesh.Effects)
+                    {
+                        effect.World = Matrix.CreateTranslation(new Vector3(5 *i,0,0));
+                    }
+                    
+                    // Draw the mesh, using the effects set above.
+                    mesh.Draw();
+                }
             base.Draw(gameTime);
         }
 
-        private Model Load_Model( string asset_Name = "")
+
+        private Model Load_Model(string asset_Name = "")
         {
-            Model myModel = Content.Load<Model>(asset_Name);
-
-            
-            float aspectRatio = (float)graphics.GraphicsDevice.Viewport.Width /
-                                       graphics.GraphicsDevice.Viewport.Height;
-
-            foreach (ModelMesh mesh in myModel.Meshes)
             {
-                
-                foreach (BasicEffect effect in mesh.Effects)
-                {
-                    effect.Projection =
-                    Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(45f), aspectRatio,
-                    1.0f, 1000.0f);
-                    
-                    effect.View = Matrix.CreateLookAt(new Vector3(0f, 10f, 50f), Vector3.Zero,
-                                    Vector3.Up);
-                    effect.World = Matrix.CreateTranslation(0, 0, 0) *
-                                    Matrix.CreateRotationX(MathHelper.ToRadians(0f));                    
+                Model myModel = Content.Load<Model>(asset_Name);
+                float aspectRatio = (float)graphics.GraphicsDevice.Viewport.Width /
+                                           graphics.GraphicsDevice.Viewport.Height;
 
-                    effect.EnableDefaultLighting();
+                foreach (ModelMesh mesh in myModel.Meshes)
+                {
+
+                    foreach (BasicEffect effect in mesh.Effects)
+                    {
+
+
+                        effect.Projection =
+                        Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(45f), aspectRatio,
+                        1.0f, 1000.0f);
+
+                        effect.View = Matrix.CreateLookAt(new Vector3(0f, 10f, 50f), Vector3.Zero,
+                                        Vector3.Up);
+                        effect.World = Matrix.CreateTranslation(0, 0, 0) *
+                                        Matrix.CreateRotationX(MathHelper.ToRadians(0f));
+
+                        effect.EnableDefaultLighting();
+                    }
                 }
+
+
+
+                return myModel;
             }
 
-            return myModel; 
         }
     }
-
-
 }

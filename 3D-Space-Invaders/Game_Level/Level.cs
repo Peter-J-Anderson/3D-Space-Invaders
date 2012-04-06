@@ -17,18 +17,19 @@ namespace Game_Level
     {
         // Level attributes
         int level { get; set; }
-        float alien_Speed { get; set; }
-        int aliens_Remaining { get; set; }
+        public float alien_Speed { get; set; }
+        public int aliens_Remaining { get; private set; }
         // How often all the aliens shoot (e.g. one from all the aliens per second)
         float alien_Fire_Rate { get; set; }
 
         // Holds the aliens for this level 
-        List<List<Space_Invader_Char>> alien_List_Column;
-        List<Space_Invader_Char> alien_List_Row;
+        public List<List<Space_Invader_Char>> alien_List_Column = new List<List<Space_Invader_Char>>();
+        public List<Space_Invader_Char> alien_List_Row = new List<Space_Invader_Char>();
 
         public Level(int _level)
         {
             level = _level;
+            Initialise();
         }
 
         private void Initialise() 

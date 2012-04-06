@@ -15,14 +15,8 @@ namespace Space_Invaders_Characters
     {
         // Types of characters in the game 
         public enum Character_Types { Invader_10, Invader_20, Invader_30, Invader_Mystery };
-
-
         // The model that will be used for this Invader 
-        private Character_Types character_Type { get; set; } 
-
-
-        List<Model> test; 
-
+        public Character_Types character_Type { get; set; }
         
         // Attributes for the alien (e.g. velocity)
         Vector2 velocity { get; set; }
@@ -48,5 +42,7 @@ namespace Space_Invaders_Characters
         /// Will apply the current velocity to the current position
         /// </summary>
         public void update_Positon(){position += velocity;}
+
+     
     }
 }
