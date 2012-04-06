@@ -114,19 +114,21 @@ namespace _3D_Space_Invaders
             graphics.GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // Draw the model. A model can have multiple meshes, so loop.
-            for (int i = 0; i < Game_Level.alien_List_Row.Count; i++)
-                foreach (ModelMesh mesh in Alien_Model_List[(int)Game_Level.alien_List_Row[i].character_Type].Meshes)
-                {
-                    // This is where the mesh orientation is set, as well 
-                    // as our camera and projection.
-                    foreach (BasicEffect effect in mesh.Effects)
+            for (int i = 0; i < 5; i++)
+                for (int j = 0; j < 11; j ++ )
+                    foreach (ModelMesh mesh in Alien_Model_List[(int)Game_Level.alien_List_Row[i].character_Type].Meshes)
                     {
-                        effect.World = Matrix.CreateTranslation(new Vector3(4 *i,0,0));
+                        // This is where the mesh orientation is set, as well 
+                        // as our camera and projection.
+                        foreach (BasicEffect effect in mesh.Effects)
+                        {
+                            // off set from the middle of the screen 
+                            effect.World = Matrix.CreateTranslation(new Vector3(-25+ (5*j), 15 + -3* i, 0));
+                        }
+
+                        // Draw the mesh, using the effects set above.
+                        mesh.Draw();
                     }
-                    
-                    // Draw the mesh, using the effects set above.
-                    mesh.Draw();
-                }
             base.Draw(gameTime);
         }
 
@@ -149,7 +151,7 @@ namespace _3D_Space_Invaders
                         Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(45f), aspectRatio,
                         1.0f, 1000.0f);
 
-                        effect.View = Matrix.CreateLookAt(new Vector3(0f, 10f, 50f), Vector3.Zero,
+                        effect.View = Matrix.CreateLookAt(new Vector3(0f, 0f, 50f), Vector3.Zero,
                                         Vector3.Up);
                         effect.World = Matrix.CreateTranslation(0, 0, 0) *
                                         Matrix.CreateRotationX(MathHelper.ToRadians(0f));
