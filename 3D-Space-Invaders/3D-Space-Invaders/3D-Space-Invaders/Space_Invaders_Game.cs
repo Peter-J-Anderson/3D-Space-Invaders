@@ -121,7 +121,7 @@ namespace _3D_Space_Invaders
                     // as our camera and projection.
                     foreach (BasicEffect effect in mesh.Effects)
                     {
-                        effect.World = Matrix.CreateTranslation(new Vector3(5 *i,0,0));
+                        effect.World = Matrix.CreateTranslation(new Vector3(3 *i,0,0));
                     }
                     
                     // Draw the mesh, using the effects set above.
