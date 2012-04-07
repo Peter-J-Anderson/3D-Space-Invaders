@@ -19,7 +19,7 @@ namespace Space_Invaders_Characters
         public Character_Types character_Type { get; set; }
         
         // Attributes for the alien (e.g. velocity)
-        Vector3 velocity { get; set; }
+        public Vector3 velocity { get; set; }
         public Vector3 position { get; set; }
         int points { get; set; }    // amount of point gained for destroying this object
  

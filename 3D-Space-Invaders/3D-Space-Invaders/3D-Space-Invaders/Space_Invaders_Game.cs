@@ -38,8 +38,8 @@ namespace _3D_Space_Invaders
         // Movement timer
         float moveTimer = 0f;
         float interval = 100f;
-        float value = 0.1f; // used for movement for now 
-
+        float xValue = 0.1f; // used for x movement for now 
+        float yValue = 0.0f; // used for y movement
 
         public Space_Invaders_3D()
         {
@@ -58,7 +58,7 @@ namespace _3D_Space_Invaders
             // TODO: Add your initialization logic here
             // Create level here :)
             Game_Level = new Level(1);
-
+            xValue = Game_Level.alien_Speed;
             base.Initialize();
         }
 
@@ -108,36 +108,48 @@ namespace _3D_Space_Invaders
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
+            float cannon_Speed = 0;
 
-            
-            for (int i = 0; i < 11; i++)
+            if (Keyboard.GetState().IsKeyDown(Keys.A) & Game_Level.cannon.position.X > -8)
+                cannon_Speed = -0.5f;
+            if (Keyboard.GetState().IsKeyDown(Keys.D) & Game_Level.cannon.position.X < 68)
+                    cannon_Speed = 0.5f;
+
+
+            for (int i = 0; i < Game_Level.alien_List.Count; i++)
             {
                 for (int j = 0; j < 5; j++)
                 {
                     if (Game_Level.alien_List[i][j].position.X > 68)
                     {
-                        value = -value; 
+                        xValue = -Game_Level.alien_Speed;
+                        yValue = -0.5f;
                     }
                     if (Game_Level.alien_List[i][j].position.X < -8)
                     {
-                        value = Math.Abs(value);
+                        xValue = Game_Level.alien_Speed;
+                        yValue = -0.5f;
                     }
 
 
                 }
             }
-
-
+            // move cannon
+            Game_Level.cannon.update_Positon(new Vector3(cannon_Speed, 0.0f, 0.0f));
+            
+            // move aliens
             moveTimer += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             if (moveTimer > interval*3)
             {
-                    for (int i = 0; i < 11; i++)
+                for (int i = 0; i < Game_Level.alien_List.Count; i++)
                     {
                         for (int j = 0; j < 5; j++)
                         {
-                            Game_Level.alien_List[i][j].update_Positon(new Vector3(value, 0, 0));
+                            Game_Level.alien_List[i][j].update_Positon(new Vector3(xValue,yValue , 0));
+                            
                         }
                     }
+                    yValue = 0;
             }
 
             // TODO: Add your update logic here
@@ -156,7 +168,7 @@ namespace _3D_Space_Invaders
             float xj, yj, zj;
             // Draw the model. A model can have multiple meshes, so loop.
             for (int i = 0; i < 5; i++)
-                for (int j = 0; j < 11; j++)
+                for (int j = 0; j < Game_Level.alien_List.Count; j++)
                     foreach (ModelMesh mesh in Alien_Model_List[(int)Game_Level.alien_List[j][i].character_Type].Meshes)
                     {
                         // This is where the mesh orientation is set, as well 
@@ -185,12 +197,13 @@ namespace _3D_Space_Invaders
                         zj = Game_Level.cannon.position.Z;
                         foreach (BasicEffect effect in mesh.Effects)
                         {
-                            effect.World = Matrix.CreateTranslation(new Vector3(xj, yj, zj));
+                            effect.World = Matrix.CreateTranslation(new Vector3(xj, yj, zj) );
                         }
 
                         // Draw the mesh, using the effects set above.
                         mesh.Draw();
                     }
+            
             base.Draw(gameTime);
         }
 
@@ -215,6 +228,7 @@ namespace _3D_Space_Invaders
 
                         effect.View = Matrix.CreateLookAt(new Vector3(30f, -20f, 50f), new Vector3(30f, -20f, 0f),
                                         Vector3.Up);
+                        
                         effect.World = Matrix.CreateTranslation(0, 0, 0) *
                                         Matrix.CreateRotationX(MathHelper.ToRadians(0f));
 

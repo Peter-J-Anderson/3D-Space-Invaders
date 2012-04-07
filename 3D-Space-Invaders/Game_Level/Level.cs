@@ -49,7 +49,7 @@ namespace Game_Level
             aliens_Remaining = 55;
 
             // movement speed = 2 at start of game
-            alien_Speed = level + (aliens_Remaining / aliens_Remaining);
+            alien_Speed = (float)level / (float)aliens_Remaining;
 
             //staring fire rate = 1 per second
             alien_Fire_Rate = aliens_Remaining - aliens_Remaining + level;
@@ -63,7 +63,7 @@ namespace Game_Level
 
         private void Create_Aliens()
         { 
-            for (int i = 0; i < 11; i++) // loop through each column
+            for (int i = 0; i < 6; i++) // loop through each column
             {// loop through columns
                 temp_List = new List<Space_Invader_Char>();
                 for (int j = 0; j < 1; j++) // for each row in the column put an alien
