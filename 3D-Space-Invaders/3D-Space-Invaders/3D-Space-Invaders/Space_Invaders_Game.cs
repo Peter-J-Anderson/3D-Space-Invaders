@@ -68,20 +68,21 @@ namespace _3D_Space_Invaders
         /// </summary>
         protected override void LoadContent()
         {
-            Model temp, temp1, temp2, temp3;
+            Model temp;
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             // Load models into game ready for use
 
             temp = Load_Model(@"Space_Invaders\Invader_10");
             Alien_Model_List.Add(temp);
-            temp1 = Load_Model(@"Space_Invaders\Invader_20");
-            Alien_Model_List.Add(temp1);
-            temp2 = Load_Model(@"Space_Invaders\Invader_30");
-            Alien_Model_List.Add(temp2);
-            temp3 = Load_Model(@"Space_Invaders\Mystery");
-            Alien_Model_List.Add(temp3);
-
+            temp = Load_Model(@"Space_Invaders\Invader_20");
+            Alien_Model_List.Add(temp);
+            temp = Load_Model(@"Space_Invaders\Invader_30");
+            Alien_Model_List.Add(temp);
+            temp = Load_Model(@"Space_Invaders\Mystery");
+            Alien_Model_List.Add(temp);
+            temp = Load_Model(@"Laser_Cannon\Laser_Cannon");
+            Alien_Model_List.Add(temp);
 
             aspectRatio = graphics.GraphicsDevice.Viewport.AspectRatio;
         }
@@ -151,6 +152,7 @@ namespace _3D_Space_Invaders
         protected override void Draw(GameTime gameTime)
         {
             graphics.GraphicsDevice.Clear(Color.CornflowerBlue);
+            
             float xj, yj, zj;
             // Draw the model. A model can have multiple meshes, so loop.
             for (int i = 0; i < 5; i++)
@@ -162,6 +164,25 @@ namespace _3D_Space_Invaders
                         xj = Game_Level.alien_List[j][i].position.X;
                         yj = Game_Level.alien_List[j][i].position.Y;
                         zj = Game_Level.alien_List[j][i].position.Z;
+                        foreach (BasicEffect effect in mesh.Effects)
+                        {
+                            effect.World = Matrix.CreateTranslation(new Vector3(xj, yj, zj));
+                        }
+
+                        // Draw the mesh, using the effects set above.
+                        mesh.Draw();
+                    }
+
+            // Draw the model. A model can have multiple meshes, so loop.
+            for (int i = 0; i < 5; i++)
+                for (int j = 0; j < 11; j++)
+                    foreach (ModelMesh mesh in Alien_Model_List[(int)Game_Level.cannon.character_Type].Meshes)
+                    {
+                        // This is where the mesh orientation is set, as well 
+                        // as our camera and projection.
+                        xj = Game_Level.cannon.position.X;
+                        yj = Game_Level.cannon.position.Y;
+                        zj = Game_Level.cannon.position.Z;
                         foreach (BasicEffect effect in mesh.Effects)
                         {
                             effect.World = Matrix.CreateTranslation(new Vector3(xj, yj, zj));

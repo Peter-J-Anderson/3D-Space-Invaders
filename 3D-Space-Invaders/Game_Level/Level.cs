@@ -24,7 +24,14 @@ namespace Game_Level
 
         // Holds the aliens for this level 
         public List<List<Space_Invader_Char>> alien_List = new List<List<Space_Invader_Char>>();
-        List<Space_Invader_Char> temp_Alien_List;
+        
+        // Holds the cannon for this level
+        public Space_Invader_Char cannon;
+
+        // Temp list
+        List<Space_Invader_Char> temp_List;
+
+
         public Level(int _level)
         {
             level = _level;
@@ -49,30 +56,38 @@ namespace Game_Level
 
             // Create aliens 
             Create_Aliens();
+
+            // Create cannon
+            Create_Cannon();
         }
 
         private void Create_Aliens()
         { 
             for (int i = 0; i < 11; i++) // loop through each column
             {// loop through columns
-                temp_Alien_List = new List<Space_Invader_Char>();
+                temp_List = new List<Space_Invader_Char>();
                 for (int j = 0; j < 1; j++) // for each row in the column put an alien
                 {
-                    temp_Alien_List.Add(new Space_Invader_Char(Space_Invader_Char.Character_Types.Invader_30, new Vector3(alien_Speed, 0,0), new Vector3((6 * i), -3 * j, -10)));
+                    temp_List.Add(new Space_Invader_Char(Space_Invader_Char.Character_Types.Invader_30, new Vector3(alien_Speed, 0,0), new Vector3((6 * i), -3 * j, -10)));
                 }
 
                 for (int j = 1; j < 3; j++)
                 {
-                    temp_Alien_List.Add(new Space_Invader_Char(Space_Invader_Char.Character_Types.Invader_20, new Vector3(alien_Speed, 0,0), new Vector3((6 * i), -3 * j, -10)));
+                    temp_List.Add(new Space_Invader_Char(Space_Invader_Char.Character_Types.Invader_20, new Vector3(alien_Speed, 0,0), new Vector3((6 * i), -3 * j, -10)));
                 }
 
                 for (int j = 3; j < 5; j++)
                 {
-                    temp_Alien_List.Add(new Space_Invader_Char(Space_Invader_Char.Character_Types.Invader_10, new Vector3(alien_Speed, 0,0), new Vector3((6 * i), -3 * j, -10)));
+                    temp_List.Add(new Space_Invader_Char(Space_Invader_Char.Character_Types.Invader_10, new Vector3(alien_Speed, 0,0), new Vector3((6 * i), -3 * j, -10)));
                 }
-                alien_List.Add(temp_Alien_List);
+                alien_List.Add(temp_List);
 
             }
+        }
+
+        private void Create_Cannon()
+        {
+            cannon = new Space_Invader_Char(Space_Invader_Char.Character_Types.Cannon, new Vector3(0.5f, 0, 0), new Vector3(30, -42, -10));
         }
 
         public void Move_Aliens()

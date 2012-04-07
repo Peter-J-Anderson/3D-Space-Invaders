@@ -14,7 +14,7 @@ namespace Space_Invaders_Characters
     public class Space_Invader_Char
     {
         // Types of characters in the game 
-        public enum Character_Types { Invader_10, Invader_20, Invader_30, Invader_Mystery };
+        public enum Character_Types { Invader_10, Invader_20, Invader_30, Invader_Mystery, Cannon};
         // The model that will be used for this Invader 
         public Character_Types character_Type { get; set; }
         
