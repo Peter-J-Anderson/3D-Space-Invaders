@@ -3,3 +3,4 @@ Content\Space_Invaders\Invader_10.xnb
 Content\Space_Invaders\Invader_20.xnb
 Content\Space_Invaders\Invader_30.xnb
 Content\Space_Invaders\Mystery.xnb
+Content\Bunker\Bunker_Block.xnb

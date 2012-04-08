@@ -25,11 +25,11 @@ namespace _3D_Space_Invaders
         float aspectRatio;
 
 
-        // These are the ships that will be attacking the laser cannon
+        // These are the ships that will be attacking the laser Cannon
         List<Model> Alien_Model_List = new List<Model>();
-        // The laser cannon the user will be controlling
+        // The laser Cannon the user will be controlling
         Model Laser_Cannon;
-        // The laser fired from bother the aliens and the laser cannon
+        // The laser fired from bother the aliens and the laser Cannon
         Model Laser;
 
         // This will be the object for the game level
@@ -83,6 +83,8 @@ namespace _3D_Space_Invaders
             Alien_Model_List.Add(temp);
             temp = Load_Model(@"Laser_Cannon\Laser_Cannon");
             Alien_Model_List.Add(temp);
+            temp = Load_Model(@"Bunker\Bunker_Block");
+            Alien_Model_List.Add(temp);
 
             aspectRatio = graphics.GraphicsDevice.Viewport.AspectRatio;
         }
@@ -108,14 +110,14 @@ namespace _3D_Space_Invaders
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
-            float cannon_Speed = 0;
+            float Cannon_Speed = 0;
 
-            if (Keyboard.GetState().IsKeyDown(Keys.A) & Game_Level.cannon.position.X > -8)
-                cannon_Speed = -0.5f;
-            if (Keyboard.GetState().IsKeyDown(Keys.D) & Game_Level.cannon.position.X < 68)
-                    cannon_Speed = 0.5f;
+            if (Keyboard.GetState().IsKeyDown(Keys.A) & Game_Level.Cannon.position.X > -8)
+                Cannon_Speed = -0.5f;
+            if (Keyboard.GetState().IsKeyDown(Keys.D) & Game_Level.Cannon.position.X < 68)
+                Cannon_Speed = 0.5f;
 
-
+            // Check to see if the aliens reach the boundries of the screen
             for (int i = 0; i < Game_Level.alien_List.Count; i++)
             {
                 for (int j = 0; j < 5; j++)
@@ -134,26 +136,24 @@ namespace _3D_Space_Invaders
 
                 }
             }
-            // move cannon
-            Game_Level.cannon.update_Positon(new Vector3(cannon_Speed, 0.0f, 0.0f));
-            
+
+            // move Cannon
+            Game_Level.Cannon.update_Positon(new Vector3(Cannon_Speed, 0.0f, 0.0f));
+
             // move aliens
             moveTimer += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-            if (moveTimer > interval*3)
+            if (moveTimer > interval * 3)
             {
                 for (int i = 0; i < Game_Level.alien_List.Count; i++)
+                {
+                    for (int j = 0; j < 5; j++)
                     {
-                        for (int j = 0; j < 5; j++)
-                        {
-                            Game_Level.alien_List[i][j].update_Positon(new Vector3(xValue,yValue , 0));
-                            
-                        }
+                        Game_Level.alien_List[i][j].update_Positon(new Vector3(xValue, yValue, 0));
+
                     }
-                    yValue = 0;
+                }
+                yValue = 0;
             }
-
-            // TODO: Add your update logic here
-
             base.Update(gameTime);
         }
 
@@ -164,8 +164,9 @@ namespace _3D_Space_Invaders
         protected override void Draw(GameTime gameTime)
         {
             graphics.GraphicsDevice.Clear(Color.CornflowerBlue);
-            
+
             float xj, yj, zj;
+            // Draw the aliens
             // Draw the model. A model can have multiple meshes, so loop.
             for (int i = 0; i < 5; i++)
                 for (int j = 0; j < Game_Level.alien_List.Count; j++)
@@ -184,26 +185,42 @@ namespace _3D_Space_Invaders
                         // Draw the mesh, using the effects set above.
                         mesh.Draw();
                     }
-
+            // Draw the Cannon
             // Draw the model. A model can have multiple meshes, so loop.
-            for (int i = 0; i < 5; i++)
-                for (int j = 0; j < 11; j++)
-                    foreach (ModelMesh mesh in Alien_Model_List[(int)Game_Level.cannon.character_Type].Meshes)
-                    {
-                        // This is where the mesh orientation is set, as well 
-                        // as our camera and projection.
-                        xj = Game_Level.cannon.position.X;
-                        yj = Game_Level.cannon.position.Y;
-                        zj = Game_Level.cannon.position.Z;
-                        foreach (BasicEffect effect in mesh.Effects)
-                        {
-                            effect.World = Matrix.CreateTranslation(new Vector3(xj, yj, zj) );
-                        }
+            foreach (ModelMesh mesh in Alien_Model_List[(int)Game_Level.Cannon.character_Type].Meshes)
+            {
+                // This is where the mesh orientation is set, as well 
+                // as our camera and projection.
+                xj = Game_Level.Cannon.position.X;
+                yj = Game_Level.Cannon.position.Y;
+                zj = Game_Level.Cannon.position.Z;
+                foreach (BasicEffect effect in mesh.Effects)
+                {
+                    effect.World = Matrix.CreateTranslation(new Vector3(xj, yj, zj));
+                }
 
-                        // Draw the mesh, using the effects set above.
-                        mesh.Draw();
+                // Draw the mesh, using the effects set above.
+                mesh.Draw();
+            }
+
+            // Draw the Bunkers
+            // Draw the model. A model can have multiple meshes, so loop.
+            for (int i = 0; i < Game_Level.Bunker_List.Count;i++)
+                foreach (ModelMesh mesh in Alien_Model_List[(int)Game_Level.Bunker_List[i].character_Type].Meshes)
+                {
+                    // This is where the mesh orientation is set, as well 
+                    // as our camera and projection.
+                    xj = Game_Level.Bunker_List[i].position.X;
+                    yj = Game_Level.Bunker_List[i].position.Y;
+                    zj = Game_Level.Bunker_List[i].position.Z;
+                    foreach (BasicEffect effect in mesh.Effects)
+                    {
+                        effect.World = Matrix.CreateTranslation(new Vector3(xj, yj, zj));
                     }
-            
+
+                    // Draw the mesh, using the effects set above.
+                    mesh.Draw();
+                }
             base.Draw(gameTime);
         }
 
@@ -228,7 +245,7 @@ namespace _3D_Space_Invaders
 
                         effect.View = Matrix.CreateLookAt(new Vector3(30f, -20f, 50f), new Vector3(30f, -20f, 0f),
                                         Vector3.Up);
-                        
+
                         effect.World = Matrix.CreateTranslation(0, 0, 0) *
                                         Matrix.CreateRotationX(MathHelper.ToRadians(0f));
 

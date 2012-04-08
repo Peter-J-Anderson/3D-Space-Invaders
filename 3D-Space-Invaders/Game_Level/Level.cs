@@ -25,8 +25,12 @@ namespace Game_Level
         // Holds the aliens for this level 
         public List<List<Space_Invader_Char>> alien_List = new List<List<Space_Invader_Char>>();
         
-        // Holds the cannon for this level
-        public Space_Invader_Char cannon;
+        // Holds the Cannon for this level
+        public Space_Invader_Char Cannon;
+
+        // Hold the bunkers 
+        public List<Space_Invader_Char> Bunker_List = new List<Space_Invader_Char>();
+        private Space_Invader_Char Bunker;
 
         // Temp list
         List<Space_Invader_Char> temp_List;
@@ -57,13 +61,16 @@ namespace Game_Level
             // Create aliens 
             Create_Aliens();
 
-            // Create cannon
+            // Create Cannon
             Create_Cannon();
+
+            // Create Bunkers
+            Create_Bunker();
         }
 
         private void Create_Aliens()
         { 
-            for (int i = 0; i < 6; i++) // loop through each column
+            for (int i = 0; i < 11; i++) // loop through each column
             {// loop through columns
                 temp_List = new List<Space_Invader_Char>();
                 for (int j = 0; j < 1; j++) // for each row in the column put an alien
@@ -85,16 +92,41 @@ namespace Game_Level
             }
         }
 
-        private void Create_Cannon()
+        private void Create_Laser()
         {
-            cannon = new Space_Invader_Char(Space_Invader_Char.Character_Types.Cannon, new Vector3(0.5f, 0, 0), new Vector3(30, -42, -10));
+            // This will create the laser that is fired from both the aliens and Cannon
         }
 
-        public void Move_Aliens()
+        private void Create_Bunker()
         { 
-        
+            // this will create the bunker based on a start location
+            // start with a basic block to represent the bunkers
+            Bunker = new Space_Invader_Char(Space_Invader_Char.Character_Types.Bunker_Block, new Vector3(0, 0, 0), new Vector3(0, -35, -10));
+            Bunker_List.Add(Bunker);
+
+            Bunker = new Space_Invader_Char(Space_Invader_Char.Character_Types.Bunker_Block, new Vector3(0, 0, 0), new Vector3(10, -35, -10));
+            Bunker_List.Add(Bunker);
+
+            Bunker = new Space_Invader_Char(Space_Invader_Char.Character_Types.Bunker_Block, new Vector3(0, 0, 0), new Vector3(20, -35, -10));
+            Bunker_List.Add(Bunker);
+
+            Bunker = new Space_Invader_Char(Space_Invader_Char.Character_Types.Bunker_Block, new Vector3(0, 0, 0), new Vector3(30, -35, -10));
+            Bunker_List.Add(Bunker);
+
+            Bunker = new Space_Invader_Char(Space_Invader_Char.Character_Types.Bunker_Block, new Vector3(0, 0, 0), new Vector3(40, -35, -10));
+            Bunker_List.Add(Bunker);
+
+            Bunker = new Space_Invader_Char(Space_Invader_Char.Character_Types.Bunker_Block, new Vector3(0, 0, 0), new Vector3(50, -35, -10));
+            Bunker_List.Add(Bunker);
+
+            Bunker = new Space_Invader_Char(Space_Invader_Char.Character_Types.Bunker_Block, new Vector3(0, 0, 0), new Vector3(60, -35, -10));
+            Bunker_List.Add(Bunker);
         }
-        
+        private void Create_Cannon()
+        {
+            Cannon = new Space_Invader_Char(Space_Invader_Char.Character_Types.Cannon, new Vector3(0.5f, 0, 0), new Vector3(30, -42, -10));
+        }
+      
 
     }
 }
