@@ -116,6 +116,8 @@ namespace _3D_Space_Invaders
                 Cannon_Speed = -0.5f;
             if (Keyboard.GetState().IsKeyDown(Keys.D) & Game_Level.Cannon.position.X < 68)
                 Cannon_Speed = 0.5f;
+            if (Keyboard.GetState().IsKeyDown(Keys.Space))
+                Game_Level.Create_Laser(Game_Level.Cannon.position + new Vector3(0,5,0), new Vector3(0.0f,0.8f,0.0f));
 
             // Check to see if the aliens reach the boundries of the screen
             for (int i = 0; i < Game_Level.alien_List.Count; i++)
@@ -137,8 +139,17 @@ namespace _3D_Space_Invaders
                 }
             }
 
-            // move Cannon
-            Game_Level.Cannon.update_Positon(new Vector3(Cannon_Speed, 0.0f, 0.0f));
+            // destroy laser if it goes out of bound
+            for (int i = 0; i < Game_Level.Laser_List.Count; i++)
+            {
+                if (Game_Level.Laser_List[i].position.Y > 3 || Game_Level.Laser_List[i].position.Y < -45)
+                {
+                    Game_Level.Laser_List.RemoveAt(i);
+                }
+            }
+
+                // move Cannon
+                Game_Level.Cannon.update_Positon(new Vector3(Cannon_Speed, 0.0f, 0.0f));
 
             // move aliens
             moveTimer += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
@@ -154,7 +165,14 @@ namespace _3D_Space_Invaders
                 }
                 yValue = 0;
             }
-            base.Update(gameTime);
+
+            // Move lasers 
+            for (int i = 0; i < Game_Level.Laser_List.Count; i++)
+            {
+                Game_Level.Laser_List[i].update_Positon(Game_Level.Laser_List[i].velocity);
+            }
+
+                base.Update(gameTime);
         }
 
         /// <summary>
@@ -213,6 +231,25 @@ namespace _3D_Space_Invaders
                     xj = Game_Level.Bunker_List[i].position.X;
                     yj = Game_Level.Bunker_List[i].position.Y;
                     zj = Game_Level.Bunker_List[i].position.Z;
+                    foreach (BasicEffect effect in mesh.Effects)
+                    {
+                        effect.World = Matrix.CreateTranslation(new Vector3(xj, yj, zj));
+                    }
+
+                    // Draw the mesh, using the effects set above.
+                    mesh.Draw();
+                }
+
+            // Draw the lasers 
+            // Draw the model. A model can have multiple meshes, so loop.
+            for (int i = 0; i < Game_Level.Laser_List.Count; i++)
+                foreach (ModelMesh mesh in Alien_Model_List[(int)Game_Level.Laser_List[i].character_Type].Meshes)
+                {
+                    // This is where the mesh orientation is set, as well 
+                    // as our camera and projection.
+                    xj = Game_Level.Laser_List[i].position.X;
+                    yj = Game_Level.Laser_List[i].position.Y;
+                    zj = Game_Level.Laser_List[i].position.Z;
                     foreach (BasicEffect effect in mesh.Effects)
                     {
                         effect.World = Matrix.CreateTranslation(new Vector3(xj, yj, zj));

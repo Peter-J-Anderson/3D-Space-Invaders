@@ -33,7 +33,7 @@ namespace Space_Invaders_Characters
         {
             // Set attributes that are required for creation
             character_Type = _character_Type;
-            //velocity = _velocity;
+            velocity = _velocity;
             position = _position;
             points = (int)_character_Type+1 * 10;
 

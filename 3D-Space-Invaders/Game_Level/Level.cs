@@ -32,6 +32,10 @@ namespace Game_Level
         public List<Space_Invader_Char> Bunker_List = new List<Space_Invader_Char>();
         private Space_Invader_Char Bunker;
 
+        // Will hold the lasers from aliens and cannon
+        public List<Space_Invader_Char> Laser_List = new List<Space_Invader_Char>();
+        private Space_Invader_Char Laser;
+
         // Temp list
         List<Space_Invader_Char> temp_List;
 
@@ -92,9 +96,12 @@ namespace Game_Level
             }
         }
 
-        private void Create_Laser()
+        public void Create_Laser(Vector3 _start_Position, Vector3 _velocity)
         {
             // This will create the laser that is fired from both the aliens and Cannon
+            Laser = new Space_Invader_Char(Space_Invader_Char.Character_Types.Bunker_Block, _velocity, _start_Position);
+            Laser_List.Add(Laser);
+
         }
 
         private void Create_Bunker()
@@ -122,6 +129,7 @@ namespace Game_Level
             Bunker = new Space_Invader_Char(Space_Invader_Char.Character_Types.Bunker_Block, new Vector3(0, 0, 0), new Vector3(60, -35, -10));
             Bunker_List.Add(Bunker);
         }
+
         private void Create_Cannon()
         {
             Cannon = new Space_Invader_Char(Space_Invader_Char.Character_Types.Cannon, new Vector3(0.5f, 0, 0), new Vector3(30, -42, -10));
