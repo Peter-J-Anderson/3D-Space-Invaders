@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 
+
 namespace Space_Invaders_Characters
 {
     public class Space_Invader_Char
@@ -17,12 +18,18 @@ namespace Space_Invaders_Characters
         public enum Character_Types { Invader_10, Invader_20, Invader_30, Invader_Mystery, Cannon, Bunker_Block};
         // The model that will be used for this Invader 
         public Character_Types character_Type { get; set; }
-        
+
+        public bool shot { get; set; }  // Flag used to determine if you can shoot again or not
+
         // Attributes for the alien (e.g. velocity)
         public Vector3 velocity { get; set; }
         public Vector3 position { get; set; }
-        int points { get; set; }    // amount of point gained for destroying this object
- 
+        public int points { get; set; }    // amount of point gained for destroying this object
+
+        Space_Invader_Char Laser;
+        public List<Space_Invader_Char> Laser_List = new List<Space_Invader_Char>();
+
+
         /// <summary>
         /// Class Constructor
         /// </summary>
@@ -43,6 +50,16 @@ namespace Space_Invaders_Characters
         /// </summary>
         public void update_Positon(Vector3 _velocity) { position += _velocity; }
 
-     
+        public void Shoot(Vector3 _velocity)
+        {
+            // This will create the laser that is fired from both the aliens and Cannon
+            if (shot == false)
+            {
+                shot = true; 
+                Laser = new Space_Invader_Char(Space_Invader_Char.Character_Types.Bunker_Block, _velocity, position);
+                Laser_List.Add(Laser);
+            }
+           
+        }
     }
 }
