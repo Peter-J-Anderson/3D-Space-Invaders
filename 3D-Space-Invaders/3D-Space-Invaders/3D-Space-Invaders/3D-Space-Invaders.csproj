@@ -116,6 +116,10 @@
     <Content Include="GameThumbnail.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Defence_Bunker\Defence_Bunker.csproj">
+      <Project>{7B309CCD-C994-4F89-A502-63FA0195210C}</Project>
+      <Name>Defence_Bunker</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Game_Level\Game_Level.csproj">
       <Project>{79836D56-EE1E-45CF-B790-F1385EA36C71}</Project>
       <Name>Game_Level</Name>

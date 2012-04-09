@@ -1,20 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <ProjectGuid>{79836D56-EE1E-45CF-B790-F1385EA36C71}</ProjectGuid>
+    <ProjectGuid>{7B309CCD-C994-4F89-A502-63FA0195210C}</ProjectGuid>
     <ProjectTypeGuids>{6D335F3A-9D43-41b4-9D22-F6F17C4BE596};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Game_Level</RootNamespace>
-    <AssemblyName>Game_Level</AssemblyName>
+    <RootNamespace>Defence_Bunker</RootNamespace>
+    <AssemblyName>Defence_Bunker</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <XnaFrameworkVersion>v4.0</XnaFrameworkVersion>
     <XnaPlatform>Windows</XnaPlatform>
     <XnaProfile>HiDef</XnaProfile>
-    <XnaCrossPlatformGroupID>42a8363e-6cc2-432b-868c-81ca3e25584d</XnaCrossPlatformGroupID>
+    <XnaCrossPlatformGroupID>ccc23ea2-21ed-4ac2-948b-24a56a7f0c4a</XnaCrossPlatformGroupID>
     <XnaOutputType>Library</XnaOutputType>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -92,14 +92,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Level.cs" />
+    <Compile Include="Defence_Bunker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Defence_Bunker\Defence_Bunker.csproj">
-      <Project>{7B309CCD-C994-4F89-A502-63FA0195210C}</Project>
-      <Name>Defence_Bunker</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Space_Invaders\Character.csproj">
       <Project>{482F191E-8403-4C07-BB58-8DC84FCF99F6}</Project>
       <Name>Character</Name>

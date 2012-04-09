@@ -8,8 +8,8 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
-using Space_Invaders_Characters; 
-
+using Space_Invaders_Characters;
+using Defence_Bunker_Framework;
 
 namespace Game_Level
 {
@@ -29,8 +29,13 @@ namespace Game_Level
         public float Laser_Speed { get; set; }
         
         // Holds the aliens for this level 
-        public List<List<Space_Invader_Char>> alien_List = new List<List<Space_Invader_Char>>();
+        public List<List<Space_Invader_Char>> Alien_List = new List<List<Space_Invader_Char>>();
+        // Alien Temp list
+        private List<Space_Invader_Char> Alien_Temp_List;
         
+        // Holds the Mystery Ship
+        public Space_Invader_Char Myster_Ship; 
+
         // Holds the Cannon for this level
         public Space_Invader_Char Cannon;
 
@@ -38,14 +43,13 @@ namespace Game_Level
         float interval = 0;
 
         // Hold the bunkers 
-        public List<Space_Invader_Char> Bunker_List = new List<Space_Invader_Char>();
-        private Space_Invader_Char Bunker;
+        public List<Defence_Bunker> Bunker_List = new List<Defence_Bunker>();
+        public Defence_Bunker Bunker;
 
         // Will hold the lasers from aliens and cannon
         public List<Space_Invader_Char> Laser_List = new List<Space_Invader_Char>();
-      
-        // Temp list
-        List<Space_Invader_Char> temp_List;
+        Space_Invader_Char Laser;
+        
 
 
         public Level(int _level, float _interval)
@@ -72,7 +76,7 @@ namespace Game_Level
             alien_Speed = ((float)level + (float)aliens_Killed)/interval;
 
             // Staring fire rate = 1 per second
-            alien_Fire_Rate =  (55 - aliens_Killed + level)* 10;
+            Update_Alien_Fire_Rate();
 
             // Create aliens 
             Create_Aliens();
@@ -88,50 +92,44 @@ namespace Game_Level
         { 
             for (int i = 0; i < 11; i++) // loop through each column
             {// loop through columns
-                temp_List = new List<Space_Invader_Char>();
-                for (int j = 0; j < 1; j++) // for each row in the column put an alien
+                Alien_Temp_List = new List<Space_Invader_Char>();
+                for (int j = 0; j < 1; j++) // for each row in the column put an Alien
                 {
-                    temp_List.Add(new Space_Invader_Char(Space_Invader_Char.Character_Types.Invader_30, new Vector3(alien_Speed, 0,0), new Vector3((6 * i), -3 * j, -10)));
+                    Alien_Temp_List.Add(new Space_Invader_Char(Space_Invader_Char.Character_Types.Invader_30, new Vector3(alien_Speed, 0, 0), new Vector3((6 * i), -3 * j, -10)));
                 }
 
                 for (int j = 1; j < 3; j++)
                 {
-                    temp_List.Add(new Space_Invader_Char(Space_Invader_Char.Character_Types.Invader_20, new Vector3(alien_Speed, 0,0), new Vector3((6 * i), -3 * j, -10)));
+                    Alien_Temp_List.Add(new Space_Invader_Char(Space_Invader_Char.Character_Types.Invader_20, new Vector3(alien_Speed, 0, 0), new Vector3((6 * i), -3 * j, -10)));
                 }
 
                 for (int j = 3; j < 5; j++)
                 {
-                    temp_List.Add(new Space_Invader_Char(Space_Invader_Char.Character_Types.Invader_10, new Vector3(alien_Speed, 0,0), new Vector3((6 * i), -3 * j, -10)));
+                    Alien_Temp_List.Add(new Space_Invader_Char(Space_Invader_Char.Character_Types.Invader_10, new Vector3(alien_Speed, 0, 0), new Vector3((6 * i), -3 * j, -10)));
                 }
-                alien_List.Add(temp_List);
+                Alien_List.Add(Alien_Temp_List);
 
             }
+        }
+
+        private void Create_Mystery_Ship()
+        { 
+            // Create and draw the Mystery Ship
+            Myster_Ship = new Space_Invader_Char(Space_Invader_Char.Character_Types.Invader_Mystery, new Vector3(alien_Speed, 0, 0), new Vector3(10, 0, -10));
         }
 
         private void Create_Bunker()
         { 
             // this will create the bunker based on a start location
             // start with a basic block to represent the bunkers
-            Bunker = new Space_Invader_Char(Space_Invader_Char.Character_Types.Bunker_Block, new Vector3(0, 0, 0), new Vector3(0, -35, -10));
-            Bunker_List.Add(Bunker);
             
-            Bunker = new Space_Invader_Char(Space_Invader_Char.Character_Types.Bunker_Block, new Vector3(0, 0, 0), new Vector3(10, -35, -10));
-            Bunker_List.Add(Bunker);
+            for (int i = 0; i < 7; i++)
+            {
+                Bunker = new Defence_Bunker(new Vector3(-2 + (i * 10), -35, -10), 5);
+                Bunker_List.Add(Bunker);
+            }
+                
 
-            Bunker = new Space_Invader_Char(Space_Invader_Char.Character_Types.Bunker_Block, new Vector3(0, 0, 0), new Vector3(20, -35, -10));
-            Bunker_List.Add(Bunker);
-
-            Bunker = new Space_Invader_Char(Space_Invader_Char.Character_Types.Bunker_Block, new Vector3(0, 0, 0), new Vector3(30, -35, -10));
-            Bunker_List.Add(Bunker);
-
-            Bunker = new Space_Invader_Char(Space_Invader_Char.Character_Types.Bunker_Block, new Vector3(0, 0, 0), new Vector3(40, -35, -10));
-            Bunker_List.Add(Bunker);
-
-            Bunker = new Space_Invader_Char(Space_Invader_Char.Character_Types.Bunker_Block, new Vector3(0, 0, 0), new Vector3(50, -35, -10));
-            Bunker_List.Add(Bunker);
-
-            Bunker = new Space_Invader_Char(Space_Invader_Char.Character_Types.Bunker_Block, new Vector3(0, 0, 0), new Vector3(60, -35, -10));
-            Bunker_List.Add(Bunker);
         }
 
         private void Create_Cannon()
@@ -139,32 +137,46 @@ namespace Game_Level
             Cannon = new Space_Invader_Char(Space_Invader_Char.Character_Types.Cannon, new Vector3(0.5f, 0, 0), new Vector3(30, -42, -10));
         }
 
+        private void Update_Alien_Speed()
+        {
+
+            // NOTE: FIND A BETTER WAY TO DO THIS
+            if (alien_Speed < 0)
+                alien_Speed = -((float)level + (float)aliens_Killed) / interval;
+            else if (alien_Speed > 0)
+                alien_Speed = ((float)level + (float)aliens_Killed) / interval;
+            for (int i = 0; i < Alien_List.Count; i++)
+                for (int j = 0; j < Alien_List[i].Count; j++)
+                    Alien_List[i][j].velocity = new Vector3(alien_Speed, 0, 0);
+
+            Update_Alien_Fire_Rate();
+
+        }
+
+        private void Update_Alien_Fire_Rate()
+        {
+            alien_Fire_Rate = (55 - aliens_Killed + level) * 10;
+        }
+        
+        public void Create_Laser(Space_Invader_Char _character)
+        { 
+            // NOTE: USE THIS FUNCTION TO CREATE A LASER
+        }
+
         public void Remove_Alien(int _value1, int _value2)
         {
-            alien_List[_value1].RemoveAt(_value2);
+            Alien_List[_value1].RemoveAt(_value2);
             aliens_Killed++;
 
             Update_Alien_Speed();
 
             // Remove empty lists
-            if (alien_List[_value1].Count == 0)
-                alien_List.RemoveAt(_value1);
+            if (Alien_List[_value1].Count == 0)
+                Alien_List.RemoveAt(_value1);
 
             
         }
 
-        private void Update_Alien_Speed()
-        {
-
-            // NOTE: FIND A BETTER WAY TO DO THIS
-            if (alien_Speed< 0)
-            alien_Speed = -((float)level + (float)aliens_Killed) / interval;
-            else if (alien_Speed > 0)
-                alien_Speed = ((float)level + (float)aliens_Killed) / interval;
-            for (int i = 0; i < alien_List.Count; i++)
-                for (int j = 0; j < alien_List[i].Count; j++)
-                    alien_List[i][j].velocity = new Vector3(alien_Speed, 0, 0);
-
-        }
+        
     }
 }

@@ -1,0 +1,8 @@
+C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\Defence_Bunker\bin\x86\Debug\Defence_Bunker.dll
+C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\Defence_Bunker\bin\x86\Debug\Defence_Bunker.pdb
+C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\Defence_Bunker\bin\x86\Debug\Space_Invaders.dll
+C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\Defence_Bunker\bin\x86\Debug\Space_Invaders.pdb
+C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\Defence_Bunker\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\Defence_Bunker\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\Defence_Bunker\obj\x86\Debug\Defence_Bunker.dll
+C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\Defence_Bunker\obj\x86\Debug\Defence_Bunker.pdb

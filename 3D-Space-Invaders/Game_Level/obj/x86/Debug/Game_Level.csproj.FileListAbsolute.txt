@@ -6,3 +6,5 @@ C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\Game_Level\bin\x86\Debug\Space
 C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\Game_Level\bin\x86\Debug\Space_Invaders.pdb
 C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\Game_Level\obj\x86\Debug\Game_Level.dll
 C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\Game_Level\obj\x86\Debug\Game_Level.pdb
+C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\Game_Level\bin\x86\Debug\Defence_Bunker.dll
+C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\Game_Level\bin\x86\Debug\Defence_Bunker.pdb

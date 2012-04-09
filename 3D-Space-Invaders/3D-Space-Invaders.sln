@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Character", "Space_Invaders
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Game_Level", "Game_Level\Game_Level.csproj", "{79836D56-EE1E-45CF-B790-F1385EA36C71}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Defence_Bunker", "Defence_Bunker\Defence_Bunker.csproj", "{7B309CCD-C994-4F89-A502-63FA0195210C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -29,6 +31,10 @@ Global
 		{79836D56-EE1E-45CF-B790-F1385EA36C71}.Debug|x86.Build.0 = Debug|x86
 		{79836D56-EE1E-45CF-B790-F1385EA36C71}.Release|x86.ActiveCfg = Release|x86
 		{79836D56-EE1E-45CF-B790-F1385EA36C71}.Release|x86.Build.0 = Release|x86
+		{7B309CCD-C994-4F89-A502-63FA0195210C}.Debug|x86.ActiveCfg = Debug|x86
+		{7B309CCD-C994-4F89-A502-63FA0195210C}.Debug|x86.Build.0 = Debug|x86
+		{7B309CCD-C994-4F89-A502-63FA0195210C}.Release|x86.ActiveCfg = Release|x86
+		{7B309CCD-C994-4F89-A502-63FA0195210C}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -15,13 +15,13 @@ namespace Space_Invaders_Characters
     public class Space_Invader_Char
     {
         // Types of characters in the game 
-        public enum Character_Types { Invader_10, Invader_20, Invader_30, Invader_Mystery, Cannon, Bunker_Block};
+        public enum Character_Types { Invader_10, Invader_20, Invader_30, Invader_Mystery, Cannon, Bunker_Block, Laser};
         // The model that will be used for this Invader 
         public Character_Types character_Type { get; set; }
 
         public bool shot { get; set; }  // Flag used to determine if you can shoot again or not
 
-        // Attributes for the alien (e.g. velocity)
+        // Attributes for the Alien (e.g. velocity)
         public Vector3 velocity { get; set; }
         public Vector3 position { get; set; }
         public int points { get; set; }    // amount of point gained for destroying this object
@@ -56,7 +56,7 @@ namespace Space_Invaders_Characters
             if (shot == false)
             {
                 shot = true; 
-                Laser = new Space_Invader_Char(Space_Invader_Char.Character_Types.Bunker_Block, _velocity, position);
+                Laser = new Space_Invader_Char(Space_Invader_Char.Character_Types.Laser, _velocity, position);
                 Laser_List.Add(Laser);
             }
            
