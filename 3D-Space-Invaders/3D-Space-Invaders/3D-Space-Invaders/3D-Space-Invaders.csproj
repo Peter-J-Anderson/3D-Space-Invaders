@@ -116,6 +116,10 @@
     <Content Include="GameThumbnail.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Character\Character.csproj">
+      <Project>{D9D837E8-F665-4DE7-8F37-2A7E50657D55}</Project>
+      <Name>Character</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Defence_Bunker\Defence_Bunker.csproj">
       <Project>{7B309CCD-C994-4F89-A502-63FA0195210C}</Project>
       <Name>Defence_Bunker</Name>
@@ -123,10 +127,6 @@
     <ProjectReference Include="..\..\Game_Level\Game_Level.csproj">
       <Project>{79836D56-EE1E-45CF-B790-F1385EA36C71}</Project>
       <Name>Game_Level</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Space_Invaders\Character.csproj">
-      <Project>{482F191E-8403-4C07-BB58-8DC84FCF99F6}</Project>
-      <Name>Character</Name>
     </ProjectReference>
     <ProjectReference Include="..\3D-Space-InvadersContent\3D-Space-InvadersContent.contentproj">
       <Name>3D-Space-InvadersContent %28Content%29</Name>

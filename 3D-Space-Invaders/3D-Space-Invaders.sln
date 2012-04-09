@@ -5,11 +5,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "3D-Space-Invaders", "3D-Spa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "3D-Space-InvadersContent", "3D-Space-Invaders\3D-Space-InvadersContent\3D-Space-InvadersContent.contentproj", "{5861CA0D-B587-4BBD-A7F7-D07513FAFFAC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Character", "Space_Invaders\Character.csproj", "{482F191E-8403-4C07-BB58-8DC84FCF99F6}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Game_Level", "Game_Level\Game_Level.csproj", "{79836D56-EE1E-45CF-B790-F1385EA36C71}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Defence_Bunker", "Defence_Bunker\Defence_Bunker.csproj", "{7B309CCD-C994-4F89-A502-63FA0195210C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Character", "Character\Character.csproj", "{D9D837E8-F665-4DE7-8F37-2A7E50657D55}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,6 @@ Global
 		{1E1034F3-7143-4725-BF6F-35BEEC0E4007}.Release|x86.Build.0 = Release|x86
 		{5861CA0D-B587-4BBD-A7F7-D07513FAFFAC}.Debug|x86.ActiveCfg = Debug|x86
 		{5861CA0D-B587-4BBD-A7F7-D07513FAFFAC}.Release|x86.ActiveCfg = Release|x86
-		{482F191E-8403-4C07-BB58-8DC84FCF99F6}.Debug|x86.ActiveCfg = Debug|x86
-		{482F191E-8403-4C07-BB58-8DC84FCF99F6}.Debug|x86.Build.0 = Debug|x86
-		{482F191E-8403-4C07-BB58-8DC84FCF99F6}.Release|x86.ActiveCfg = Release|x86
-		{482F191E-8403-4C07-BB58-8DC84FCF99F6}.Release|x86.Build.0 = Release|x86
 		{79836D56-EE1E-45CF-B790-F1385EA36C71}.Debug|x86.ActiveCfg = Debug|x86
 		{79836D56-EE1E-45CF-B790-F1385EA36C71}.Debug|x86.Build.0 = Debug|x86
 		{79836D56-EE1E-45CF-B790-F1385EA36C71}.Release|x86.ActiveCfg = Release|x86
@@ -35,6 +31,10 @@ Global
 		{7B309CCD-C994-4F89-A502-63FA0195210C}.Debug|x86.Build.0 = Debug|x86
 		{7B309CCD-C994-4F89-A502-63FA0195210C}.Release|x86.ActiveCfg = Release|x86
 		{7B309CCD-C994-4F89-A502-63FA0195210C}.Release|x86.Build.0 = Release|x86
+		{D9D837E8-F665-4DE7-8F37-2A7E50657D55}.Debug|x86.ActiveCfg = Debug|x86
+		{D9D837E8-F665-4DE7-8F37-2A7E50657D55}.Debug|x86.Build.0 = Debug|x86
+		{D9D837E8-F665-4DE7-8F37-2A7E50657D55}.Release|x86.ActiveCfg = Release|x86
+		{D9D837E8-F665-4DE7-8F37-2A7E50657D55}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

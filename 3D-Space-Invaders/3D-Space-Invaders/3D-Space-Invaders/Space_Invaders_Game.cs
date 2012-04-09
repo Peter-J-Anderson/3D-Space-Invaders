@@ -170,7 +170,6 @@ namespace _3D_Space_Invaders
                     int value2 = rand1.Next(0, (Game_Level.Alien_List[value1].Count));
 
                     Game_Level.Remove_Alien(value1, value2);
-                    Window.Title = "" + Game_Level.aliens_Killed;
                 }
             }
             
@@ -205,22 +204,24 @@ namespace _3D_Space_Invaders
                         Game_Level.Alien_List[i][j].update_Positon(new Vector3(Game_Level.alien_Speed * Convert.ToInt16(AlienMoveFlag), yValue, 0));
                         rand1 = new Random((int)DateTime.Now.Ticks & 0x0000FFFF);
                         shootingAlien = rand1.Next(0,(Game_Level.Alien_List.Count));
-
+                        
                     // Aliens shoot
                         if (AlienShootFlag == true)
                         {
                             // Randomly pick a column and make the bottom Alien shoot 
-                            Game_Level.Alien_List[shootingAlien][Game_Level.Alien_List[shootingAlien].Count-1].Shoot(new Vector3(0f, (-Game_Level.Laser_Speed * Convert.ToInt16(AlienShootFlag)) /2, 0f));
+                            Game_Level.Alien_List[shootingAlien][Game_Level.Alien_List[shootingAlien].Count-1].Shoot(new Vector3(0f, (-Game_Level.Laser_Speed * Convert.ToInt16(AlienShootFlag)) /1.5f, 0f));
                             AlienShootFlag = false;
                         }
                 }
             }
+            for (int i = 0; i < Game_Level.Mystery_Ship_List.Count; i++)
+                Game_Level.Mystery_Ship_List[i].update_Positon(Game_Level.Mystery_Ship_List[i].velocity);
             #endregion
 
-            #region Laser Movement Control
-            // Update lasers - Destroy & Move
-            if (LaserMoveFlag == true)
-            Update_Laser(Game_Level.Cannon);
+                #region Laser Movement Control
+                // Update lasers - Destroy & Move
+                if (LaserMoveFlag == true)
+                    Update_Laser(Game_Level.Cannon);
 
             for (int i = 0; i < Game_Level.Alien_List.Count; i++)
                 for (int j = 0; j < Game_Level.Alien_List[i].Count; j++)
@@ -256,7 +257,8 @@ namespace _3D_Space_Invaders
                     Draw_Model(Game_Level.Alien_List[i][j]);
 
             // Draw the Mystery-ship
-                // TO:DO :- Add Drawing for Mystery-ship
+            for (int i = 0; i < Game_Level.Mystery_Ship_List.Count; i++)
+                Draw_Model(Game_Level.Mystery_Ship_List[i]);
             
             // Draw the Bunkers
             for (int i = 0; i < Game_Level.Bunker_List.Count; i++)
@@ -289,16 +291,14 @@ namespace _3D_Space_Invaders
 
                 foreach (ModelMesh mesh in myModel.Meshes)
                 {
-
+                    
                     foreach (BasicEffect effect in mesh.Effects)
                     {
-
-
                         effect.Projection =
                         Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(45f), aspectRatio,
                         1.0f, 1000.0f);
 
-                        effect.View = Matrix.CreateLookAt(new Vector3(30f, -20f, 50f), new Vector3(30f, -20f, 0f),
+                        effect.View = Matrix.CreateLookAt(new Vector3(30f, -20f, 70f), new Vector3(30f, -15f, -20f),
                                         Vector3.Up);
 
                         effect.World = Matrix.CreateTranslation(0, 0, 0) *

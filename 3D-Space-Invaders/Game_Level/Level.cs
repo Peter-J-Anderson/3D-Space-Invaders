@@ -34,7 +34,8 @@ namespace Game_Level
         private List<Space_Invader_Char> Alien_Temp_List;
         
         // Holds the Mystery Ship
-        public Space_Invader_Char Myster_Ship; 
+        public List<Space_Invader_Char> Mystery_Ship_List = new List<Space_Invader_Char>();
+        private Space_Invader_Char Myster_Ship; 
 
         // Holds the Cannon for this level
         public Space_Invader_Char Cannon;
@@ -48,9 +49,6 @@ namespace Game_Level
 
         // Will hold the lasers from aliens and cannon
         public List<Space_Invader_Char> Laser_List = new List<Space_Invader_Char>();
-        Space_Invader_Char Laser;
-        
-
 
         public Level(int _level, float _interval)
         {
@@ -110,12 +108,14 @@ namespace Game_Level
                 Alien_List.Add(Alien_Temp_List);
 
             }
+            Create_Mystery_Ship();
         }
 
         private void Create_Mystery_Ship()
         { 
             // Create and draw the Mystery Ship
-            Myster_Ship = new Space_Invader_Char(Space_Invader_Char.Character_Types.Invader_Mystery, new Vector3(alien_Speed, 0, 0), new Vector3(10, 0, -10));
+            Myster_Ship = new Space_Invader_Char(Space_Invader_Char.Character_Types.Invader_Mystery, new Vector3(0.5f, 0, 0), new Vector3(-10, 10, -10));
+            Mystery_Ship_List.Add(Myster_Ship);
         }
 
         private void Create_Bunker()
