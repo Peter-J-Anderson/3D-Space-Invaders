@@ -24,7 +24,7 @@ namespace _3D_Space_Invaders
 
         float aspectRatio;
 
-        // game boundries           
+        // Game Boundries           
         public enum Game_Boundries
         {
             LeftHandSide = -8,      // lhs
@@ -35,28 +35,31 @@ namespace _3D_Space_Invaders
 
         // These are the ships that will be attacking the laser Cannon
         List<Model> Alien_Model_List = new List<Model>();
-        // The laser Cannon the user will be controlling
-        Model Laser_Cannon;
-        // The laser fired from bother the aliens and the laser Cannon
-        Model Laser;
-
+  
         // This will be the object for the game level
         Level Game_Level;
 
         // Movement timer
-        float AlienMoveTimer = 0f;
-        float CannonMoveTimer = 0f;
-        float AlienShootTimer = 0f;
-        float LaserMoveTimer = 0f;
+        // Timers are used to detemine when objects move
+        float AlienMoveTimer = 0f;  // Movement of alien ships
+        float CannonMoveTimer = 0f; // Movement of Laser Cannon
+        float AlienShootTimer = 0f; // Movement of Alien Lasers
+        float LaserMoveTimer = 0f;  // Movement of Cannon Lasers
+
         bool AlienShootFlag = false;
         bool AlienMoveFlag = false;
         bool CannonMoveFlag = false;
         bool LaserMoveFlag = false;
-        float interval = 100f;
-        float xValue = 0.1f; // used for x movement for now 
-        float yValue = 0.0f; // used for y movement
-        int shootingAlien;
-        Random rand1;
+
+        float interval = 100f;  // A base value used to seperate actions
+ 
+        float yValue = 0.0f; // Used for starting values - should fix this at somepoint
+        
+        int shootingAlien;  // Currently used to track which alien will fire - move this to the level class
+        float Cannon_Speed; // Used locally to reset the movement speed of the cannon when the walls have been hit
+
+
+        Random rand1;   // Used to generate a random number - current use is for selecting an alien to fire
         
         
         public Space_Invaders_3D()
@@ -73,10 +76,8 @@ namespace _3D_Space_Invaders
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
             // Create level here :)
             Game_Level = new Level(1, interval);
-            xValue = Game_Level.alien_Speed;
 
             base.Initialize();
         }
@@ -115,12 +116,14 @@ namespace _3D_Space_Invaders
 
         protected override void Update(GameTime gameTime)
         {
+            #region Timer Control
             // Update game timers
             float tempTime = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             AlienMoveTimer += tempTime;
             AlienShootTimer += tempTime;
             CannonMoveTimer += tempTime;
             LaserMoveTimer += tempTime;
+            
             // Reset game timers if needed 
             if (AlienMoveTimer > Game_Level.alien_Speed)
             {
@@ -142,12 +145,13 @@ namespace _3D_Space_Invaders
                 CannonMoveFlag = true;
                 CannonMoveTimer = 0;
             }
+            #endregion
 
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
-            float Cannon_Speed = 0;
 
+            #region User Controls
             // User controls
             if (Keyboard.GetState().IsKeyDown(Keys.A) & Game_Level.Cannon.position.X > (float)Game_Boundries.LeftHandSide)
                 Cannon_Speed = -Game_Level.Cannon.velocity.X;
@@ -155,41 +159,63 @@ namespace _3D_Space_Invaders
                 Cannon_Speed = Game_Level.Cannon.velocity.X;
             if (Keyboard.GetState().IsKeyDown(Keys.Space))
                 Game_Level.Cannon.Shoot(new Vector3(0.0f, Game_Level.Laser_Speed, 0.0f));
+            if (Keyboard.GetState().IsKeyDown(Keys.M))
+            {
+                if (Game_Level.alien_List.Count > 0)
+                {
+                    rand1 = new Random((int)DateTime.Now.Ticks & 0x0000FFFF);
+                    int value1 = rand1.Next(0, (Game_Level.alien_List.Count));
+                    int value2 = rand1.Next(0, (Game_Level.alien_List[value1].Count));
 
-            // Alien AI/Other stuff
+                    Game_Level.Remove_Alien(value1, value2);
+                    Window.Title = "" + Game_Level.aliens_Killed;
+                }
+            }
+            
+            #endregion
+
+            #region Alien AI
+
+            // Stop aliens from going off the screen
             for (int i = 0; i < Game_Level.alien_List.Count; i++)
                 for (int j = 0; j < Game_Level.alien_List[i].Count; j++)
-            // Check to see if the aliens reach the boundries of the screen
-            if (Game_Level.alien_List[i][j].position.X > (float)Game_Boundries.RightHandSide)
-            {
-                xValue = -Game_Level.alien_Speed;
-                yValue = -0.5f;
-            }
-            else if (Game_Level.alien_List[i][j].position.X < (float)Game_Boundries.LeftHandSide)
-            {
-                xValue = Game_Level.alien_Speed;
-                yValue = -0.5f;
-            }
+                {
+                    // Check to see if the aliens reach the boundries of the screen
+                    if (Game_Level.alien_List[i][j].position.X > (float)Game_Boundries.RightHandSide)
+                    {
+                        Game_Level.alien_Speed = -(Math.Abs(Game_Level.alien_Speed));
+                        yValue = -0.5f;
+                    }
+                    else if (Game_Level.alien_List[i][j].position.X < (float)Game_Boundries.LeftHandSide)
+                    {
+                        Game_Level.alien_Speed = Math.Abs(Game_Level.alien_Speed);
+                        yValue = -0.5f;
+                    }
+                }
 
+            // Loop through all the aliens
             for (int i = 0; i < Game_Level.alien_List.Count; i++)
             {
                 for (int j = 0; j < Game_Level.alien_List[i].Count; j++)
                 {
+                    
                     // Move Aliens
-                        Game_Level.alien_List[i][j].update_Positon(new Vector3(xValue * Convert.ToInt16(AlienMoveFlag), yValue, 0));
+                        Game_Level.alien_List[i][j].update_Positon(new Vector3(Game_Level.alien_Speed * Convert.ToInt16(AlienMoveFlag), yValue, 0));
                         rand1 = new Random((int)DateTime.Now.Ticks & 0x0000FFFF);
                         shootingAlien = rand1.Next(0,(Game_Level.alien_List.Count));
+
                     // Aliens shoot
                         if (AlienShootFlag == true)
                         {
                             // Randomly pick a column and make the bottom alien shoot 
                             Game_Level.alien_List[shootingAlien][Game_Level.alien_List[shootingAlien].Count-1].Shoot(new Vector3(0f, (-Game_Level.Laser_Speed * Convert.ToInt16(AlienShootFlag)) /2, 0f));
+                            AlienShootFlag = false;
                         }
                 }
             }
+            #endregion
 
-            
-            
+            #region Laser Movement Control
             // Update lasers - Destroy & Move
             if (LaserMoveFlag == true)
             Update_Laser(Game_Level.Cannon);
@@ -197,18 +223,20 @@ namespace _3D_Space_Invaders
             for (int i = 0; i < Game_Level.alien_List.Count; i++)
                 for (int j = 0; j < Game_Level.alien_List[i].Count; j++)
                     Update_Laser(Game_Level.alien_List[i][j]);
+            #endregion
 
-
+            #region Cannon Movement Control
             // Move Cannon
             Game_Level.Cannon.update_Positon(new Vector3(Cannon_Speed * Convert.ToInt16(CannonMoveFlag), 0.0f, 0.0f));
+            #endregion 
 
-            // Make sure chars dont move again
+            // Reset flags and movement values
             AlienMoveFlag = false;
             CannonMoveFlag = false;
             AlienShootFlag = false;
             LaserMoveFlag = false;
             yValue = 0;
-
+            Cannon_Speed = 0;
             base.Update(gameTime);
         }
 
@@ -217,31 +245,35 @@ namespace _3D_Space_Invaders
         {
             graphics.GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // Draw the aliens
-            // Draw the model. A model can have multiple meshes, so loop.
-            for (int i = 0; i < 5; i++)
-                for (int j = 0; j < Game_Level.alien_List.Count; j++)
-                    Draw_Model(Game_Level.alien_List[j][i]);
-
-            //// Draw the Cannon
-            // Draw the model. A model can have multiple meshes, so loop.
+            #region Draw Aliens/Cannon/Bunker
+            // Draw the Cannon
             Draw_Model(Game_Level.Cannon);
 
+            // Draw the Aliens
+            for (int i = 0; i < Game_Level.alien_List.Count; i++)
+                for (int j = 0; j < Game_Level.alien_List[i].Count; j++)    
+                    Draw_Model(Game_Level.alien_List[i][j]);
+
+            // Draw the Mystery-ship
+                // TO:DO :- Add Drawing for Mystery-ship
+            
             // Draw the Bunkers
-            // Draw the model. A model can have multiple meshes, so loop.
             for (int i = 0; i < Game_Level.Bunker_List.Count; i++)
                 Draw_Model(Game_Level.Bunker_List[i]);
+            #endregion
 
-            // Draw the lasers 
-            // Draw the model. A model can have multiple meshes, so loop.
+            #region Draw Lasers
+            // Draw the Cannon Lasers 
             for (int i = 0; i < Game_Level.Cannon.Laser_List.Count; i++)
                 Draw_Model(Game_Level.Cannon.Laser_List[i]);
 
+            // Draw the Alien Lasers 
             for (int i = 0; i < Game_Level.alien_List.Count; i++)
                 for (int j = 0; j < Game_Level.alien_List[i].Count; j++)
                     for (int k = 0; k < Game_Level.alien_List[i][j].Laser_List.Count; k++)
                         Draw_Model(Game_Level.alien_List[i][j].Laser_List[k]);
-
+            #endregion
+            
                     base.Draw(gameTime);
         }
 
@@ -290,8 +322,6 @@ namespace _3D_Space_Invaders
                                                                         myModel.position.Y,
                                                                         myModel.position.Z));
                 }
-
-                // Draw the mesh, using the effects set above.
                 mesh.Draw();
             }
         }

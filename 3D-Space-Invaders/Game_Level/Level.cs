@@ -17,11 +17,17 @@ namespace Game_Level
     {
         // Level attributes
         int level { get; set; }
+        
+        // Movement speed of aliens
         public float alien_Speed { get; set; }
         public int aliens_Killed { get; private set; }
+        
         // How often all the aliens shoot (e.g. one from all the aliens per second)
         public float alien_Fire_Rate { get; set; }
+        
+        // Movement speed of the Lasers
         public float Laser_Speed { get; set; }
+        
         // Holds the aliens for this level 
         public List<List<Space_Invader_Char>> alien_List = new List<List<Space_Invader_Char>>();
         
@@ -30,14 +36,14 @@ namespace Game_Level
 
         // interval for movement
         float interval = 0;
+
         // Hold the bunkers 
         public List<Space_Invader_Char> Bunker_List = new List<Space_Invader_Char>();
         private Space_Invader_Char Bunker;
 
         // Will hold the lasers from aliens and cannon
         public List<Space_Invader_Char> Laser_List = new List<Space_Invader_Char>();
-        private Space_Invader_Char Laser;
-
+      
         // Temp list
         List<Space_Invader_Char> temp_List;
 
@@ -47,7 +53,6 @@ namespace Game_Level
             level = _level;
             interval = _interval;
             Initialise();
-            
         }
 
         private void Initialise() 
@@ -57,17 +62,17 @@ namespace Game_Level
 
         private void Level_Setup()
         {
-            // Each level will start with 55 aliens, not includeing the myster ship
+            // Each level will start with 55 aliens, not including the Mystery-ship
             aliens_Killed = 0;
 
-            // set the speed of the laser 
+            // Set the speed of the laser 
             Laser_Speed = 80f / interval;
             
-            // movement speed 
+            // Movement speed 
             alien_Speed = ((float)level + (float)aliens_Killed)/interval;
 
-            //staring fire rate = 1 per second
-            alien_Fire_Rate =  (55 - aliens_Killed + level)* 100;
+            // Staring fire rate = 1 per second
+            alien_Fire_Rate =  (55 - aliens_Killed + level)* 10;
 
             // Create aliens 
             Create_Aliens();
@@ -103,15 +108,13 @@ namespace Game_Level
             }
         }
 
-        
-
         private void Create_Bunker()
         { 
             // this will create the bunker based on a start location
             // start with a basic block to represent the bunkers
             Bunker = new Space_Invader_Char(Space_Invader_Char.Character_Types.Bunker_Block, new Vector3(0, 0, 0), new Vector3(0, -35, -10));
             Bunker_List.Add(Bunker);
-
+            
             Bunker = new Space_Invader_Char(Space_Invader_Char.Character_Types.Bunker_Block, new Vector3(0, 0, 0), new Vector3(10, -35, -10));
             Bunker_List.Add(Bunker);
 
@@ -135,7 +138,33 @@ namespace Game_Level
         {
             Cannon = new Space_Invader_Char(Space_Invader_Char.Character_Types.Cannon, new Vector3(0.5f, 0, 0), new Vector3(30, -42, -10));
         }
-      
 
+        public void Remove_Alien(int _value1, int _value2)
+        {
+            alien_List[_value1].RemoveAt(_value2);
+            aliens_Killed++;
+
+            Update_Alien_Speed();
+
+            // Remove empty lists
+            if (alien_List[_value1].Count == 0)
+                alien_List.RemoveAt(_value1);
+
+            
+        }
+
+        private void Update_Alien_Speed()
+        {
+
+            // NOTE: FIND A BETTER WAY TO DO THIS
+            if (alien_Speed< 0)
+            alien_Speed = -((float)level + (float)aliens_Killed) / interval;
+            else if (alien_Speed > 0)
+                alien_Speed = ((float)level + (float)aliens_Killed) / interval;
+            for (int i = 0; i < alien_List.Count; i++)
+                for (int j = 0; j < alien_List[i].Count; j++)
+                    alien_List[i][j].velocity = new Vector3(alien_Speed, 0, 0);
+
+        }
     }
 }
