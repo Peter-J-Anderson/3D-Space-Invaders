@@ -161,7 +161,7 @@ namespace Game_Level
         
         public void Create_Laser(Space_Invader_Char _character)
         { 
-            // NOTE: USE THIS FUNCTION TO CREATE A LASER
+            // NOTE: USE THIS FUNCTION TO CREATE A LASER IF TIME ALLOWS IT 
         }
 
         public void Remove_Alien(int _value1, int _value2)
@@ -176,6 +176,16 @@ namespace Game_Level
                 Alien_List.RemoveAt(_value1);
 
             
+        }
+        public void Remove_Bunker(int _value1, int _value2)
+        {
+            Bunker_List[_value1].Bunker_Parts_List.RemoveAt(_value2);
+            
+            // Remove empty lists
+            if (Bunker_List.Count == 0)
+                Bunker_List.RemoveAt(_value1);
+            
+        
         }
 
         

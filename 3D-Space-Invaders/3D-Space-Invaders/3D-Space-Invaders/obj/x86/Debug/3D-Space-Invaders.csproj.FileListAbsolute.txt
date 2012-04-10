@@ -16,3 +16,6 @@ C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Inv
 C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\bin\x86\Debug\Defence_Bunker.pdb
 C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\bin\x86\Debug\Character.dll
 C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\bin\x86\Debug\Character.pdb
+C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\bin\x86\Debug\Content\Laser_Cannon\Cannon_Part1.xnb
+C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\bin\x86\Debug\Content\Laser_Cannon\Cannon_Part2.xnb
+C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\bin\x86\Debug\Content\Laser_Cannon\Cannon_Part3.xnb

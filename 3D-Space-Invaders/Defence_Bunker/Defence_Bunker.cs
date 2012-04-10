@@ -22,9 +22,8 @@ namespace Defence_Bunker_Framework
 
         int Bunker_Width; // Only using a square at the moment
 
-        public List<List<Space_Invader_Char>> Bunker_Parts_List;
-        private List<Space_Invader_Char> Bunker_Part;
-        
+        public List<Space_Invader_Char> Bunker_Parts_List;
+
         public Defence_Bunker(Vector3 _position, int _bunker_width)
         { 
             // _position will be used at the start location of the bunker
@@ -35,8 +34,7 @@ namespace Defence_Bunker_Framework
 
         private void Initialise()
         {
-            Bunker_Parts_List = new List<List<Space_Invader_Char>>();
-            Bunker_Part = new List<Space_Invader_Char>();
+            Bunker_Parts_List = new List<Space_Invader_Char>();
             Create_Bunker();
         }
 
@@ -51,10 +49,11 @@ namespace Defence_Bunker_Framework
             {
                 for (int j = 0; j < Bunker_Width; j++)
                 {
-                    Bunker_Part.Add(new Space_Invader_Char(Space_Invader_Char.Character_Types.Bunker_Block, new Vector3(0, 0, 0), new Vector3(Position.X + (1 * i), Position.Y + (0.8f * j), -10)));
+                   Bunker_Parts_List.Add(new Space_Invader_Char(Space_Invader_Char.Character_Types.Bunker_Block, new Vector3(0, 0, 0), new Vector3(Position.X + (0.9f * i), Position.Y + (0.8f * j), -10)));
                 }
-                Bunker_Parts_List.Add(Bunker_Part);
+                
             }
+            
 
         }
 

@@ -165,21 +165,59 @@ namespace _3D_Space_Invaders
             #endregion
 
             #region Collision Detection
-
+            
             for (int i = 0; i < Game_Level.Alien_List.Count; i++)
             {
                 for (int j = 0; j < Game_Level.Alien_List[i].Count; j++)
                 {
                     for (int k = 0; k < Game_Level.Alien_List[i][j].Laser_List.Count; k++)
                     {
+                        // collision with cannon
                         if (Game_Level.Alien_List[i][j].Laser_List[k].position.Y < -39.8f)
                         {
-                            Window.Title = "" + Check_Collision(Game_Level.Cannon, Game_Level.Alien_List[i][j].Laser_List[k]);
+                            if (Check_Collision(Game_Level.Alien_List[i][j].Laser_List[k], Game_Level.Cannon))
+                            {
+                                Game_Level.Alien_List[i][j].Remove_Laser(k);
+                                // NOTE: ADD CANNON REACTION HERE
+                                // REDUCE LIFE BY 1;
+                                // NEED TO MAKE MODEL FLASH
+                                // NEED TO INCREASE SCORE
+                            }
+                        }
+                        
+                    }
+                }
+            }
+            for (int i = 0; i < Game_Level.Alien_List.Count; i++)
+            {
+                for (int j = 0; j < Game_Level.Alien_List[i].Count; j++)
+                {
+                    for (int k = 0; k < Game_Level.Alien_List[i][j].Laser_List.Count; k++)
+                    {
+                        
+                        // collision with bunkers
+                        if (Game_Level.Alien_List[i][j].Laser_List[k].position.Y < -30f & Game_Level.Alien_List[i][j].Laser_List[k].position.Y > -39.8)
+                        {
+                            for (int bunker = 0; bunker < Game_Level.Bunker_List.Count; bunker++)
+                            {
+                                for (int bunkerList = 0; bunkerList < Game_Level.Bunker_List[bunker].Bunker_Parts_List.Count; bunkerList++)
+                                {
+                                    if (Game_Level.Alien_List[i][j].Laser_List.Count > 0)
+                                    {
+                                        // NOTE: K = 0 AFTER FIRST COLLISION - FIND A WAY TO DROP OUT OF ALL LOOPS WHEN COLLISION IS DETECTED
+                                        if (Check_Collision(Game_Level.Alien_List[i][j].Laser_List[k], Game_Level.Bunker_List[bunker].Bunker_Parts_List[bunkerList]))
+                                        {
+                                            Game_Level.Alien_List[i][j].Remove_Laser(k);
+                                            Game_Level.Remove_Bunker(bunker, bunkerList);
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }
             }
-
             #endregion
 
             #region Alien AI
@@ -270,8 +308,7 @@ namespace _3D_Space_Invaders
             // Draw the Bunkers
             for (int i = 0; i < Game_Level.Bunker_List.Count; i++)
                 for (int j = 0; j < Game_Level.Bunker_List[i].Bunker_Parts_List.Count; j++)
-                    for (int k = 0; k < Game_Level.Bunker_List[i].Bunker_Parts_List[j].Count; k++)
-                        Draw_Model(Game_Level.Bunker_List[i].Bunker_Parts_List[j][k]);
+                        Draw_Model(Game_Level.Bunker_List[i].Bunker_Parts_List[j]);
             #endregion
 
             #region Draw Lasers
@@ -285,7 +322,7 @@ namespace _3D_Space_Invaders
                     for (int k = 0; k < Game_Level.Alien_List[i][j].Laser_List.Count; k++)
                         Draw_Model(Game_Level.Alien_List[i][j].Laser_List[k]);
             #endregion
-            
+
             base.Draw(gameTime);
         }
 
@@ -295,7 +332,7 @@ namespace _3D_Space_Invaders
                 Model myModel = Content.Load<Model>(asset_Name);
                 float aspectRatio = (float)graphics.GraphicsDevice.Viewport.Width /
                                            graphics.GraphicsDevice.Viewport.Height;
-               
+
                 foreach (ModelMesh mesh in myModel.Meshes)
                 {
                     foreach (BasicEffect effect in mesh.Effects)
@@ -347,24 +384,23 @@ namespace _3D_Space_Invaders
                 if (_myModel.Laser_List[i].position.Y > (float)Game_Boundries.Top
                     || _myModel.Laser_List[i].position.Y < (float)Game_Boundries.Bottom)
                 {
-                    _myModel.shot = false;
-                    _myModel.Laser_List.RemoveAt(i);
+                    _myModel.Remove_Laser(i);
                 }
 
             }
         }
 
-        public bool Check_Collision(Space_Invader_Char _myModel, Space_Invader_Char _collidingModel)
+        public bool Check_Collision(Space_Invader_Char _myLaser, Space_Invader_Char _collidingModel)
         {
             BoundingSphere _sphere1, _sphere2;
 
             // Pass a char to check collision with
-            foreach (ModelMesh mesh1 in Alien_Model_List[(int)_myModel.character_Type].Meshes)
+            foreach (ModelMesh mesh1 in Alien_Model_List[(int)_myLaser.character_Type].Meshes)
             {
                 foreach (ModelMesh mesh2 in Alien_Model_List[(int)_collidingModel.character_Type].Meshes)
                 {
                     _sphere1.Center = mesh1.BoundingSphere.Center +
-                                      new Vector3(_myModel.position.X, _myModel.position.Y, _myModel.position.Z);
+                                      new Vector3(_myLaser.position.X, _myLaser.position.Y, _myLaser.position.Z);
                     _sphere1.Radius = mesh1.BoundingSphere.Radius;
 
                     _sphere2.Center = mesh2.BoundingSphere.Center +
@@ -373,9 +409,6 @@ namespace _3D_Space_Invaders
 
                     if (_sphere1.Intersects(_sphere2))
                     {
-                    // NOTE: ADD COLLISION RESPONSE HERE
-
-
                         return true;
                     }
                 }

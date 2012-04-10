@@ -56,6 +56,11 @@ namespace Space_Invaders_Characters
 
         }
 
+        public void Remove_Laser(int _value)
+        {
+            shot = false;
+            Laser_List.RemoveAt(_value);
+        }
         
     }
 }
