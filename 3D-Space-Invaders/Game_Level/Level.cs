@@ -109,13 +109,13 @@ namespace Game_Level
                 Alien_List.Add(Alien_Temp_List);
 
             }
-            Create_Mystery_Ship();
+            
         }
 
         private void Create_Mystery_Ship()
         { 
             // Create and draw the Mystery Ship
-            Myster_Ship = new Space_Invader_Char(Space_Invader_Char.Character_Types.Invader_Mystery, new Vector3(0.5f, 0, 0), new Vector3(-10, 10, -10));
+            Myster_Ship = new Space_Invader_Char(Space_Invader_Char.Character_Types.Invader_Mystery, new Vector3(0.3f, 0, 0), new Vector3(-30, 10, -10));
             Mystery_Ship_List.Add(Myster_Ship);
         }
 
@@ -158,11 +158,6 @@ namespace Game_Level
         {
             alien_Fire_Rate = (55 - aliens_Killed + level) * 10;
         }
-        
-        public void Create_Laser(Space_Invader_Char _character)
-        { 
-            // NOTE: USE THIS FUNCTION TO CREATE A LASER IF TIME ALLOWS IT 
-        }
 
         public void Remove_Alien(int _value1, int _value2)
         {
@@ -171,12 +166,17 @@ namespace Game_Level
 
             Update_Alien_Speed();
 
+            if (aliens_Killed == 20 || aliens_Killed == 40)
+                Create_Mystery_Ship();
+
+
             // Remove empty lists
             if (Alien_List[_value1].Count == 0)
                 Alien_List.RemoveAt(_value1);
 
             
         }
+
         public void Remove_Bunker(int _value1, int _value2)
         {
             Bunker_List[_value1].Bunker_Parts_List.RemoveAt(_value2);
@@ -188,6 +188,10 @@ namespace Game_Level
         
         }
 
+        public void Remove_Mystership(int _value1)
+        {
+            Mystery_Ship_List.RemoveAt(_value1);
+        }
         
     }
 }

@@ -29,7 +29,7 @@ namespace _3D_Space_Invaders
         public enum Game_Boundries
         {
             LeftHandSide = -8,      // lhs
-            Top = 3,                // top
+            Top = 25,                // top
             RightHandSide = 68,    // rhs
             Bottom = -45          // bottom
         };
@@ -164,8 +164,12 @@ namespace _3D_Space_Invaders
 
             #endregion
 
+            // I feel as if this is really bad
             #region Collision Detection
-            
+
+            #region Alien Laser Collision
+
+            #region Cannon Collision
             for (int i = 0; i < Game_Level.Alien_List.Count; i++)
             {
                 for (int j = 0; j < Game_Level.Alien_List[i].Count; j++)
@@ -184,17 +188,20 @@ namespace _3D_Space_Invaders
                                 // NEED TO INCREASE SCORE
                             }
                         }
-                        
+
                     }
                 }
             }
+            #endregion
+
+            #region Bunker Collision
             for (int i = 0; i < Game_Level.Alien_List.Count; i++)
             {
                 for (int j = 0; j < Game_Level.Alien_List[i].Count; j++)
                 {
                     for (int k = 0; k < Game_Level.Alien_List[i][j].Laser_List.Count; k++)
                     {
-                        
+
                         // collision with bunkers
                         if (Game_Level.Alien_List[i][j].Laser_List[k].position.Y < -30f & Game_Level.Alien_List[i][j].Laser_List[k].position.Y > -39.8)
                         {
@@ -217,27 +224,110 @@ namespace _3D_Space_Invaders
                         }
                     }
                 }
+
+
             }
+            #endregion
+
+            #endregion
+
+            #region Mysteryship Collision
+
+            for (int i = 0; i < Game_Level.Mystery_Ship_List.Count; i++)
+                for (int ii =0; ii < Game_Level.Cannon.Laser_List.Count; ii++)
+                {
+                    if (Check_Collision(Game_Level.Cannon.Laser_List[ii], Game_Level.Mystery_Ship_List[i]))
+                    {
+                        Game_Level.Cannon.Remove_Laser(ii);
+                        Game_Level.Remove_Mystership(i);
+                    }
+                }
+
+            #endregion
+
+            #region Cannon Laser Collision
+
+                #region Bunker Collision
+                for (int i = 0; i < Game_Level.Cannon.Laser_List.Count; i++)
+                {
+                    // collision with bunker
+                    if (Game_Level.Cannon.Laser_List[i].position.Y < -30f & Game_Level.Cannon.Laser_List[i].position.Y > -39.8)
+                    {
+                        for (int bunker = 0; bunker < Game_Level.Bunker_List.Count; bunker++)
+                        {
+                            for (int bunkerList = 0; bunkerList < Game_Level.Bunker_List[bunker].Bunker_Parts_List.Count; bunkerList++)
+                            {
+                                if (Game_Level.Cannon.Laser_List.Count == 0)
+                                {
+                                    break;
+                                }
+                                if (Check_Collision(Game_Level.Cannon.Laser_List[i], Game_Level.Bunker_List[bunker].Bunker_Parts_List[bunkerList]))
+                                {
+                                    Game_Level.Cannon.Remove_Laser(i);
+                                    Game_Level.Remove_Bunker(bunker, bunkerList);
+                                    break;
+                                }
+
+                            }
+                        }
+                    }
+                }
+
+            #endregion 
+
+            #region Alien Collison
+            for (int i = 0; i < Game_Level.Cannon.Laser_List.Count; i++)
+            {
+                if (Game_Level.Cannon.Laser_List[i].position.Y > -30)
+                { 
+                    // check for collision with aliens
+                    for (int ii = 0; ii < Game_Level.Alien_List.Count; ii++)
+                    {
+                        for (int jj = 0; jj < Game_Level.Alien_List[ii].Count; jj++)
+                        {
+                            if (Game_Level.Cannon.Laser_List.Count == 0)
+                            {
+                                break;
+                            }
+                            if (Check_Collision(Game_Level.Cannon.Laser_List[i],Game_Level.Alien_List[ii][jj]))
+                            {
+                                Game_Level.Cannon.Remove_Laser(i);
+                                Game_Level.Remove_Alien(ii, jj);
+                                // NOTE: ADD POINTS HERE
+                                break;
+                            }
+                        }
+                    }
+                }
+
+
+            }
+
+
+            #endregion
+
+            #endregion
+
             #endregion
 
             #region Alien AI
 
-            // Stop aliens from going off the screen
-            for (int i = 0; i < Game_Level.Alien_List.Count; i++)
-                for (int j = 0; j < Game_Level.Alien_List[i].Count; j++)
-                {
-                    // Check to see if the aliens reach the boundries of the screen
-                    if (Game_Level.Alien_List[i][j].position.X > (float)Game_Boundries.RightHandSide)
+                // Stop aliens from going off the screen
+                for (int i = 0; i < Game_Level.Alien_List.Count; i++)
+                    for (int j = 0; j < Game_Level.Alien_List[i].Count; j++)
                     {
-                        Game_Level.alien_Speed = -(Math.Abs(Game_Level.alien_Speed));
-                        yValue = -0.5f;
+                        // Check to see if the aliens reach the boundries of the screen
+                        if (Game_Level.Alien_List[i][j].position.X > (float)Game_Boundries.RightHandSide)
+                        {
+                            Game_Level.alien_Speed = -(Math.Abs(Game_Level.alien_Speed));
+                            yValue = -0.5f;
+                        }
+                        else if (Game_Level.Alien_List[i][j].position.X < (float)Game_Boundries.LeftHandSide)
+                        {
+                            Game_Level.alien_Speed = Math.Abs(Game_Level.alien_Speed);
+                            yValue = -0.5f;
+                        }
                     }
-                    else if (Game_Level.Alien_List[i][j].position.X < (float)Game_Boundries.LeftHandSide)
-                    {
-                        Game_Level.alien_Speed = Math.Abs(Game_Level.alien_Speed);
-                        yValue = -0.5f;
-                    }
-                }
 
             // Loop through all the aliens
             for (int i = 0; i < Game_Level.Alien_List.Count; i++)
@@ -254,7 +344,7 @@ namespace _3D_Space_Invaders
                     if (AlienShootFlag == true)
                     {
                         // Randomly pick a column and make the bottom Alien shoot 
-                        Game_Level.Alien_List[shootingAlien][Game_Level.Alien_List[shootingAlien].Count - 1].Shoot(new Vector3(0f, (-Game_Level.Laser_Speed * Convert.ToInt16(AlienShootFlag)) / 1.5f, 0f));
+                        Game_Level.Alien_List[shootingAlien][Game_Level.Alien_List[shootingAlien].Count - 1].Shoot(new Vector3(0f, (-Game_Level.Laser_Speed * Convert.ToInt16(AlienShootFlag)) / 2, 0f));
                         AlienShootFlag = false;
                     }
                 }
@@ -308,7 +398,7 @@ namespace _3D_Space_Invaders
             // Draw the Bunkers
             for (int i = 0; i < Game_Level.Bunker_List.Count; i++)
                 for (int j = 0; j < Game_Level.Bunker_List[i].Bunker_Parts_List.Count; j++)
-                        Draw_Model(Game_Level.Bunker_List[i].Bunker_Parts_List[j]);
+                    Draw_Model(Game_Level.Bunker_List[i].Bunker_Parts_List[j]);
             #endregion
 
             #region Draw Lasers
