@@ -87,23 +87,24 @@ namespace Game_Level
         }
 
         private void Create_Aliens()
-        { 
+        {
+            int _baseY = 5;
             for (int i = 0; i < 11; i++) // loop through each column
             {// loop through columns
                 Alien_Temp_List = new List<Space_Invader_Char>();
                 for (int j = 0; j < 1; j++) // for each row in the column put an Alien
                 {
-                    Alien_Temp_List.Add(new Space_Invader_Char(Space_Invader_Char.Character_Types.Invader_30, new Vector3(alien_Speed, 0, 0), new Vector3((6 * i), -3 * j, -10)));
+                    Alien_Temp_List.Add(new Space_Invader_Char(Space_Invader_Char.Character_Types.Invader_30, new Vector3(alien_Speed, 0, 0), new Vector3((6 * i), _baseY - 1 * j, -10)));
                 }
 
                 for (int j = 1; j < 3; j++)
                 {
-                    Alien_Temp_List.Add(new Space_Invader_Char(Space_Invader_Char.Character_Types.Invader_20, new Vector3(alien_Speed, 0, 0), new Vector3((6 * i), -3 * j, -10)));
+                    Alien_Temp_List.Add(new Space_Invader_Char(Space_Invader_Char.Character_Types.Invader_20, new Vector3(alien_Speed, 0, 0), new Vector3((6 * i), _baseY - 4.5f * j, -10)));
                 }
 
                 for (int j = 3; j < 5; j++)
                 {
-                    Alien_Temp_List.Add(new Space_Invader_Char(Space_Invader_Char.Character_Types.Invader_10, new Vector3(alien_Speed, 0, 0), new Vector3((6 * i), -3 * j, -10)));
+                    Alien_Temp_List.Add(new Space_Invader_Char(Space_Invader_Char.Character_Types.Invader_10, new Vector3(alien_Speed, 0, 0), new Vector3((6 * i), _baseY - 4.5f * j, -10)));
                 }
                 Alien_List.Add(Alien_Temp_List);
 

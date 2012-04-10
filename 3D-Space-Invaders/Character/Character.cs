@@ -15,7 +15,7 @@ namespace Space_Invaders_Characters
     public class Space_Invader_Char
     {
         // Types of characters in the game 
-        public enum Character_Types { Invader_10, Invader_20, Invader_30, Invader_Mystery, Cannon, Bunker_Block, Laser };
+        public enum Character_Types { Invader_10, Invader_20, Invader_30, Invader_Mystery, Cannon, Bunker_Block, Laser};
         // The model that will be used for this Invader 
         public Character_Types character_Type { get; set; }
 
@@ -26,28 +26,22 @@ namespace Space_Invaders_Characters
         public Vector3 position { get; set; }
         public int points { get; set; }    // amount of point gained for destroying this object
 
+        // Characters lasers
         Space_Invader_Char Laser;
         public List<Space_Invader_Char> Laser_List = new List<Space_Invader_Char>();
 
+        public String Owner = "";
 
-        /// <summary>
-        /// Class Constructor
-        /// </summary>
-        /// <param name="_myModel"></param>
-        /// <param name="_velocity"></param>
-        /// <param name="_position"></param>
-        public Space_Invader_Char(Character_Types _character_Type, Vector3 _velocity, Vector3 _position)
+        public Space_Invader_Char(Character_Types _character_Type, Vector3 _velocity, Vector3 _position, String _owner = "")
         {
             // Set attributes that are required for creation
             character_Type = _character_Type;
             velocity = _velocity;
             position = _position;
             points = (int)_character_Type + 1 * 10;
-
+            Owner = _owner;
         }
-        /// <summary>
-        /// Will apply the current velocity to the current position
-        /// </summary>
+
         public void update_Positon(Vector3 _velocity) { position += _velocity; }
 
         public void Shoot(Vector3 _velocity)
@@ -61,5 +55,7 @@ namespace Space_Invaders_Characters
             }
 
         }
+
+        
     }
 }
