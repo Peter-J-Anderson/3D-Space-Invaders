@@ -25,6 +25,11 @@ namespace _3D_Space_Invaders
 
         float aspectRatio;
 
+        //player scores
+        int Player1_Score = 0;
+        int Player2_Score = 0;
+ 
+
         // Game Boundries           
         public enum Game_Boundries
         {
@@ -149,7 +154,7 @@ namespace _3D_Space_Invaders
             if (Keyboard.GetState().IsKeyDown(Keys.D) & Game_Level.Cannon.position.X < (float)Game_Boundries.RightHandSide)
                 Cannon_Speed = Game_Level.Cannon.velocity.X;
             if (Keyboard.GetState().IsKeyDown(Keys.Space))
-                Game_Level.Cannon.Shoot(new Vector3(0.0f, Game_Level.Laser_Speed, 0.0f));
+                Game_Level.Cannon.Shoot(new Vector3(0.0f, Game_Level.Laser_Speed*2, 0.0f));
             if (Keyboard.GetState().IsKeyDown(Keys.M))
             {
                 if (Game_Level.Alien_List.Count > 0)
@@ -247,7 +252,7 @@ namespace _3D_Space_Invaders
 
             #region Cannon Laser Collision
 
-                #region Bunker Collision
+            #region Bunker Collision
                 for (int i = 0; i < Game_Level.Cannon.Laser_List.Count; i++)
                 {
                     // collision with bunker
@@ -291,9 +296,10 @@ namespace _3D_Space_Invaders
                             }
                             if (Check_Collision(Game_Level.Cannon.Laser_List[i],Game_Level.Alien_List[ii][jj]))
                             {
+                                Player1_Score += Game_Level.Alien_List[ii][jj].points;
                                 Game_Level.Cannon.Remove_Laser(i);
                                 Game_Level.Remove_Alien(ii, jj);
-                                // NOTE: ADD POINTS HERE
+                                Window.Title = "P1 Score: " + Player1_Score;
                                 break;
                             }
                         }
@@ -368,8 +374,37 @@ namespace _3D_Space_Invaders
             Game_Level.Cannon.update_Positon(new Vector3(Cannon_Speed * Convert.ToInt16(CannonMoveFlag), 0.0f, 0.0f));
             #endregion
 
-            // Reset flags and movement values
-            AlienMoveFlag = false;
+
+
+             
+            #region End Condition
+
+            if (Game_Level.aliens_Killed == 55)
+            { 
+                // End level, Create next level
+                Window.Title = " Next Level";
+            }
+
+            // check to see if aliens have reached the bottom of the screen
+            for (int i = 0; i < Game_Level.Alien_List.Count; i++)
+                for (int j = 0; j < Game_Level.Alien_List[i].Count; j++)
+                {
+                    if (Game_Level.Alien_List[i][j].position.Y <= -40)
+                    { 
+                        // Game Over
+                        Window.Title = "Game Over";
+                    }
+                
+                }
+
+
+
+            #endregion
+
+
+
+                    // Reset flags and movement values
+                    AlienMoveFlag = false;
             CannonMoveFlag = false;
             AlienShootFlag = false;
             LaserMoveFlag = false;
