@@ -39,13 +39,12 @@ namespace Game_Level
         List<Model> Model_List;
 
         // Holds the Cannon for this level
-        private Cannon Player1_Cannon;
-        private Cannon Player2_Cannon;
-
+        List<Cannon> Player_List = new List<Cannon>();
+        private Cannon Player_Cannon;
+        
         // Will hold the laser for each player
-        private List<Laser> Player1_Laser_List = new List<Laser>();
-        private List<Laser> Player2_Laser_List = new List<Laser>();
-
+        private List<Laser> Player_Laser_List = new List<Laser>();
+        
         // Holds the aliens for this level 
         private List<List<Alien>> Alien_Column;
         private List<Alien> Alien_Row;
@@ -55,15 +54,10 @@ namespace Game_Level
 
         // Movement timer
         // Timers are used to detemine when objects move
-        float AlienMoveTimer = 0f;  // Movement of Alien ships
-        float CannonMoveTimer = 0f; // Movement of Laser Cannon
         float AlienShootTimer = 0f; // Movement of Alien Lasers
-        float LaserMoveTimer = 0f;  // Movement of Cannon Lasers
-
+        
         bool AlienShootFlag = false;
-        bool AlienMoveFlag = false;
-        bool CannonMoveFlag = false;
-        bool LaserMoveFlag = false;
+        
 
         #endregion
 
@@ -106,9 +100,8 @@ namespace Game_Level
             // Create aliens 
             Create_Aliens();
 
-            // Create Cannon
-            for (int i = 1; i <= players; i++)
-            { Create_Cannon(i); }
+            // Create Cannons
+            Create_Cannon(); 
 
             // Create Bunkers
             Create_Bunker();
@@ -142,11 +135,6 @@ namespace Game_Level
             }
         }
 
-        private void Create_Alien_Laser()
-        {
-            Alien_Laser_List.Add(Player2_Cannon.Laser(Model_List[(int)Space_Invader_Char.Character_Types.Laser], "Alien"));
-        }
-
         private void Create_Mystery_Ship()
         {
             // Create and draw the Mystery Ship
@@ -168,36 +156,24 @@ namespace Game_Level
             }
         }
 
-        private void Create_Cannon(int _player)
+        private void Create_Cannon()
         {
-            if (_player == 1)
-                Create_Player1_Cannon();
-            else if (_player == 2)
-                Create_Player2_Cannon();
+            for (int i = 0; i < players; i++)
+                Create_Player_Cannon();
+            
         }
 
-        private void Create_Player1_Cannon()
+        private void Create_Player_Cannon()
         {
-            Player1_Cannon = new Cannon(new Vector3((float)Game_Boundries.LeftHandSide + 20,
+            Player_Cannon = new Cannon(new Vector3((float)Game_Boundries.LeftHandSide + 20,
                 (float)Game_Boundries.Bottom + 10, 0), new Vector3(0.5f, 0, 0)
                 , Model_List[(int)Space_Invader_Char.Character_Types.Cannon]);
+            Player_List.Add(Player_Cannon);
         }
 
-        private void Create_Player2_Cannon()
+        private void Create_Player_Laser(int _playerNumber)
         {
-            Player2_Cannon = new Cannon(new Vector3((float)Game_Boundries.LeftHandSide + 40,
-                (float)Game_Boundries.Bottom + 10, 0), new Vector3(0.5f, 0, 0)
-                , Model_List[(int)Space_Invader_Char.Character_Types.Cannon]);
-        }
-
-        private void Create_Player1_Laser()
-        {
-            Player1_Laser_List.Add(Player1_Cannon.Laser(Model_List[(int)Space_Invader_Char.Character_Types.Laser], "Player1"));
-        }
-
-        private void Create_Player2_Laser()
-        {
-            Player2_Laser_List.Add(Player2_Cannon.Laser(Model_List[(int)Space_Invader_Char.Character_Types.Laser], "Player2"));
+            Player_Laser_List.Add(Player_List[_playerNumber].Laser(Model_List[(int)Space_Invader_Char.Character_Types.Laser], "Player" + _playerNumber));
         }
 
         private void Update_Alien_Speed()
@@ -241,8 +217,7 @@ namespace Game_Level
         {
             Update_Timers(gameTime);
             Alien_Laser_Collision();
-            Player1_Laser_Collision();
-            Player2_Laser_Collision();
+            Player_Laser_Collision();
             Update_Laser_Position();
             Update_Alien_Position();
             Update_Alien_Shooting();
@@ -256,32 +231,14 @@ namespace Game_Level
             #region Timer Control
             // Update game timers
             float tempTime = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-            AlienMoveTimer += tempTime;
             AlienShootTimer += tempTime;
-            CannonMoveTimer += tempTime;
-            LaserMoveTimer += tempTime;
-
-            // Reset game timers if needed 
-            if (AlienMoveTimer > alien_Speed)
-            {
-                AlienMoveFlag = true;
-                AlienMoveTimer = 0;
-            }
-            if (LaserMoveTimer > 30f)
-            {
-                LaserMoveFlag = true;
-                LaserMoveTimer = 0f;
-            }
+           
             if (AlienShootTimer > alien_Fire_Rate)
             {
                 AlienShootFlag = true;
                 AlienShootTimer = 0;
             }
-            if (CannonMoveTimer > Player1_Cannon.Velocity.X)
-            {
-                CannonMoveFlag = true;
-                CannonMoveTimer = 0;
-            }
+            
             #endregion
 
             // Update alien/Cannon cooldowns
@@ -292,10 +249,10 @@ namespace Game_Level
                 }
 
             // Update Cooldown for Player1
-            Player1_Cannon.Update_Cooldown(gameTime);
-
-            // Update Cooldown for Player2
-            Player2_Cannon.Update_Cooldown(gameTime);
+            for (int i = 0; i < Player_List.Count; i++)
+            {
+                Player_List[i].Update_Cooldown(gameTime);
+            }
         }
 
         private void Alien_Laser_Collision()
@@ -320,12 +277,13 @@ namespace Game_Level
             }
             #endregion
 
-            #region Alien with Player1 Cannon
+            #region Alien with Player Cannon
 
             for (int i = 0; i < Alien_Column.Count; i++)
                 for (int j = 0; j < Alien_Column[i].Count; j++)
                 {
-                    if (Alien_Column[i][j].myBoundingSphere.Intersects(Player1_Cannon.myBoundingSphere))
+                    for (int k = 0; k < Player_List.Count; k++)
+                    if (Alien_Column[i][j].myBoundingSphere.Intersects(Player_List[k].myBoundingSphere))
                     {
                         // Set level to failed
                         return;
@@ -334,128 +292,59 @@ namespace Game_Level
 
             #endregion
 
-            #region Alien with Player2 Cannon
-            if (players > 1)
-                for (int i = 0; i < Alien_Column.Count; i++)
-                {
-                    for (int j = 0; j < Alien_Column[i].Count; j++)
-                        if (Alien_Column[i][j].myBoundingSphere.Intersects(Player2_Cannon.myBoundingSphere))
-                        {
-                            // Set level to failed
-                            return;
-                        }
-                }
-
-            #endregion
-
         }
 
-        private void Player1_Laser_Collision()
+        private void Player_Laser_Collision()
         {
-            #region Player1 Cannon Lasers with Bunkers
+            #region Player Lasers with Aliens
+            for (int i = 0; i < Alien_Column.Count; i++)
+                for (int j = 0; j < Alien_Column[i].Count; j++)
+                {
+                    for (int k = 0; k < Player_Laser_List.Count; k++)
+                    {
+                        if (Player_Laser_List[k].myBoundingSphere.Intersects(Alien_Column[i][j].myBoundingSphere))
+                        {
+                            Alien_Column[i].RemoveAt(j);
+                            if (Alien_Column[i].Count == 0)
+                                Alien_Column.RemoveAt(i);
+                            Player_Laser_List.RemoveAt(k);
+                            return;
+                        }
+                    }
+                }
+            #endregion
+
+            #region Player Cannon Lasers with Bunkers
             for (int i = 0; i < Bunker_List.Count; i++)
             {
-                for (int j = 0; j < Player1_Laser_List.Count; j++)
+                for (int j = 0; j < Player_Laser_List.Count; j++)
                 {
-                    if (Bunker_List[i].Check_Collision(Player1_Laser_List[j].myBoundingSphere))
+                    if (Bunker_List[i].Check_Collision(Player_Laser_List[j].myBoundingSphere))
                     {
-                        Player1_Laser_List.RemoveAt(j);
+                        Player_Laser_List.RemoveAt(j);
                         return;
                     }
                 }
             }
             #endregion
-
-            #region Player1 Cannon Lasers with Aliens
-
-            for (int i = 0; i < Alien_Column.Count; i++)
-                for (int j = 0; j < Alien_Column[i].Count; j++)
-                {
-                    for (int k = 0; k < Player1_Laser_List.Count; k++)
-                    {
-                        if (Player1_Laser_List[k].myBoundingSphere.Intersects(Alien_Column[i][j].myBoundingSphere))
-                        {
-                            Alien_Column[i].RemoveAt(j);
-                            if (Alien_Column[i].Count == 0)
-                                Alien_Column.RemoveAt(i);
-                            Player1_Laser_List.RemoveAt(k);
-                            return;
-                        }
-                    }
-                }
-            #endregion
         }
 
-        private void Player2_Laser_Collision()
-        {
-            #region Player2 Cannon Lasers with Bunkers
-            if (players > 1)
-                for (int i = 0; i < Bunker_List.Count; i++)
-                {
-                    for (int j = 0; j < Player2_Laser_List.Count; j++)
-                    {
-                        if (Bunker_List[i].Check_Collision(Player2_Laser_List[j].myBoundingSphere))
-                        {
-                            Player2_Laser_List.RemoveAt(j);
-                            return;
-                        }
-                    }
-                }
-            #endregion
-
-            #region Player2 Cannon Lasers with Aliens
-            if (players > 1)
-                for (int i = 0; i < Alien_Column.Count; i++)
-                    for (int j = 0; j < Alien_Column[i].Count; j++)
-                    {
-                        for (int k = 0; k < Player2_Laser_List.Count; k++)
-                        {
-                            if (Player2_Laser_List[k].myBoundingSphere.Intersects(Alien_Column[i][j].myBoundingSphere))
-                            {
-                                Alien_Column[i].RemoveAt(j);
-                                if (Alien_Column[i].Count == 0)
-                                    Alien_Column.RemoveAt(i);
-                                Player2_Laser_List.RemoveAt(k);
-                                return;
-                            }
-                        }
-                    }
-            #endregion
-        }
-
-
+        
         #region Player Controls
 
-        public void Player1_Shoot()
+        public void Player_Shoot(int _player)
         {
-            Player1_Laser_List.Add(Player1_Cannon.Laser(Model_List[(int)Space_Invader_Char.Character_Types.Laser], "Player1"));
+            Player_Laser_List.Add(Player_List[_player].Laser(Model_List[(int)Space_Invader_Char.Character_Types.Laser], "Player" + _player));
         }
 
-        public void Player1_Move_Left()
+        public void Player_Move_Left(int _player)
         {
-            Player1_Cannon.update_Positon(Cannon.Movement_Direction.Left);
+            Player_List[_player].update_Positon(Cannon.Movement_Direction.Left);
         }
 
-        public void Player1_Move_Right()
+        public void Player_Move_Right(int _player)
         {
-            Player1_Cannon.update_Positon(Cannon.Movement_Direction.Right);
-        }
-
-
-
-        public void Player2_Shoot()
-        {
-            Player2_Laser_List.Add(Player2_Cannon.Laser(Model_List[(int)Space_Invader_Char.Character_Types.Laser], "Player2"));
-        }
-
-        public void Player2_Move_Left()
-        {
-            Player2_Cannon.update_Positon(Cannon.Movement_Direction.Left);
-        }
-
-        public void Player2_Move_Right()
-        {
-            Player2_Cannon.update_Positon(Cannon.Movement_Direction.Right);
+            Player_List[_player].update_Positon(Cannon.Movement_Direction.Right);
         }
 
         #endregion
@@ -465,7 +354,7 @@ namespace Game_Level
             for (int i = 0; i < Alien_Laser_List.Count; i++)
             {
                 Alien_Laser_List[i].update_Positon(new Vector3(Alien_Laser_List[i].Velocity.X,
-                                                               Alien_Laser_List[i].Velocity.Y * Convert.ToInt16(LaserMoveFlag),
+                                                               Alien_Laser_List[i].Velocity.Y,
                                                                Alien_Laser_List[i].Velocity.Z));
                 if (Alien_Laser_List[i].Position.X > (float)Game_Boundries.RightHandSide ||
                     Alien_Laser_List[i].Position.X < (float)Game_Boundries.LeftHandSide ||
@@ -475,28 +364,16 @@ namespace Game_Level
 
             }
             // Player1 Lasers
-            for (int i = 0; i < Player1_Laser_List.Count; i++)
+            for (int i = 0; i < Player_Laser_List.Count; i++)
             {
-                Player1_Laser_List[i].update_Positon(new Vector3(Player1_Laser_List[i].Velocity.X,
-                                                                 Player1_Laser_List[i].Velocity.Y * Convert.ToInt16(LaserMoveFlag),
-                                                                 Player1_Laser_List[i].Velocity.Z));
-                if (Player1_Laser_List[i].Position.X > (float)Game_Boundries.RightHandSide ||
-                    Player1_Laser_List[i].Position.X < (float)Game_Boundries.LeftHandSide ||
-                    Player1_Laser_List[i].Position.Y > (float)Game_Boundries.Top ||
-                    Player1_Laser_List[i].Position.Y < (float)Game_Boundries.Bottom)
-                    Player1_Laser_List.RemoveAt(i);
-            }
-            //Player2 Lasers
-            for (int i = 0; i < Player2_Laser_List.Count; i++)
-            {
-                Player2_Laser_List[i].update_Positon(new Vector3(Player2_Laser_List[i].Velocity.X,
-                                                                 Player2_Laser_List[i].Velocity.Y * Convert.ToInt16(LaserMoveFlag),
-                                                                 Player2_Laser_List[i].Velocity.Z));
-                if (Player2_Laser_List[i].Position.X > (float)Game_Boundries.RightHandSide ||
-                    Player2_Laser_List[i].Position.X < (float)Game_Boundries.LeftHandSide ||
-                    Player2_Laser_List[i].Position.Y > (float)Game_Boundries.Top ||
-                    Player2_Laser_List[i].Position.Y < (float)Game_Boundries.Bottom)
-                    Player2_Laser_List.RemoveAt(i);
+                Player_Laser_List[i].update_Positon(new Vector3(Player_Laser_List[i].Velocity.X,
+                                                                 Player_Laser_List[i].Velocity.Y,
+                                                                 Player_Laser_List[i].Velocity.Z));
+                if (Player_Laser_List[i].Position.X > (float)Game_Boundries.RightHandSide ||
+                    Player_Laser_List[i].Position.X < (float)Game_Boundries.LeftHandSide ||
+                    Player_Laser_List[i].Position.Y > (float)Game_Boundries.Top ||
+                    Player_Laser_List[i].Position.Y < (float)Game_Boundries.Bottom)
+                    Player_Laser_List.RemoveAt(i);
             }
         }
 
@@ -524,8 +401,8 @@ namespace Game_Level
             for (int i = 0; i < Alien_Column.Count; i++)
             {
                 for (int j = 0; j < Alien_Column[i].Count; j++)
-                    Alien_Column[i][j].update_Positon(new Vector3(alien_Speed * Convert.ToInt16(AlienMoveFlag),
-                                                             yValue * Convert.ToInt16(AlienMoveFlag),
+                    Alien_Column[i][j].update_Positon(new Vector3(alien_Speed,
+                                                             yValue,
                                                              0));
             }
         }
@@ -547,10 +424,7 @@ namespace Game_Level
         private void Reset_Flags()
         {
             // Reset flags and movement values
-            AlienMoveFlag = false;
-            CannonMoveFlag = false;
             AlienShootFlag = false;
-            LaserMoveFlag = false;
         }
         #endregion
 
@@ -559,8 +433,11 @@ namespace Game_Level
             Draw_Lasers();
             Draw_Bunkers();
             Draw_Aliens();
-            Draw_Player1();
-            Draw_Player2();
+            
+            // all players 
+            for (int i =0; i < Player_List.Count; i++)
+                Draw_Player(i);
+            
         }
 
         #region Draw Level Objects
@@ -573,17 +450,12 @@ namespace Game_Level
             }
 
             // Draw all player1 lasers
-            for (int i = 0; i < Player1_Laser_List.Count; i++)
+            for (int i = 0; i < Player_Laser_List.Count; i++)
             {
-                Player1_Laser_List[i].Draw_Model();
+                Player_Laser_List[i].Draw_Model();
             }
 
-            // Draw all player2 lasers
-            for (int i = 0; i < Player2_Laser_List.Count; i++)
-            {
-                Player2_Laser_List[i].Draw_Model();
-            }
-
+            
         }
 
         private void Draw_Bunkers()
@@ -603,18 +475,11 @@ namespace Game_Level
             }
         }
 
-        private void Draw_Player1()
+        private void Draw_Player(int _player)
         {
-            Player1_Cannon.Draw_Model();
+            Player_List[_player].Draw_Model();
         }
 
-        private void Draw_Player2()
-        {
-            if (players > 1)
-            {
-                Player2_Cannon.Draw_Model();
-            }
-        }
         #endregion
 
     }

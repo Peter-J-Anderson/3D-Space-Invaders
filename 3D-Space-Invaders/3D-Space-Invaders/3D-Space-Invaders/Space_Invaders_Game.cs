@@ -101,20 +101,20 @@ namespace _3D_Space_Invaders
             //Player1 Controls
             #region Player1 Controls
             if (Keyboard.GetState().IsKeyDown(Keys.A))
-                Game_Level.Player1_Move_Left();
+                Game_Level.Player_Move_Left(0);
             if (Keyboard.GetState().IsKeyDown(Keys.D))
-                Game_Level.Player1_Move_Right();
+                Game_Level.Player_Move_Right(0);
             if (Keyboard.GetState().IsKeyDown(Keys.Space))
-                Game_Level.Player1_Shoot();
+                Game_Level.Player_Shoot(0);
             #endregion
 
             #region Player2 Controls
             if (Keyboard.GetState().IsKeyDown(Keys.Left))
-                Game_Level.Player2_Move_Left();
+                Game_Level.Player_Move_Left(1);
             if (Keyboard.GetState().IsKeyDown(Keys.Right))
-                Game_Level.Player2_Move_Right();
+                Game_Level.Player_Move_Right(1);
             if (Keyboard.GetState().IsKeyDown(Keys.Enter))
-                Game_Level.Player2_Shoot();
+                Game_Level.Player_Shoot(1);
             #endregion
 
             Game_Level.Update_Level(gameTime);
