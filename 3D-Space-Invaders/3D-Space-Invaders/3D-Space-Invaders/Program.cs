@@ -10,7 +10,7 @@ namespace _3D_Space_Invaders
         /// </summary>
         static void Main(string[] args)
         {
-            using (Space_Invaders_3D game = new Space_Invaders_3D())
+            using (Space_Invaders_Game game = new Space_Invaders_Game())
             {
                 game.Run();
             }

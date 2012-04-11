@@ -96,6 +96,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Alien\Alien.csproj">
+      <Project>{449D7BD6-D23F-4262-B96E-7C3E408D22F9}</Project>
+      <Name>Alien</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Cannon\Cannon.csproj">
+      <Project>{C69830A7-E73C-450F-91A6-AA72A25D7808}</Project>
+      <Name>Cannon</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Character\Character.csproj">
       <Project>{D9D837E8-F665-4DE7-8F37-2A7E50657D55}</Project>
       <Name>Character</Name>
@@ -103,6 +111,10 @@
     <ProjectReference Include="..\Defence_Bunker\Defence_Bunker.csproj">
       <Project>{7B309CCD-C994-4F89-A502-63FA0195210C}</Project>
       <Name>Defence_Bunker</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Laser\Laser.csproj">
+      <Project>{04DE5FCC-D4E8-4BEF-95A5-79436274BEE6}</Project>
+      <Name>Laser</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
