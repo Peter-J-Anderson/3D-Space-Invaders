@@ -42,7 +42,7 @@ namespace Alien_Framework
             {
                 ShotFlag = true;
                 // create laser here
-                _laser = new Laser(new Vector3(0f, -0.8f, 0), _owner, Position, _myModel);
+                _laser = new Laser(new Vector3(0f, -0.6f, 0), _owner, Position, _myModel);
                 //return the newly created laser
                 return _laser;
             }

@@ -41,10 +41,10 @@ namespace Game_Level
         // Holds the Cannon for this level
         List<Cannon> Player_List = new List<Cannon>();
         private Cannon Player_Cannon;
-        
+
         // Will hold the laser for each player
         private List<Laser> Player_Laser_List = new List<Laser>();
-        
+
         // Holds the aliens for this level 
         private List<List<Alien>> Alien_Column;
         private List<Alien> Alien_Row;
@@ -55,9 +55,9 @@ namespace Game_Level
         // Movement timer
         // Timers are used to detemine when objects move
         float AlienShootTimer = 0f; // Movement of Alien Lasers
-        
+
         bool AlienShootFlag = false;
-        
+
 
         #endregion
 
@@ -72,6 +72,7 @@ namespace Game_Level
 
         // Hold the bunkers 
         private List<Defence_Bunker> Bunker_List = new List<Defence_Bunker>();
+
 
         public Level(int _level, int _players, List<Model> _model_List)
         {
@@ -101,7 +102,7 @@ namespace Game_Level
             Create_Aliens();
 
             // Create Cannons
-            Create_Cannon(); 
+            Create_Cannon();
 
             // Create Bunkers
             Create_Bunker();
@@ -150,7 +151,7 @@ namespace Game_Level
             // start with a basic block to represent the bunkers
             for (int i = 0; i < 7; i++)
             {
-                Bunker_List.Add(new Defence_Bunker(new Vector3((float)Game_Boundries.LeftHandSide + (i * 10),
+                Bunker_List.Add(new Defence_Bunker(new Vector3((float)Game_Boundries.LeftHandSide + (5 + i * 10),
                                                                (float)Game_Boundries.Bottom + 15, 0), 5,
                     Model_List[(int)Space_Invader_Char.Character_Types.Bunker_Block]));
             }
@@ -160,14 +161,14 @@ namespace Game_Level
         {
             for (int i = 0; i < players; i++)
                 Create_Player_Cannon();
-            
+
         }
 
         private void Create_Player_Cannon()
         {
             Player_Cannon = new Cannon(new Vector3((float)Game_Boundries.LeftHandSide + 20,
-                (float)Game_Boundries.Bottom + 10, 0), new Vector3(0.5f, 0, 0)
-                , Model_List[(int)Space_Invader_Char.Character_Types.Cannon]);
+                (float)Game_Boundries.Bottom + 10, 0), new Vector3(0.5f, 0, 0), 3,
+                 Model_List[(int)Space_Invader_Char.Character_Types.Cannon]);
             Player_List.Add(Player_Cannon);
         }
 
@@ -216,8 +217,8 @@ namespace Game_Level
         public void Update_Level(GameTime gameTime)
         {
             Update_Timers(gameTime);
-            Alien_Laser_Collision();
-            Player_Laser_Collision();
+            Alien_Collision();
+            Player_Collision();
             Update_Laser_Position();
             Update_Alien_Position();
             Update_Alien_Shooting();
@@ -232,13 +233,13 @@ namespace Game_Level
             // Update game timers
             float tempTime = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             AlienShootTimer += tempTime;
-           
+
             if (AlienShootTimer > alien_Fire_Rate)
             {
                 AlienShootFlag = true;
                 AlienShootTimer = 0;
             }
-            
+
             #endregion
 
             // Update alien/Cannon cooldowns
@@ -255,7 +256,7 @@ namespace Game_Level
             }
         }
 
-        private void Alien_Laser_Collision()
+        private void Alien_Collision()
         {
             #region Alien Lasers with Bunkers
             // Alien lasers with bunkers
@@ -277,24 +278,45 @@ namespace Game_Level
             }
             #endregion
 
-            #region Alien with Player Cannon
+            #region Alien Lasers with Cannon
 
+            for (int i = 0; i < players; i++)
+            {
+                if (Player_List[i].Lives > 0)
+                    for (int j = 0; j < Alien_Laser_List.Count; j++)
+                    {
+                        if (Alien_Laser_List[j].myBoundingSphere.Intersects(Player_List[i].myBoundingSphere))
+                        {
+                            Player_List[i].Lives--;
+                            Alien_Laser_List.RemoveAt(j);
+                            // add animation to the animation list
+                            // use the coods of the player 
+                            return;
+                        }
+                    }
+            }
+            #endregion
+
+            #region Alien with Player Cannon
+            
+            if(Bunker_List.Count == 0)  // No need to check if the aliens havent made it past the bunkers 
             for (int i = 0; i < Alien_Column.Count; i++)
                 for (int j = 0; j < Alien_Column[i].Count; j++)
                 {
                     for (int k = 0; k < Player_List.Count; k++)
-                    if (Alien_Column[i][j].myBoundingSphere.Intersects(Player_List[k].myBoundingSphere))
-                    {
-                        // Set level to failed
-                        return;
-                    }
+                        if (Alien_Column[i][j].myBoundingSphere.Intersects(Player_List[k].myBoundingSphere))
+                        {
+                            // Set level to failed
+                            return;
+                        }
                 }
 
             #endregion
 
+
         }
 
-        private void Player_Laser_Collision()
+        private void Player_Collision()
         {
             #region Player Lasers with Aliens
             for (int i = 0; i < Alien_Column.Count; i++)
@@ -329,25 +351,31 @@ namespace Game_Level
             #endregion
         }
 
-        
+
         #region Player Controls
 
         public void Player_Shoot(int _player)
         {
+            if(Player_List[_player].Lives > 0)
             Player_Laser_List.Add(Player_List[_player].Laser(Model_List[(int)Space_Invader_Char.Character_Types.Laser], "Player" + _player));
         }
 
         public void Player_Move_Left(int _player)
         {
-            Player_List[_player].update_Positon(Cannon.Movement_Direction.Left);
+            if (Player_List[_player].Lives > 0)
+            if (Player_List[_player].Position.X > (int)Game_Boundries.LeftHandSide)
+                Player_List[_player].update_Positon(Cannon.Movement_Direction.Left);
         }
 
         public void Player_Move_Right(int _player)
         {
-            Player_List[_player].update_Positon(Cannon.Movement_Direction.Right);
+            if (Player_List[_player].Lives > 0)
+            if (Player_List[_player].Position.X < (int)Game_Boundries.RightHandSide)
+                Player_List[_player].update_Positon(Cannon.Movement_Direction.Right);
         }
 
         #endregion
+
         private void Update_Laser_Position()
         {
             // Alien Lasesrs
@@ -433,11 +461,12 @@ namespace Game_Level
             Draw_Lasers();
             Draw_Bunkers();
             Draw_Aliens();
-            
+
             // all players 
-            for (int i =0; i < Player_List.Count; i++)
+            for (int i = 0; i < Player_List.Count; i++)
+                if (Player_List[i].Lives > 0)
                 Draw_Player(i);
-            
+
         }
 
         #region Draw Level Objects
@@ -455,7 +484,7 @@ namespace Game_Level
                 Player_Laser_List[i].Draw_Model();
             }
 
-            
+
         }
 
         private void Draw_Bunkers()

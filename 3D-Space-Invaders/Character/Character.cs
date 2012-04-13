@@ -29,19 +29,24 @@ namespace Space_Invaders_Characters_Framework
         public Space_Invader_Char(Character_Types _character_Type, Vector3 _position, Model _myModel)
         {
             // Set attributes that are required for object creation
+            
             Character_Type = _character_Type;
             myModel = _myModel;
             Position = _position;
             myBoundingSphere = myModel.Meshes[0].BoundingSphere;
             myBoundingSphere.Center.X += Position.X;
             myBoundingSphere.Center.Y += Position.Y;
-            myBoundingSphere.Center.Z += Position.Z;
-
+            if (Character_Type == Character_Types.Cannon)
+            myBoundingSphere.Center.Z += Position.Z -1;
+            else
+                myBoundingSphere.Center.Z += Position.Z;
+            
         }
 
         public void update_Positon(Vector3 _velocity)
         {
             Position += _velocity;
+
             myBoundingSphere.Center.X = Position.X;
             myBoundingSphere.Center.Y = Position.Y;
             myBoundingSphere.Center.Z = Position.Z;
@@ -51,6 +56,7 @@ namespace Space_Invaders_Characters_Framework
         { 
             if(myBoundingSphere.Intersects(_object))
             {
+
                 return true;
             }
 

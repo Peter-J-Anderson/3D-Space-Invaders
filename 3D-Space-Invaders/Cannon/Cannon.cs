@@ -21,16 +21,18 @@ namespace Cannon_Framework
 
         // Flag used to determine if you can shoot again or not
         public bool ShotFlag { get; set; }
-
         private float ShotCooldown { get; set; }
 
         // attributes 
         public Vector3 Velocity { get; set; }
+        public int Lives { get; set; }
 
-        public Cannon(Vector3 _position, Vector3 _velocity, Model _myModel)
+
+        public Cannon(Vector3 _position, Vector3 _velocity, int _lives, Model _myModel)
             : base(Character_Types.Cannon, _position, _myModel)
         {
             // Set attributes that are required for creation
+            Lives = _lives;
             Velocity = _velocity;
         }
 
