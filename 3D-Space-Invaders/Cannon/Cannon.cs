@@ -23,6 +23,10 @@ namespace Cannon_Framework
         public bool ShotFlag { get; set; }
         private float ShotCooldown { get; set; }
 
+        public int Points { get; set; }
+
+        public string myName { get; set; }
+         
         // attributes 
         public Vector3 Velocity { get; set; }
         public int Lives { get; set; }
@@ -38,6 +42,7 @@ namespace Cannon_Framework
 
         public Laser Laser(Model _myModel, String _owner)
         {
+            myName = _owner;
             Laser _laser;
             // This will create the laser that is fired from both the aliens and Cannon
             if (ShotFlag == false)

@@ -24,6 +24,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Laser", "Laser\Laser.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Animation_2D", "Animation_2D\Animation_2D.csproj", "{E419CEB7-A541-41D3-A8BB-35B7D4CE0901}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HUD", "HUD\HUD.csproj", "{CFD71B63-0051-44D4-AD3A-38E9A19625C9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -64,6 +66,10 @@ Global
 		{E419CEB7-A541-41D3-A8BB-35B7D4CE0901}.Debug|x86.Build.0 = Debug|x86
 		{E419CEB7-A541-41D3-A8BB-35B7D4CE0901}.Release|x86.ActiveCfg = Release|x86
 		{E419CEB7-A541-41D3-A8BB-35B7D4CE0901}.Release|x86.Build.0 = Release|x86
+		{CFD71B63-0051-44D4-AD3A-38E9A19625C9}.Debug|x86.ActiveCfg = Debug|x86
+		{CFD71B63-0051-44D4-AD3A-38E9A19625C9}.Debug|x86.Build.0 = Debug|x86
+		{CFD71B63-0051-44D4-AD3A-38E9A19625C9}.Release|x86.ActiveCfg = Release|x86
+		{CFD71B63-0051-44D4-AD3A-38E9A19625C9}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

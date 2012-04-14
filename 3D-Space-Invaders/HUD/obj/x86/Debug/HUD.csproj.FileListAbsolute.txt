@@ -1,0 +1,12 @@
+C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\HUD\bin\x86\Debug\HUD.dll
+C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\HUD\bin\x86\Debug\HUD.pdb
+C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\HUD\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\HUD\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\HUD\obj\x86\Debug\HUD.dll
+C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\HUD\obj\x86\Debug\HUD.pdb
+C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\HUD\bin\x86\Debug\Cannon.dll
+C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\HUD\bin\x86\Debug\Character.dll
+C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\HUD\bin\x86\Debug\Laser.dll
+C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\HUD\bin\x86\Debug\Cannon.pdb
+C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\HUD\bin\x86\Debug\Character.pdb
+C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\HUD\bin\x86\Debug\Laser.pdb

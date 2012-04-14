@@ -128,6 +128,10 @@
       <Project>{79836D56-EE1E-45CF-B790-F1385EA36C71}</Project>
       <Name>Game_Level</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\HUD\HUD.csproj">
+      <Project>{CFD71B63-0051-44D4-AD3A-38E9A19625C9}</Project>
+      <Name>HUD</Name>
+    </ProjectReference>
     <ProjectReference Include="..\3D-Space-InvadersContent\3D-Space-InvadersContent.contentproj">
       <Name>3D-Space-InvadersContent %28Content%29</Name>
       <XnaReferenceType>Content</XnaReferenceType>

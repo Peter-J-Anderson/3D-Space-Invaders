@@ -34,8 +34,12 @@ namespace Space_Invaders_Characters_Framework
             myModel = _myModel;
             Position = _position;
             myBoundingSphere = myModel.Meshes[0].BoundingSphere;
-            myBoundingSphere.Center.X += Position.X;
-            myBoundingSphere.Center.Y += Position.Y;
+            if (_character_Type == Character_Types.Bunker_Block)
+            myBoundingSphere.Radius = myBoundingSphere.Radius * 0.5f;
+            myBoundingSphere.Center.X = Position.X + myBoundingSphere.Radius;
+            myBoundingSphere.Center.Y = Position.Y + myBoundingSphere.Radius;
+             
+            
             if (Character_Type == Character_Types.Cannon)
             myBoundingSphere.Center.Z += Position.Z -1;
             else

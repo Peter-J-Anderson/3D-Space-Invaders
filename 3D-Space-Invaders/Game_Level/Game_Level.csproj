@@ -116,6 +116,10 @@
       <Project>{7B309CCD-C994-4F89-A502-63FA0195210C}</Project>
       <Name>Defence_Bunker</Name>
     </ProjectReference>
+    <ProjectReference Include="..\HUD\HUD.csproj">
+      <Project>{CFD71B63-0051-44D4-AD3A-38E9A19625C9}</Project>
+      <Name>HUD</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Laser\Laser.csproj">
       <Project>{04DE5FCC-D4E8-4BEF-95A5-79436274BEE6}</Project>
       <Name>Laser</Name>

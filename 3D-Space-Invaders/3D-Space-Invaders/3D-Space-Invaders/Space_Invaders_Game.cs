@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Game_Level;
+using HUD_Framework;
 
 namespace _3D_Space_Invaders
 {
@@ -21,13 +22,28 @@ namespace _3D_Space_Invaders
         SpriteBatch spriteBatch;
         float aspectRatio;
 
+        public enum game_states
+        {
+            Continue,
+            Failed,
+            Complete,
+            Pause,
+            Restart,
+            Exit
+        };
+
+        bool buttonRelease = true;
+        Texture2D pauseScreen;
+        game_states Level_Response = game_states.Continue;
+
         Level Game_Level;
         
         // These are the ships that will be attacking the laser Cannon
         List<Model> Model_List = new List<Model>();
 
         // 2D animation list 
-        List<Texture2D> Animation_List = new List<Texture2D>();
+        List<Texture2D> Texture_List = new List<Texture2D>();
+        List<SpriteFont> Font_list = new List<SpriteFont>();
 
         public Space_Invaders_Game()
         {
@@ -43,8 +59,14 @@ namespace _3D_Space_Invaders
         /// </summary>
         protected override void Initialize()
         {
+            SpriteFont _temp_Font = Content.Load<SpriteFont>("HUD_Font");
+            Font_list.Add(_temp_Font);
             // TODO: Add your initialization logic here
-            
+            graphics.PreferredBackBufferWidth = 900;
+            graphics.PreferredBackBufferHeight = 460;
+            graphics.ApplyChanges();
+
+
             base.Initialize();
         }
 
@@ -76,12 +98,14 @@ namespace _3D_Space_Invaders
             _temp_Model = Load_Model(@"Bunker\Bunker_Block"); // Used to represent the laser at the moment
             Model_List.Add(_temp_Model);
 
-            _temp_Texture2D = Content.Load<Texture2D>(@"2D Animation\Explosion");
-            Animation_List.Add(_temp_Texture2D);
+            pauseScreen = Content.Load<Texture2D>(@"2D Animation\PauseScreen");
 
+            _temp_Texture2D = Content.Load<Texture2D>(@"2D Animation\Background");
+            //_temp_Texture2D = Content.Load<Texture2D>(@"2D Animation\Explosion");
+            Texture_List.Add(_temp_Texture2D);
 
             // Create level here :)
-            Game_Level = new Level(1, 2, Model_List);//, Animation_List);
+            Game_Level = new Level(1, 2, Model_List, Texture_List, Font_list);//, Animation_List);
 
             
             aspectRatio = graphics.GraphicsDevice.Viewport.AspectRatio;
@@ -106,42 +130,82 @@ namespace _3D_Space_Invaders
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
-            //Player1 Controls
-            #region Player1 Controls
-            if (Keyboard.GetState().IsKeyDown(Keys.A))
-                Game_Level.Player_Move_Left(0);
-            if (Keyboard.GetState().IsKeyDown(Keys.D))
-                Game_Level.Player_Move_Right(0);
-            if (Keyboard.GetState().IsKeyDown(Keys.Space))
-                Game_Level.Player_Shoot(0);
-            #endregion
 
-            #region Player2 Controls
-            if (Keyboard.GetState().IsKeyDown(Keys.Left))
-                Game_Level.Player_Move_Left(1);
-            if (Keyboard.GetState().IsKeyDown(Keys.Right))
-                Game_Level.Player_Move_Right(1);
-            if (Keyboard.GetState().IsKeyDown(Keys.Enter))
-                Game_Level.Player_Shoot(1);
-            #endregion
+            if (Keyboard.GetState().IsKeyUp(Keys.Escape))
+                buttonRelease = true;
 
-            Game_Level.Update_Level(gameTime);
-            // TODO: Add your update logic here
+            if (Level_Response == game_states.Continue)
+            {
+                //Player1 Controls
+                #region Player1 Controls
+                if (Keyboard.GetState().IsKeyDown(Keys.A))
+                    Game_Level.Player_Move_Left(0);
+                if (Keyboard.GetState().IsKeyDown(Keys.D))
+                    Game_Level.Player_Move_Right(0);
+                if (Keyboard.GetState().IsKeyDown(Keys.Space))
+                    Game_Level.Player_Shoot(0);
+                #endregion
 
+                #region Player2 Controls
+                if (Keyboard.GetState().IsKeyDown(Keys.Left))
+                    Game_Level.Player_Move_Left(1);
+                if (Keyboard.GetState().IsKeyDown(Keys.Right))
+                    Game_Level.Player_Move_Right(1);
+                if (Keyboard.GetState().IsKeyDown(Keys.Enter))
+                    Game_Level.Player_Shoot(1);
+                #endregion
+
+                // Update level 
+                Level_Response = (game_states)Game_Level.Update_Level(gameTime);
+
+                if (Keyboard.GetState().IsKeyDown(Keys.Escape) & buttonRelease == true)
+                {
+                    buttonRelease = false;
+                    Level_Response = game_states.Pause; // testing 
+                }
+                
+                // TODO: Add your update logic here
+            }
+            if (Level_Response == game_states.Pause)
+            {
+
+                if (Keyboard.GetState().IsKeyDown(Keys.Escape) & buttonRelease == true)
+                {
+                    Level_Response = game_states.Continue; // testing 
+                    buttonRelease = false;
+                }
+                // Show level menu - here have choices 
+            }
+            if (Level_Response == game_states.Restart)
+            { // restart game with 2 players at the moment 
+                Game_Level = new Level(1, 2, Model_List, Texture_List, Font_list);
+                Level_Response = game_states.Continue;
+            }
+            if (Level_Response == game_states.Failed)
+            {
+                Window.Title = ("testing");
+                // tell player game is over 
+            }
+            if (Level_Response == game_states.Exit)
+            {
+                Exit();
+            }
             base.Update(gameTime);
         }
 
-        /// <summary>
-        /// This is called when the game should draw itself.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
 
             // TODO: Add your drawing code here
             spriteBatch.Begin();
-            Game_Level.Draw_Level(spriteBatch);
+                
+                Game_Level.Draw_Level(spriteBatch);
+                // draw failed screen 
+                if (Level_Response == game_states.Pause)
+                {
+                    spriteBatch.Draw(pauseScreen, new Vector2(300, 50), Color.White);
+                }
             spriteBatch.End();
             base.Draw(gameTime);
         }
@@ -161,7 +225,7 @@ namespace _3D_Space_Invaders
                         Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(45f), aspectRatio,
                         1.0f, 1000.0f);
 
-                        effect.View = Matrix.CreateLookAt(new Vector3(30f, 30f, 70f), new Vector3(30f, 30f, -70f),
+                        effect.View = Matrix.CreateLookAt(new Vector3(35f, 30f, 100f), new Vector3(35f, 30f, -70f),
                                         Vector3.Up);
 
                         effect.World = Matrix.CreateTranslation(0, 0, 0) *
