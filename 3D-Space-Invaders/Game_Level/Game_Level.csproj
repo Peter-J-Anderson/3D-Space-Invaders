@@ -100,6 +100,10 @@
       <Project>{449D7BD6-D23F-4262-B96E-7C3E408D22F9}</Project>
       <Name>Alien</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Animation_2D\Animation_2D.csproj">
+      <Project>{E419CEB7-A541-41D3-A8BB-35B7D4CE0901}</Project>
+      <Name>Animation_2D</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Cannon\Cannon.csproj">
       <Project>{C69830A7-E73C-450F-91A6-AA72A25D7808}</Project>
       <Name>Cannon</Name>

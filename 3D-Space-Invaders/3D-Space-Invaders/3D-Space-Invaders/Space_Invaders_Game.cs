@@ -19,13 +19,15 @@ namespace _3D_Space_Invaders
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-
         float aspectRatio;
 
         Level Game_Level;
+        
         // These are the ships that will be attacking the laser Cannon
         List<Model> Model_List = new List<Model>();
 
+        // 2D animation list 
+        List<Texture2D> Animation_List = new List<Texture2D>();
 
         public Space_Invaders_Game()
         {
@@ -52,30 +54,36 @@ namespace _3D_Space_Invaders
         /// </summary>
         protected override void LoadContent()
         {
-             Model temp;
+            Model _temp_Model;
+            Texture2D _temp_Texture2D;
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             // Load models into game ready for use
 
-            temp = Load_Model(@"Space_Invaders\Invader_10");
-            Model_List.Add(temp);
-            temp = Load_Model(@"Space_Invaders\Invader_20");
-            Model_List.Add(temp);
-            temp = Load_Model(@"Space_Invaders\Invader_30");
-            Model_List.Add(temp);
-            temp = Load_Model(@"Space_Invaders\Mystery");
-            Model_List.Add(temp);
-            temp = Load_Model(@"Laser_Cannon\Laser_Cannon");
-            Model_List.Add(temp);
-            temp = Load_Model(@"Bunker\Bunker_Block");
-            Model_List.Add(temp);
+            _temp_Model = Load_Model(@"Space_Invaders\Invader_10");
+            Model_List.Add(_temp_Model);
+            _temp_Model = Load_Model(@"Space_Invaders\Invader_20");
+            Model_List.Add(_temp_Model);
+            _temp_Model = Load_Model(@"Space_Invaders\Invader_30");
+            Model_List.Add(_temp_Model);
+            _temp_Model = Load_Model(@"Space_Invaders\Mystery");
+            Model_List.Add(_temp_Model);
+            _temp_Model = Load_Model(@"Laser_Cannon\Laser_Cannon");
+            Model_List.Add(_temp_Model);
+            _temp_Model = Load_Model(@"Bunker\Bunker_Block");
+            Model_List.Add(_temp_Model);
             // NOTE: CHANGE THE MODEL BEING LOADED IN FOR LASERS
-            temp = Load_Model(@"Bunker\Bunker_Block"); // Used to represent the laser at the moment
-            Model_List.Add(temp);
+            _temp_Model = Load_Model(@"Bunker\Bunker_Block"); // Used to represent the laser at the moment
+            Model_List.Add(_temp_Model);
+
+            _temp_Texture2D = Content.Load<Texture2D>(@"2D Animation\Explosion");
+            Animation_List.Add(_temp_Texture2D);
+
 
             // Create level here :)
-            Game_Level = new Level(1, 2, Model_List);
+            Game_Level = new Level(1, 2, Model_List);//, Animation_List);
 
+            
             aspectRatio = graphics.GraphicsDevice.Viewport.AspectRatio;
         }
 
@@ -132,7 +140,9 @@ namespace _3D_Space_Invaders
             GraphicsDevice.Clear(Color.Black);
 
             // TODO: Add your drawing code here
-            Game_Level.Draw_Level();
+            spriteBatch.Begin();
+            Game_Level.Draw_Level(spriteBatch);
+            spriteBatch.End();
             base.Draw(gameTime);
         }
 

@@ -11,7 +11,7 @@
       <Time>2012-04-10T05:51:08.3302877+01:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Laser_Cannon\Laser_Cannon_0.xml</Key>
-        <Value>2012-04-13T18:09:58.5011536+01:00</Value>
+        <Value>2012-04-14T07:05:43.114761+01:00</Value>
       </Dependency>
     </Item>
     <Item>
@@ -24,7 +24,7 @@
       <Time>2012-04-10T01:05:49.0981658+01:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Space_Invaders\Invader_10_0.xml</Key>
-        <Value>2012-04-13T18:09:58.6211542+01:00</Value>
+        <Value>2012-04-14T07:05:43.2387626+01:00</Value>
       </Dependency>
     </Item>
     <Item>
@@ -37,7 +37,7 @@
       <Time>2012-04-10T01:07:07.6137076+01:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Space_Invaders\Invader_20_0.xml</Key>
-        <Value>2012-04-13T18:09:58.7011547+01:00</Value>
+        <Value>2012-04-14T07:05:43.3323628+01:00</Value>
       </Dependency>
     </Item>
     <Item>
@@ -50,7 +50,7 @@
       <Time>2012-04-10T00:57:39.1477852+01:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Space_Invaders\Invader_30_0.xml</Key>
-        <Value>2012-04-13T18:09:58.7961554+01:00</Value>
+        <Value>2012-04-14T07:05:43.410363+01:00</Value>
       </Dependency>
     </Item>
     <Item>
@@ -63,7 +63,7 @@
       <Time>2012-04-02T19:46:27.7421361+01:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Space_Invaders\Mystery_0.xml</Key>
-        <Value>2012-04-13T18:09:58.9661575+01:00</Value>
+        <Value>2012-04-14T07:05:43.607364+01:00</Value>
       </Dependency>
     </Item>
     <Item>
@@ -76,7 +76,7 @@
       <Time>2012-04-13T18:05:35.3018721+01:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Bunker\Bunker_Block_0.xml</Key>
-        <Value>2012-04-13T18:09:59.0531586+01:00</Value>
+        <Value>2012-04-14T07:05:43.692365+01:00</Value>
       </Dependency>
     </Item>
     <Item>
@@ -89,7 +89,7 @@
       <Time>2012-04-10T05:20:20.5575381+01:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Laser_Cannon\Cannon_Part1_0.xml</Key>
-        <Value>2012-04-13T18:09:59.1241595+01:00</Value>
+        <Value>2012-04-14T07:05:43.7843662+01:00</Value>
       </Dependency>
     </Item>
     <Item>
@@ -102,7 +102,7 @@
       <Time>2012-04-10T05:19:42.2842741+01:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Laser_Cannon\Cannon_Part2_0.xml</Key>
-        <Value>2012-04-13T18:09:59.1991605+01:00</Value>
+        <Value>2012-04-14T07:05:43.8623672+01:00</Value>
       </Dependency>
     </Item>
     <Item>
@@ -115,8 +115,17 @@
       <Time>2012-04-10T05:19:16.0650932+01:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Laser_Cannon\Cannon_Part3_0.xml</Key>
-        <Value>2012-04-13T18:09:59.2741614+01:00</Value>
+        <Value>2012-04-14T07:05:43.9363681+01:00</Value>
       </Dependency>
+    </Item>
+    <Item>
+      <Source>2D Animation\Explosion.png</Source>
+      <Name>2D Animation\Explosion</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\bin\x86\Debug\Content\2D Animation\Explosion.xnb</Output>
+      <Time>2012-04-13T18:30:57.4915923+01:00</Time>
     </Item>
     <Item>
       <Source>Laser_Cannon\Laser_Cannon.x</Source>
@@ -219,7 +228,7 @@
       </Assembly>
       <Assembly>
         <Key>C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\Game_Level\bin\x86\Debug\Game_Level.dll</Key>
-        <Value>2012-04-13T18:09:57.5411443+01:00</Value>
+        <Value>2012-04-14T07:05:41.8377449+01:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Windows\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>

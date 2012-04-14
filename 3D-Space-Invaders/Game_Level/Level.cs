@@ -14,6 +14,7 @@ using Defence_Bunker_Framework;
 using Laser_Framework;
 using Alien_Framework;
 using Cannon_Framework;
+using Animation_2D_Framework;
 
 namespace Game_Level
 {
@@ -37,6 +38,10 @@ namespace Game_Level
 
         //List of models for this level
         List<Model> Model_List;
+        //List of animations
+        //List<Texture2D> Texture_List;
+        //List<Animation_2D> Animation_List = new List<Animation_2D>();
+
 
         // Holds the Cannon for this level
         List<Cannon> Player_List = new List<Cannon>();
@@ -74,11 +79,12 @@ namespace Game_Level
         private List<Defence_Bunker> Bunker_List = new List<Defence_Bunker>();
 
 
-        public Level(int _level, int _players, List<Model> _model_List)
+        public Level(int _level, int _players, List<Model> _model_List)//, List<Texture2D> _animation_List)
         {
             players = _players;
             level = _level;
             Model_List = _model_List;
+            //Texture_List = _animation_List;
             Initialise();
         }
 
@@ -254,6 +260,11 @@ namespace Game_Level
             {
                 Player_List[i].Update_Cooldown(gameTime);
             }
+
+            //for (int i = 0; i < Animation_List.Count; i++)
+            //{
+            //    Animation_List[i].Update_Animation(tempTime);
+            //}
         }
 
         private void Alien_Collision()
@@ -270,6 +281,12 @@ namespace Game_Level
                         {
                             if (Bunker_List[i].Bunker_Column[ii][jj].Check_Collision(Alien_Laser_List[j].myBoundingSphere))
                             {
+                                //Animation_List.Add(new Animation_2D(new Vector2(Bunker_List[i].Bunker_Column[ii][jj].Position.X,
+                                //                                                Bunker_List[i].Bunker_Column[ii][jj].Position.Y),
+                                //                                    4,
+                                //                                    4,
+                                //                                    Texture_List[0]));
+
                                 Bunker_List[i].Bunker_Column[ii].RemoveAt(jj);
                                 Alien_Laser_List.RemoveAt(j);
                                 return;
@@ -456,11 +473,13 @@ namespace Game_Level
         }
         #endregion
 
-        public void Draw_Level()
+        public void Draw_Level(SpriteBatch spriteBatch)
         {
             Draw_Lasers();
             Draw_Bunkers();
             Draw_Aliens();
+
+            //Draw_Animations(spriteBatch);
 
             // all players 
             for (int i = 0; i < Player_List.Count; i++)
@@ -509,6 +528,16 @@ namespace Game_Level
             Player_List[_player].Draw_Model();
         }
 
+        //private void Draw_Animations(SpriteBatch spriteBatch)
+        //{
+            //for (int i = 0; i < Animation_List.Count; i++)
+            //{
+            //  if (Animation_List[i].Draw(spriteBatch))
+            //    {
+            //        Animation_List.RemoveAt(i);
+            //    }
+            //}
+        //}
         #endregion
 
     }

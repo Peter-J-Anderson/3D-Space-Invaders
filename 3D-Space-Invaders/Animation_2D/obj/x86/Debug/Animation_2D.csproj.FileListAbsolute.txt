@@ -1,0 +1,6 @@
+C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\Animation_2D\bin\x86\Debug\Animation_2D.dll
+C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\Animation_2D\bin\x86\Debug\Animation_2D.pdb
+C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\Animation_2D\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\Animation_2D\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\Animation_2D\obj\x86\Debug\Animation_2D.dll
+C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\Animation_2D\obj\x86\Debug\Animation_2D.pdb

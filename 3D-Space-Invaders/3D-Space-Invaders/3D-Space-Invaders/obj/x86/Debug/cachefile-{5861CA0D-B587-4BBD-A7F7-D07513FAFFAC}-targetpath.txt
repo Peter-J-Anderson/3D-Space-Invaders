@@ -7,3 +7,4 @@ Content\Bunker\Bunker_Block.xnb
 Content\Laser_Cannon\Cannon_Part1.xnb
 Content\Laser_Cannon\Cannon_Part2.xnb
 Content\Laser_Cannon\Cannon_Part3.xnb
+Content\2D Animation\Explosion.xnb
