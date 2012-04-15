@@ -233,6 +233,20 @@ namespace _3D_Space_Invaders
 
             #endregion 
 
+            #region Close Game
+   
+            if (Keyboard.GetState().IsKeyDown(Keys.Escape) & buttonRelease == true)
+            {
+                Level_Response = game_states.Exit;
+                buttonRelease = false;
+            }
+            if (Level_Response == game_states.Exit)
+            {
+                Exit();
+            }
+
+            #endregion
+
 
 
             if (Level_Response == game_states.Continue)
@@ -269,17 +283,12 @@ namespace _3D_Space_Invaders
                     Level_Response = (game_states)Game_Level.Update_Level(gameTime);
                     // TODO: Add your update logic here
                 }
+
                 if (Keyboard.GetState().IsKeyDown(Keys.R) & buttonRelease == true)
                 {
                     Level_Response = game_states.Restart; // testing 
                     buttonRelease = false;
                 }
-                
-                if (Level_Response == game_states.Exit)
-                {
-                    Exit();
-                }
-
                 #endregion 
 
             }
