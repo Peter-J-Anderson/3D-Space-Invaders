@@ -10,4 +10,7 @@ Content\Laser_Cannon\Cannon_Part3.xnb
 Content\2D Animation\Explosion.xnb
 Content\2D Animation\Background.xnb
 Content\2D Animation\PauseScreen.xnb
+Content\2D Animation\Game_Over.xnb
+Content\2D Animation\StartupScreen.xnb
+Content\2D Animation\PlayerSelect.xnb
 Content\HUD_Font.xnb

@@ -235,19 +235,21 @@ namespace Game_Level
             Update_Alien_Position();
             Update_Alien_Shooting();
             Reset_Flags();
-
             
+            if (myLevel_State == Level_State.Failed)
+                return (int)myLevel_State;
 
-                for (int _value = 0; _value < Player_List.Count; _value++)
+
+            for (int _value = 0; _value < Player_List.Count; _value++)
+            {
+                myLevel_State = Level_State.Failed;
+                if (Player_List[_value].Lives > 0)
                 {
-                    myLevel_State = Level_State.Failed;
-                    if (Player_List[_value].Lives > 0)
-                    {
-                        myLevel_State = Level_State.Continue;
-                        return (int)myLevel_State;
-                    }
+                    myLevel_State = Level_State.Continue;
+                    return (int)myLevel_State;
                 }
-            
+            }
+
 
             if (aliens_Killed == 55)
             {
@@ -389,8 +391,8 @@ namespace Game_Level
                                 {
                                     Player_List[kk].Points += Alien_Column[i][j].Points;
                                 }
-                            }                          
-                            
+                            }
+
                             Alien_Column[i].RemoveAt(j);
 
                             aliens_Killed++;
@@ -408,13 +410,13 @@ namespace Game_Level
                 }
 
 
-            for (int i = 0; i < Mystery_Ship_List.Count; i++ )
+            for (int i = 0; i < Mystery_Ship_List.Count; i++)
                 for (int k = 0; k < Player_Laser_List.Count; k++)
                 {
                     if (Player_Laser_List[k].myBoundingSphere.Intersects(Mystery_Ship_List[i].myBoundingSphere))
                     {
 
- 
+
 
                         for (int kk = 0; kk < Player_List.Count; kk++)
                         {
@@ -533,15 +535,27 @@ namespace Game_Level
             for (int i = 0; i < Alien_Column.Count; i++)
             {
                 for (int j = 0; j < Alien_Column[i].Count; j++)
+                {
+                    if (Alien_Column[i][j].Position.Y < (int)Game_Boundries.Bottom + 15)
+                    {
+                         myLevel_State = Level_State.Failed;
+                        return;
+                    }
                     Alien_Column[i][j].update_Positon(new Vector3(alien_Speed,
                                                              yValue,
                                                              0));
+                    
+
+                }
             }
-            
+
+
         }
 
         private void Update_Alien_Shooting()
         {
+            if (myLevel_State == Level_State.Failed)
+                return;
             Random rand1 = new Random((int)DateTime.Now.Ticks & 0x0000FFFF);
             int shootingAlien = rand1.Next(0, (Alien_Column.Count));
 
@@ -568,8 +582,8 @@ namespace Game_Level
             Draw_Aliens();
 
             Draw_HUD(spriteBatch);
-            
-            
+
+
             // all players 
             for (int i = 0; i < Player_List.Count; i++)
                 if (Player_List[i].Lives > 0)
@@ -584,8 +598,8 @@ namespace Game_Level
             myHUD.Draw_HUD(spriteBatch);    // draw background 
             for (int i = 0; i < Player_List.Count; i++)
             {
-                spriteBatch.DrawString(HUD_Font_List[0], "Player" + (i+1) + " Stats" , new Vector2(5, 10 + (100 * i)), Color.White);
-                spriteBatch.DrawString(HUD_Font_List[0],"Score:" + Player_List[i].Points, new Vector2(5, 30 + (100 * i)), Color.White);
+                spriteBatch.DrawString(HUD_Font_List[0], "Player" + (i + 1) + " Stats", new Vector2(5, 10 + (100 * i)), Color.White);
+                spriteBatch.DrawString(HUD_Font_List[0], "Score:" + Player_List[i].Points, new Vector2(5, 30 + (100 * i)), Color.White);
                 spriteBatch.DrawString(HUD_Font_List[0], "Lives:" + Player_List[i].Lives, new Vector2(5, 50 + (100 * i)), Color.White);
             }
 

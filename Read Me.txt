@@ -1,0 +1,23 @@
+Controls 
+
+p = pause
+esc = quit
+r = restart game with current controller settings
+
+player1 controls
+a = move left
+d = move right 
+spacebar = fire
+
+
+player2 controls 
+left = move left
+right = move right 
+enter = fire 
+
+
+gamepad controls 
+left = move left 
+right = move right 
+a = fire 
+pause = pause 

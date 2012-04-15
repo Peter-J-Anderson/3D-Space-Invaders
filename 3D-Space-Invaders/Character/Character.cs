@@ -41,7 +41,7 @@ namespace Space_Invaders_Characters_Framework
              
             
             if (Character_Type == Character_Types.Cannon)
-            myBoundingSphere.Center.Z += Position.Z -1;
+            myBoundingSphere.Center.Z += Position.Z;
             else
                 myBoundingSphere.Center.Z += Position.Z;
             

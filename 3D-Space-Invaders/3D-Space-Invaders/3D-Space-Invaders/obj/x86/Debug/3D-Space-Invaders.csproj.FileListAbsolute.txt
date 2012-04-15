@@ -31,3 +31,6 @@ C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Inv
 C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\bin\x86\Debug\HUD.pdb
 C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\bin\x86\Debug\Content\HUD_Font.xnb
 C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\bin\x86\Debug\Content\2D Animation\PauseScreen.xnb
+C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\bin\x86\Debug\Content\2D Animation\Game_Over.xnb
+C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\bin\x86\Debug\Content\2D Animation\StartupScreen.xnb
+C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\bin\x86\Debug\Content\2D Animation\PlayerSelect.xnb
