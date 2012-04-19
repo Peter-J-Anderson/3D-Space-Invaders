@@ -3,3 +3,10 @@ http://www.google.co.uk/imgres?um=1&hl=en&sa=N&biw=1304&bih=664&tbm=isch&tbnid=-
 
 inspiration - space invaders game 
 http://www.youtube.com/watch?v=437Ld_rKM2s
+
+sounds 
+http://create.msdn.com/en-US/education/catalog/sample/spacewar (some sound effects)
+http://www.nosoapradio.us/ - backing music (main game)
+http://soundbible.com/1087-Laser.html (laser shooting)
+http://soundbible.com/7-Anti-Aircraft-Gun.html (cannon getting hit)
+http://www.soundjay.com/button-sounds-1.html (mysteryship/menu transition

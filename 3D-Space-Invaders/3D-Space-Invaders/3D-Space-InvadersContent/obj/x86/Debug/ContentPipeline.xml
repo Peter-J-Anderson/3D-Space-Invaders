@@ -11,7 +11,7 @@
       <Time>2012-04-10T05:51:08.3302877+01:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Laser_Cannon\Laser_Cannon_0.xml</Key>
-        <Value>2012-04-15T20:09:18.880684+01:00</Value>
+        <Value>2012-04-19T13:01:19.9535007+01:00</Value>
       </Dependency>
     </Item>
     <Item>
@@ -24,7 +24,7 @@
       <Time>2012-04-10T01:05:49.0981658+01:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Space_Invaders\Invader_10_0.xml</Key>
-        <Value>2012-04-15T20:09:19.0076856+01:00</Value>
+        <Value>2012-04-19T13:01:20.1845025+01:00</Value>
       </Dependency>
     </Item>
     <Item>
@@ -37,7 +37,7 @@
       <Time>2012-04-10T01:07:07.6137076+01:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Space_Invaders\Invader_20_0.xml</Key>
-        <Value>2012-04-15T20:09:19.0896866+01:00</Value>
+        <Value>2012-04-19T13:01:20.2735032+01:00</Value>
       </Dependency>
     </Item>
     <Item>
@@ -50,7 +50,7 @@
       <Time>2012-04-10T00:57:39.1477852+01:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Space_Invaders\Invader_30_0.xml</Key>
-        <Value>2012-04-15T20:09:19.1756877+01:00</Value>
+        <Value>2012-04-19T13:01:20.3585039+01:00</Value>
       </Dependency>
     </Item>
     <Item>
@@ -63,7 +63,7 @@
       <Time>2012-04-02T19:46:27.7421361+01:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Space_Invaders\Mystery_0.xml</Key>
-        <Value>2012-04-15T20:09:19.3396897+01:00</Value>
+        <Value>2012-04-19T13:01:20.5345053+01:00</Value>
       </Dependency>
     </Item>
     <Item>
@@ -76,7 +76,7 @@
       <Time>2012-04-13T18:05:35.3018721+01:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Bunker\Bunker_Block_0.xml</Key>
-        <Value>2012-04-15T20:09:19.4336909+01:00</Value>
+        <Value>2012-04-19T13:01:20.6135059+01:00</Value>
       </Dependency>
     </Item>
     <Item>
@@ -89,7 +89,7 @@
       <Time>2012-04-10T05:20:20.5575381+01:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Laser_Cannon\Cannon_Part1_0.xml</Key>
-        <Value>2012-04-15T20:09:19.5136919+01:00</Value>
+        <Value>2012-04-19T13:01:20.7345068+01:00</Value>
       </Dependency>
     </Item>
     <Item>
@@ -102,7 +102,7 @@
       <Time>2012-04-10T05:19:42.2842741+01:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Laser_Cannon\Cannon_Part2_0.xml</Key>
-        <Value>2012-04-15T20:09:19.6036931+01:00</Value>
+        <Value>2012-04-19T13:01:20.8745079+01:00</Value>
       </Dependency>
     </Item>
     <Item>
@@ -115,7 +115,7 @@
       <Time>2012-04-10T05:19:16.0650932+01:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Laser_Cannon\Cannon_Part3_0.xml</Key>
-        <Value>2012-04-15T20:09:19.6896941+01:00</Value>
+        <Value>2012-04-19T13:01:20.9905088+01:00</Value>
       </Dependency>
     </Item>
     <Item>
@@ -173,6 +173,15 @@
       <Time>2012-04-15T19:14:10.3727388+01:00</Time>
     </Item>
     <Item>
+      <Source>2D Animation\Win Screen.png</Source>
+      <Name>2D Animation\Win Screen</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\bin\x86\Debug\Content\2D Animation\Win Screen.xnb</Output>
+      <Time>2012-04-17T22:05:34.9119063+01:00</Time>
+    </Item>
+    <Item>
       <Source>HUD_Font.spritefont</Source>
       <Name>HUD_Font</Name>
       <Importer>FontDescriptionImporter</Importer>
@@ -180,6 +189,62 @@
       <Options>None</Options>
       <Output>C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\bin\x86\Debug\Content\HUD_Font.xnb</Output>
       <Time>2012-04-14T19:36:59.4114191+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Sound\Game_Loop.mp3</Source>
+      <Name>Sound\Game_Loop</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\bin\x86\Debug\Content\Sound\Game_Loop.xnb</Output>
+      <Extra>C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\bin\x86\Debug\Content\Sound\Game_Loop.wma</Extra>
+      <Time>2012-04-18T07:53:40.1960908+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Sound\Win.mp3</Source>
+      <Name>Sound\Win</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\bin\x86\Debug\Content\Sound\Win.xnb</Output>
+      <Extra>C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\bin\x86\Debug\Content\Sound\Win.wma</Extra>
+      <Time>2012-04-16T18:10:36.6514998+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Sound\MenuTransition.wav</Source>
+      <Name>Sound\MenuTransition</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\bin\x86\Debug\Content\Sound\MenuTransition.xnb</Output>
+      <Time>2012-04-19T12:14:29.6045802+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Sound\CannonHit.wav</Source>
+      <Name>Sound\CannonHit</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\bin\x86\Debug\Content\Sound\CannonHit.xnb</Output>
+      <Time>2012-04-19T12:27:02.0024488+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Sound\Laser.wav</Source>
+      <Name>Sound\Laser</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\bin\x86\Debug\Content\Sound\Laser.xnb</Output>
+      <Time>2012-04-19T12:27:49.8178218+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Sound\MysteryShip.wav</Source>
+      <Name>Sound\MysteryShip</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\3D-Space-Invaders\bin\x86\Debug\Content\Sound\MysteryShip.xnb</Output>
+      <Time>2012-04-19T12:28:16.772032+01:00</Time>
     </Item>
     <Item>
       <Source>Laser_Cannon\Laser_Cannon.x</Source>
@@ -282,7 +347,7 @@
       </Assembly>
       <Assembly>
         <Key>C:\Users\Pete\3D-Space-Invaders\3D-Space-Invaders\Game_Level\bin\x86\Debug\Game_Level.dll</Key>
-        <Value>2012-04-15T20:09:17.8328712+01:00</Value>
+        <Value>2012-04-19T13:01:18.7744915+01:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Windows\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>

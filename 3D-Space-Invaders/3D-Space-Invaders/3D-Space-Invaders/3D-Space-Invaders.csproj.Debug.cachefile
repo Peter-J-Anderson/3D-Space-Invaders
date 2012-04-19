@@ -13,4 +13,13 @@ Content\2D Animation\PauseScreen.xnb
 Content\2D Animation\Game_Over.xnb
 Content\2D Animation\StartupScreen.xnb
 Content\2D Animation\PlayerSelect.xnb
+Content\2D Animation\Win Screen.xnb
 Content\HUD_Font.xnb
+Content\Sound\Game_Loop.xnb
+Content\Sound\Win.xnb
+Content\Sound\MenuTransition.xnb
+Content\Sound\CannonHit.xnb
+Content\Sound\Laser.xnb
+Content\Sound\MysteryShip.xnb
+Content\Sound\Game_Loop.wma
+Content\Sound\Win.wma

@@ -40,8 +40,14 @@ namespace _3D_Space_Invaders
         Texture2D PlayerSelect;
         Texture2D pauseScreen;
         Texture2D gameOver;
+        Texture2D WinScreen;
         int numberOfPlayers = 2;
 
+        bool endsongflag = true; 
+
+        // Sound 
+        Song Menu_Song;
+        Song Win_Song;
         game_states Level_Response = game_states.Startup;
 
         Level Game_Level;
@@ -52,6 +58,9 @@ namespace _3D_Space_Invaders
         // 2D animation list 
         List<Texture2D> Texture_List = new List<Texture2D>();
         List<SpriteFont> Font_list = new List<SpriteFont>();
+
+        // Sound effects 
+        List<SoundEffect> SoundEffect_List = new List<SoundEffect>();
 
         public Space_Invaders_Game()
         {
@@ -110,8 +119,20 @@ namespace _3D_Space_Invaders
             PlayerSelect = Content.Load<Texture2D>(@"2D Animation\PlayerSelect");
             pauseScreen = Content.Load<Texture2D>(@"2D Animation\PauseScreen");
             gameOver = Content.Load<Texture2D>(@"2D Animation\Game_Over");
+            WinScreen = Content.Load<Texture2D>(@"2D Animation\Win Screen"); 
 
+            
+            SoundEffect_List.Add (Content.Load<SoundEffect>(@"Sound\MenuTransition"));
+            SoundEffect_List.Add(Content.Load<SoundEffect>(@"Sound\Laser"));
+            SoundEffect_List.Add(Content.Load<SoundEffect>(@"Sound\CannonHit"));
+            SoundEffect_List.Add(Content.Load<SoundEffect>(@"Sound\MysteryShip"));
 
+            Win_Song = Content.Load<Song>(@"Sound\Win");
+            Menu_Song = Content.Load<Song>(@"Sound\Game_Loop");
+            MediaPlayer.Play(Menu_Song);
+            MediaPlayer.Pause();
+            MediaPlayer.IsRepeating = true;
+            MediaPlayer.Volume = 0.3f;
             _temp_Texture2D = Content.Load<Texture2D>(@"2D Animation\Background");
             //_temp_Texture2D = Content.Load<Texture2D>(@"2D Animation\Explosion");
             Texture_List.Add(_temp_Texture2D);
@@ -150,43 +171,47 @@ namespace _3D_Space_Invaders
                 {
                     myControlType = ControlType._Keyboard;
                     Level_Response = game_states.PlayerSelect;
+                    SoundEffect_List[0].Play();
                 }
                 if (Keyboard.GetState().IsKeyDown(Keys.D1))
                 {
                     myControlType = ControlType._Gamepad;
                     Level_Response = game_states.PlayerSelect;
+                    SoundEffect_List[0].Play();
                 }
                 if (Keyboard.GetState().IsKeyDown(Keys.D2))
                 {
                     myControlType = ControlType._Kinect;
                     Level_Response = game_states.PlayerSelect;
+                    SoundEffect_List[0].Play();
                 }
 
             }
             #endregion
 
             #region player select
-
-            if (Keyboard.GetState().IsKeyDown(Keys.D1))
+            if (Level_Response == game_states.PlayerSelect)
+            {
+                if (Keyboard.GetState().IsKeyDown(Keys.D1))
                 {
                     numberOfPlayers = 1;
                     Level_Response = game_states.Continue;
-
+                    SoundEffect_List[0].Play();
                     // Create level here :)
-                    Game_Level = new Level(1, numberOfPlayers, Model_List, Texture_List, Font_list);//, Animation_List);
+                    Game_Level = new Level(1, numberOfPlayers, Model_List, Texture_List, Font_list, SoundEffect_List);//, Animation_List);
 
                 }
                 if (Keyboard.GetState().IsKeyDown(Keys.D2))
                 {
                     numberOfPlayers = 2;
                     Level_Response = game_states.Continue;
-
+                    SoundEffect_List[0].Play();
                     // Create level here :)
-                    Game_Level = new Level(1, numberOfPlayers, Model_List, Texture_List, Font_list);//, Animation_List);
+                    Game_Level = new Level(1, numberOfPlayers, Model_List, Texture_List, Font_list, SoundEffect_List);//, Animation_List);
 
                 }
 
-
+            }
             #endregion
 
             
@@ -198,6 +223,8 @@ namespace _3D_Space_Invaders
             if (Level_Response == game_states.Continue)
             if (Keyboard.GetState().IsKeyDown(Keys.P) & buttonRelease == true)
             {   // to pause game
+                SoundEffect_List[0].Play();
+                MediaPlayer.Pause();
                 buttonRelease = false;
                 Level_Response = game_states.Pause; // testing 
             }
@@ -206,6 +233,8 @@ namespace _3D_Space_Invaders
             {
                 if (Keyboard.GetState().IsKeyDown(Keys.P) & buttonRelease == true)
                 { // unpause
+                    SoundEffect_List[0].Play();
+                    MediaPlayer.Resume();
                     Level_Response = game_states.Continue; // testing 
                     buttonRelease = false;
                 }
@@ -216,8 +245,9 @@ namespace _3D_Space_Invaders
             #region Restarting Game
 
             if (Level_Response == game_states.Restart)
-            { // restart game with 2 players at the moment 
-                Game_Level = new Level(1, numberOfPlayers, Model_List, Texture_List, Font_list);
+            { // restart game with 2 players at the moment
+                SoundEffect_List[0].Play();
+                Game_Level = new Level(1, numberOfPlayers, Model_List, Texture_List, Font_list, SoundEffect_List);
                 Level_Response = game_states.Continue;
             }
 
@@ -233,8 +263,9 @@ namespace _3D_Space_Invaders
 
             #endregion 
 
+            
             #region Close Game
-   
+
             if (Keyboard.GetState().IsKeyDown(Keys.Escape) & buttonRelease == true)
             {
                 Level_Response = game_states.Exit;
@@ -242,15 +273,36 @@ namespace _3D_Space_Invaders
             }
             if (Level_Response == game_states.Exit)
             {
+                SoundEffect_List[0].Play();
                 Exit();
             }
 
             #endregion
 
+            #region Game Won
+
+            if (Level_Response == game_states.Complete)
+            {
+                // do somethign if needed - maybe play a sound 
+                //MediaPlayer.Stop();
+                if (endsongflag == true)
+                {
+                    MediaPlayer.Play(Win_Song);
+                    //MediaPlayer.Resume();
+                    endsongflag = false;
+                }
+
+            }
+
+            #endregion 
+
 
 
             if (Level_Response == game_states.Continue)
             {
+                MediaPlayer.Resume();
+
+
                 // if user decides to use the keyboard
                 // max of 2 players for keyboard
                 #region Keyboard Controlled
@@ -282,6 +334,7 @@ namespace _3D_Space_Invaders
                     // Update level 
                     Level_Response = (game_states)Game_Level.Update_Level(gameTime);
                     // TODO: Add your update logic here
+
                 }
 
                 if (Keyboard.GetState().IsKeyDown(Keys.R) & buttonRelease == true)
@@ -337,7 +390,14 @@ namespace _3D_Space_Invaders
                 // draw game over screen 
             }
             #endregion
-            
+
+            #region You Win
+            if (Level_Response == game_states.Complete)
+                spriteBatch.Draw(WinScreen, new Vector2(0, 0), Color.White);
+
+            #endregion
+
+
             spriteBatch.End();
             base.Draw(gameTime);
         }

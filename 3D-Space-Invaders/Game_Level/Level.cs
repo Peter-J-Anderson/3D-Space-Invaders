@@ -56,6 +56,7 @@ namespace Game_Level
         List<Model> Model_List;
 
         List<Texture2D> Texture_List;
+        List<SoundEffect> SoundEffect_List = new List<SoundEffect>();
 
         List<SpriteFont> HUD_Font_List;
         Alien Mystery_Ship;
@@ -97,7 +98,7 @@ namespace Game_Level
         private List<Defence_Bunker> Bunker_List = new List<Defence_Bunker>();
 
 
-        public Level(int _level, int _players, List<Model> _model_List, List<Texture2D> _texture_List, List<SpriteFont> _font_List)
+        public Level(int _level, int _players, List<Model> _model_List, List<Texture2D> _texture_List, List<SpriteFont> _font_List, List<SoundEffect> _soundEffect_List)
         {
             players = _players;
             level = _level;
@@ -105,6 +106,7 @@ namespace Game_Level
             Texture_List = _texture_List;
             myHUD = new HUD(Texture_List[0]);   // hud background
             HUD_Font_List = _font_List;
+            SoundEffect_List = _soundEffect_List;
             Initialise();
         }
 
@@ -221,7 +223,7 @@ namespace Game_Level
         private void Update_Alien_Fire_Rate()
         {
             // setting global fire rate
-            alien_Fire_Rate = (55 - aliens_Killed + level) * 10;
+            alien_Fire_Rate = (55 + level) * 10;// aliens_Killed + level) * 10;
         }
 
         //game update functions
@@ -246,7 +248,8 @@ namespace Game_Level
                 if (Player_List[_value].Lives > 0)
                 {
                     myLevel_State = Level_State.Continue;
-                    return (int)myLevel_State;
+                    break;
+                    //return (int)myLevel_State;
                 }
             }
 
@@ -254,6 +257,7 @@ namespace Game_Level
             if (aliens_Killed == 55)
             {
                 myLevel_State = Level_State.Complete;
+                //return (int)myLevel_State;
             }
 
             /*  int values 
@@ -339,6 +343,7 @@ namespace Game_Level
                     {
                         if (Alien_Laser_List[j].myBoundingSphere.Intersects(Player_List[i].myBoundingSphere))
                         {
+                            SoundEffect_List[2].Play();
                             Player_List[i].Lives--;
                             Alien_Laser_List.RemoveAt(j);
                             for (int _value = 0; _value < Player_List.Count; _value++)
@@ -411,27 +416,37 @@ namespace Game_Level
 
 
             for (int i = 0; i < Mystery_Ship_List.Count; i++)
+            {
+                // NOTE: fix this so it is a song no a effect - loop it
+                SoundEffect_List[3].Play();
+
+                if (Mystery_Ship_List[i].Position.X > (int)Game_Boundries.RightHandSide + 3)
+                {
+                    Mystery_Ship_List.RemoveAt(i);
+                    break;
+                }
                 for (int k = 0; k < Player_Laser_List.Count; k++)
                 {
                     if (Player_Laser_List[k].myBoundingSphere.Intersects(Mystery_Ship_List[i].myBoundingSphere))
                     {
 
 
-
                         for (int kk = 0; kk < Player_List.Count; kk++)
                         {
+                            
                             if (Player_Laser_List[k].Owner == Player_List[kk].myName)
                             {
                                 Player_List[kk].Points += 100;
                             }
                         }
+                        SoundEffect_List[2].Play();
                         Mystery_Ship_List.RemoveAt(i);
 
                         Player_Laser_List.RemoveAt(k);
                         return;
                     }
                 }
-
+            }
             #endregion
 
             #region Player Cannon Lasers with Bunkers
@@ -455,7 +470,11 @@ namespace Game_Level
         public void Player_Shoot(int _player)
         {
             if (Player_List[_player].Lives > 0)
+            {
+                if (Player_List[_player].ShotFlag == false) SoundEffect_List[1].Play();   
                 Player_Laser_List.Add(Player_List[_player].Laser(Model_List[(int)Space_Invader_Char.Character_Types.Laser], "Player" + _player));
+                 
+            }
         }
 
         public void Player_Move_Left(int _player)
@@ -516,7 +535,7 @@ namespace Game_Level
             else if (alien_Speed > 0)
                 alien_Speed = (((float)level + (float)aliens_Killed) / interval);
 
-
+            if (Alien_Column.Count > 0)
             if (Alien_Column[Alien_Column.Count - 1][0].Position.X > (float)Game_Boundries.RightHandSide)
             {
                 alien_Speed = -(Math.Abs(((float)level + (float)aliens_Killed) / interval));
