@@ -62,9 +62,29 @@ namespace Cannon_Framework
             ShotFlag = false;
         }
 
+        public void set_Position(int _value)
+        {
+            Position = new Vector3(_value, Position.Y,Position.Z);
+
+            myBoundingSphere.Center.X = Position.X;
+            myBoundingSphere.Center.Y = Position.Y;
+            myBoundingSphere.Center.Z = Position.Z;
+        }
+
         public void update_Positon(Movement_Direction _direction)
         {
             update_Positon(Velocity * (int)_direction);
+        }
+
+        // used for kinect movement
+        public void update_Positon(int _handlocation)
+        {
+            Position = new Vector3(_handlocation,Position.Y,0);
+
+            myBoundingSphere.Center.X = Position.X;
+            myBoundingSphere.Center.Y = Position.Y;
+            myBoundingSphere.Center.Z = Position.Z;
+
         }
 
         public void Update_Cooldown(GameTime gameTime)

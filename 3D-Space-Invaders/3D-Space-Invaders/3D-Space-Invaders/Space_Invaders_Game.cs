@@ -8,19 +8,27 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using Microsoft.Kinect;
+
 using Game_Level;
 using HUD_Framework;
 
 namespace _3D_Space_Invaders
 {
-    /// <summary>
-    /// This is the main type for your game
-    /// </summary>
+    
     public class Space_Invaders_Game : Microsoft.Xna.Framework.Game
     {
+        Vector2 handvalue = new Vector2();
+
+        KinectSensor My_Kinect_Sensor;
+
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         float aspectRatio;
+
+        string connectedStatus = "";
+        Texture2D KinectImage;
+        bool kinectShoot = false;
 
         public enum game_states
         {
@@ -68,14 +76,13 @@ namespace _3D_Space_Invaders
             Content.RootDirectory = "Content";
         }
 
-        /// <summary>
-        /// Allows the game to perform any initialization it needs to before starting to run.
-        /// This is where it can query for any required services and load any non-graphic
-        /// related content.  Calling base.Initialize will enumerate through any components
-        /// and initialize them as well.
-        /// </summary>
         protected override void Initialize()
         {
+            // Setup kinect 
+            // what function to call
+            KinectSensor.KinectSensors.StatusChanged += new EventHandler<StatusChangedEventArgs>(KinectSensors_StatusChanged);
+            DiscoverKinectSensor();
+
             SpriteFont _temp_Font = Content.Load<SpriteFont>("HUD_Font");
             Font_list.Add(_temp_Font);
             // TODO: Add your initialization logic here
@@ -87,10 +94,96 @@ namespace _3D_Space_Invaders
             base.Initialize();
         }
 
-        /// <summary>
-        /// LoadContent will be called once per game and is the place to load
-        /// all of your content.
-        /// </summary>
+        private void DiscoverKinectSensor()
+        { 
+            foreach (KinectSensor sensor in KinectSensor.KinectSensors)
+            {
+                if (sensor.Status == KinectStatus.Connected)
+                {
+                    My_Kinect_Sensor = sensor;
+                    break; 
+                }
+            }
+            if (My_Kinect_Sensor == null)
+            {
+                connectedStatus = "Found none Kinect Sensors connect to USB";
+                return;
+            }
+            
+            // Init the kinect 
+            if (My_Kinect_Sensor.Status == KinectStatus.Connected)
+            {
+                InitialiseKinect();
+            }
+        }
+
+        private void KinectSensors_StatusChanged(object sender, StatusChangedEventArgs e)
+        {
+            if (this.My_Kinect_Sensor == e.Sensor)
+            {
+                if (e.Status == KinectStatus.Disconnected ||
+                    e.Status == KinectStatus.NotPowered)
+                {
+                    this.My_Kinect_Sensor = null;
+                    this.DiscoverKinectSensor();
+                }
+            }
+        }
+
+        private bool InitialiseKinect()
+        {
+         
+            My_Kinect_Sensor.SkeletonStream.Enable();
+            My_Kinect_Sensor.SkeletonFrameReady += new
+                EventHandler<SkeletonFrameReadyEventArgs>(kinectSensor_SkeletonFrameReady);
+
+            try
+            {
+                My_Kinect_Sensor.Start();
+            }
+            catch
+            {
+                connectedStatus = "Cannont start Kinect!";
+                return false;
+            }
+            return true; 
+        }
+
+        private void kinectSensor_SkeletonFrameReady(object sender, SkeletonFrameReadyEventArgs e)
+        {
+            using (SkeletonFrame skeleton_Frame = e.OpenSkeletonFrame())
+            {
+                if (skeleton_Frame != null)
+                {
+                    Skeleton[] skeletonData = new Skeleton[skeleton_Frame.SkeletonArrayLength];
+
+                    skeleton_Frame.CopySkeletonDataTo(skeletonData);
+
+                    Skeleton playerSkeleton = (from s in skeletonData
+                                               where s.TrackingState == SkeletonTrackingState.Tracked
+                                               select s).FirstOrDefault();
+                    if (playerSkeleton != null)
+                    {
+                        handvalue = new Vector2(0.5f * ((playerSkeleton.Joints[JointType.Spine].Position.X)),// - ((playerSkeleton.Joints[JointType.Spine].Position.X)) * 0.5f),
+                                                   playerSkeleton.Joints[JointType.HandRight].Position.Z * 0);
+
+                        if (playerSkeleton.Joints[JointType.HandLeft].Position.Y > playerSkeleton.Joints[JointType.Head].Position.Y)
+                            kinectShoot = true;
+                        else
+                            kinectShoot = false;
+                    }
+                    
+
+                    //keep it positive
+                    handvalue.X += 0.49f;
+                    handvalue.X *= 100;
+                    handvalue.X -= 10;
+                    Window.Title = "X: " + handvalue.X + " Y: " + handvalue.Y;
+
+                            }
+            }
+        }
+
         protected override void LoadContent()
         {
             Model _temp_Model;
@@ -144,20 +237,11 @@ namespace _3D_Space_Invaders
             aspectRatio = graphics.GraphicsDevice.Viewport.AspectRatio;
         }
 
-        /// <summary>
-        /// UnloadContent will be called once per game and is the place to unload
-        /// all content.
-        /// </summary>
         protected override void UnloadContent()
         {
             // TODO: Unload any non ContentManager content here
         }
 
-        /// <summary>
-        /// Allows the game to run logic such as updating the world,
-        /// checking for collisions, gathering input, and playing audio.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
             // Allows the game to exit
@@ -169,18 +253,21 @@ namespace _3D_Space_Invaders
             {
                 if (Keyboard.GetState().IsKeyDown(Keys.D0))
                 {
+                    buttonRelease = false;
                     myControlType = ControlType._Keyboard;
                     Level_Response = game_states.PlayerSelect;
                     SoundEffect_List[0].Play();
                 }
                 if (Keyboard.GetState().IsKeyDown(Keys.D1))
                 {
+                    buttonRelease = false;
                     myControlType = ControlType._Gamepad;
                     Level_Response = game_states.PlayerSelect;
                     SoundEffect_List[0].Play();
                 }
                 if (Keyboard.GetState().IsKeyDown(Keys.D2))
                 {
+                    buttonRelease = false;
                     myControlType = ControlType._Kinect;
                     Level_Response = game_states.PlayerSelect;
                     SoundEffect_List[0].Play();
@@ -192,8 +279,9 @@ namespace _3D_Space_Invaders
             #region player select
             if (Level_Response == game_states.PlayerSelect)
             {
-                if (Keyboard.GetState().IsKeyDown(Keys.D1))
+                if (Keyboard.GetState().IsKeyDown(Keys.D1) & buttonRelease == true)
                 {
+                    buttonRelease = false;
                     numberOfPlayers = 1;
                     Level_Response = game_states.Continue;
                     SoundEffect_List[0].Play();
@@ -201,8 +289,9 @@ namespace _3D_Space_Invaders
                     Game_Level = new Level(1, numberOfPlayers, Model_List, Texture_List, Font_list, SoundEffect_List);//, Animation_List);
 
                 }
-                if (Keyboard.GetState().IsKeyDown(Keys.D2))
+                if (Keyboard.GetState().IsKeyDown(Keys.D2) & buttonRelease == true)
                 {
+                    buttonRelease = false;
                     numberOfPlayers = 2;
                     Level_Response = game_states.Continue;
                     SoundEffect_List[0].Play();
@@ -215,7 +304,8 @@ namespace _3D_Space_Invaders
             #endregion
 
             
-            if (Keyboard.GetState().IsKeyUp(Keys.P) && Keyboard.GetState().IsKeyUp(Keys.R))
+            if (Keyboard.GetState().IsKeyUp(Keys.P) && Keyboard.GetState().IsKeyUp(Keys.R) && 
+                Keyboard.GetState().IsKeyUp(Keys.D0) && Keyboard.GetState().IsKeyUp(Keys.D1) && Keyboard.GetState().IsKeyUp(Keys.D2))
                 buttonRelease = true;
             
 
@@ -344,6 +434,30 @@ namespace _3D_Space_Invaders
                 }
                 #endregion 
 
+                
+                #region Kinect Controlled
+                //Player1 Controls - keyboard
+                if (myControlType == ControlType._Kinect)
+                {
+                    #region Player1 Controls
+
+                    
+                    Game_Level.Player_Move(0,(int)handvalue.X);
+                    
+                    
+                    if (kinectShoot == true)
+                        Game_Level.Player_Shoot(0);
+                    #endregion
+
+
+                    // Update level 
+                    Level_Response = (game_states)Game_Level.Update_Level(gameTime);
+                    // TODO: Add your update logic here
+
+                }
+
+                #endregion
+
             }
 
             base.Update(gameTime);
@@ -359,7 +473,7 @@ namespace _3D_Space_Invaders
             // draw the start up screen 
             #region Game Running
             if (Level_Response == game_states.Continue)
-            Game_Level.Draw_Level(spriteBatch);
+                Game_Level.Draw_Level(spriteBatch);
             #endregion
 
             // draw failed screen 
@@ -373,7 +487,7 @@ namespace _3D_Space_Invaders
 
             #region Select Players
             if ( Level_Response == game_states.PlayerSelect)
-            spriteBatch.Draw(PlayerSelect, new Vector2(0, 0), Color.White);
+                spriteBatch.Draw(PlayerSelect, new Vector2(0, 0), Color.White);
             #endregion
 
             #region Game Paused
@@ -397,6 +511,11 @@ namespace _3D_Space_Invaders
 
             #endregion
 
+            //Texture2D rect = Content.Load<Texture2D>(@"2D Animation\Explosion");
+
+            
+
+            //priteBatch.Draw(rect, handvalue, Color.White);
 
             spriteBatch.End();
             base.Draw(gameTime);
@@ -417,7 +536,8 @@ namespace _3D_Space_Invaders
                         Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(45f), aspectRatio,
                         1.0f, 1000.0f);
 
-                        effect.View = Matrix.CreateLookAt(new Vector3(35f, 30f, 100f), new Vector3(35f, 30f, -70f),
+                        effect.View = Matrix.CreateLookAt(new Vector3(45f, 30f, 100f),
+                                                          new Vector3(35f, 30f, -70f),
                                         Vector3.Up);
 
                         effect.World = Matrix.CreateTranslation(0, 0, 0) *

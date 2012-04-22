@@ -148,7 +148,7 @@ namespace Game_Level
                     Alien_Row.Add(new Alien(new Vector3((float)Game_Boundries.LeftHandSide + (6 * i), ((float)Game_Boundries.Top - 13) - 1 * j, 0), new Vector3(0.5f, 0, 0),
                     Space_Invader_Char.Character_Types.Invader_30, Model_List[(int)Space_Invader_Char.Character_Types.Invader_30]));
                 }
-
+                
                 for (int j = 1; j < 3; j++)
                 {
                     Alien_Row.Add(new Alien(new Vector3((float)Game_Boundries.LeftHandSide + (6 * i), ((float)Game_Boundries.Top - 13) - 4.5f * j, 0), new Vector3(0.5f, 0, 0),
@@ -483,6 +483,12 @@ namespace Game_Level
                 if (Player_List[_player].Position.X > (int)Game_Boundries.LeftHandSide)
                     Player_List[_player].update_Positon(Cannon.Movement_Direction.Left);
         }
+        public void Player_Move(int _player, int _xPosition)
+        {
+            if (Player_List[_player].Lives > 0 && _xPosition > 0 && _xPosition < (int)Game_Boundries.RightHandSide)
+                if (Player_List[_player].Position.X > (int)Game_Boundries.LeftHandSide)
+                    Player_List[_player].set_Position(_xPosition);
+        }
 
         public void Player_Move_Right(int _player)
         {
@@ -490,7 +496,6 @@ namespace Game_Level
                 if (Player_List[_player].Position.X < (int)Game_Boundries.RightHandSide)
                     Player_List[_player].update_Positon(Cannon.Movement_Direction.Right);
         }
-
         #endregion
 
         private void Update_Laser_Position()
